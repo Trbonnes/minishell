@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/17 16:39:15 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/17 17:53:44 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,46 +32,103 @@ int ft_execute_builtin(t_parsing *parser)
 	return (1);
 }
 
-int ft_select_builtin(char *cmd_str)
+int ft_select_builtin(char *builtin_str)
 {
 	const char * const *builtins = (const char *[]){"cd", "echo", "env", "exit", "export", "pwd", "unset", NULL};
 	int i;
 
 	i = -1;
-	while (cmd_str[++i])
-		cmd_str[i] = ft_tolower(cmd_str[i]);
+	while (builtin_str[++i])
+		builtin_str[i] = ft_tolower(builtin_str[i]);
 	i = -1;
-	while (builtins[++i] != NULL && ft_strcmp(builtins[i], cmd_str) != 0)
+	while (builtins[++i] != NULL && ft_strcmp(builtins[i], builtin_str) != 0)
 		;
 	return(i);
 }
 
-int ft_detect_builtin()
+char *ft_parser_cmd(char *str)
+{
+	char *parsed;
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|' && str[i] != '<' && str[i] != '>' && ++i)
+		j++;
+	if (!(parsed=malloc(sizeof(char) * j + 1)))
+		return (NULL);
+	i = i - j;
+	j = 0;
+	while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|' && str[i] != '<' && str[i] != '>')
+		parsed[j++] = str[i++];
+	parsed[j] = '\0';
+	return (parsed);
+}
+
+char *ft_parser_redirection(char **builtin_str)
 {
 	int i;
 	int j;
-	t_parsing parser;
-	char *str;
-	char *cmd_str;
+	int len;
+	char *redirection_str;
 
 	i = 0;
+	len = 0;
+	j = 0;
+	while (builtin_str[0][i] && builtin_str[0][i] != '<' && builtin_str[0][i] != '>')
+		i++;
+	while (builtin_str[0][i + len] && builtin_str[0][i + len] == '<' && builtin_str[0][i + len] == '>' && builtin_str[0][i + len] == ' ')
+		len++;
+	while (builtin_str[0][i + len] && builtin_str[0][i + len] != ' ' && builtin_str[0][i + len] != ';' && builtin_str[0][i + len] != '|' && builtin_str[0][i + len] != '<' && builtin_str[0][i + len] != '>')
+		len++;
+	if ((redirection_str = malloc(sizeof(char) * len + 1)) == NULL)
+		return (NULL);
+	while (i <= len)
+		redirection_str[j++] = builtin_str[0][i++];
+	redirection_str[j] = '\0';
+	return (redirection_str);
+}
+
+char *ft_parser_param(char *str)
+{
+	char *parsed;
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|' && ++i)
+		j++;
+	if (!(parsed=malloc(sizeof(char) * j + 1)))
+		return (NULL);
+	i = i - j;
+	j = 0;
+	while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|')
+		parsed[j++] = str[i++];
+	parsed[j] = '\0';
+	return (parsed);
+}
+
+
+int ft_detect_builtin()
+{
+	int i;
+	t_parsing parser;
+	char *str;
+
+	i = -1;
 	parser = (t_parsing) { 0 };
 	write(1,"$>", 2);
 	get_next_line(0, &str);
-	while(str[i])
+	while(str[++i])
 	{
-		j = 0;
-		while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|' && str[i] != '<' && str[i] != '>' && ++i)
-			j++;
-		if (!(cmd_str=malloc(sizeof(char) * j + 1)))
+		if ((parser.param = ft_parser_cmd(str + i)) == NULL)
 			return (-1);
-		i = i - j;
-		j = 0;
 		while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|' && str[i] != '<' && str[i] != '>')
-			cmd_str[j++] = str[i++];
-		cmd_str[j] = '\0';
-		parser.builtin_detected = ft_select_builtin(cmd_str);//7 dans le cas d'une commande inconnue
-		free(cmd_str);
+			i++;
+		parser.builtin_detected = ft_select_builtin(parser.param);//7 dans le cas d'une commande inconnue
+		free(parser.param);
 		while (str[i] == ' ')
 			i++;
 		if (str[i] == '-' && str[i] && parser.builtin_detected < 7)
@@ -89,9 +146,18 @@ int ft_detect_builtin()
 				i += 2;
 			}
 		}
+		if ((parser.param = ft_parser_param(str + i)) == NULL)
+			return (-1);
+		while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|')
+			i++;
+		if ((parser.redirection = ft_parser_redirection(&parser.param)) == NULL)
+			return (-1);
 		ft_execute_builtin(&parser);//Return -1 dans le cas d'une commande inconnue
 		printf("%d\n", parser.builtin_detected);
-		i++;
+		free(parser.param);
+		free(parser.redirection);
+		if (str[i] != '\0')
+			i++;
 	}
 	free(str);
 	return (1);
