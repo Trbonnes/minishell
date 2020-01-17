@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = 
+SRCS = ./srcs/main.c ./srcs/stdin.c ./srcs/get_next_line.c ./srcs/get_next_line_utils.c
 OBJS = ${SRCS:.c=.o}
 
 NAME =	minishell

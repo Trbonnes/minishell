@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/17 10:34:22 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/17 10:44:23 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <stdio.h> // a enlever
 
+int ft_stdin();
 
 #endif

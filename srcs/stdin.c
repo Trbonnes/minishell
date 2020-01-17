@@ -6,7 +6,22 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/17 10:37:04 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/17 11:32:44 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/minishell.h"
+
+int ft_stdin()
+{
+	int i;
+
+	char *str;
+	write(1,"$>", 2);
+	get_next_line(0, &str);
+	while(str[i])
+	{
+		
+	}
+	return (1);
+}
