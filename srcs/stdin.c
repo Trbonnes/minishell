@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/17 16:02:31 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/17 16:39:15 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int ft_execute_builtin(t_parsing *parser)
 		return(/*pwd*/0);
 	else if (parser->builtin_detected == 6)
 		return(/*unset*/0);
+	write(2, "bash: command not found\n", 24);
 	return (1);
 }
 
@@ -60,20 +61,20 @@ int ft_detect_builtin()
 	while(str[i])
 	{
 		j = 0;
-		while(((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')) && ++i)
+		while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|' && str[i] != '<' && str[i] != '>' && ++i)
 			j++;
 		if (!(cmd_str=malloc(sizeof(char) * j + 1)))
 			return (-1);
 		i = i - j;
 		j = 0;
-		while((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
+		while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|' && str[i] != '<' && str[i] != '>')
 			cmd_str[j++] = str[i++];
 		cmd_str[j] = '\0';
 		parser.builtin_detected = ft_select_builtin(cmd_str);//7 dans le cas d'une commande inconnue
 		free(cmd_str);
 		while (str[i] == ' ')
 			i++;
-		if (str[i] == '-' && str[i])
+		if (str[i] == '-' && str[i] && parser.builtin_detected < 7)
 		{
 			if(parser.builtin_detected != 1)
 			{
