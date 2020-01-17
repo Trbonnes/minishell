@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/17 14:45:32 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/17 15:58:09 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 typedef struct	s_parsing
 {
 	int builtin_detected;
-	int option;
+	int echo_option;
 	int sep;
 	char *param;
 }				t_parsing;
