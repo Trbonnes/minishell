@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 10:29:17 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/17 14:02:16 by trbonnes         ###   ########.fr       */
+/*   Created: 2020/01/17 14:05:15 by trbonnes          #+#    #+#             */
+/*   Updated: 2020/01/17 14:06:16 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-int main(int ac, char **av, char **env)
+int	ft_tolower(int c)
 {
-	(void)(ac + av);
-	(void)env;
-	while(ft_detect_builtin() > 0)
-	{
-		printf("\n");
-	}
-	return (0);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	else
+		return (c);
 }
