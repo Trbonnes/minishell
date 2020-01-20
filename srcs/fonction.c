@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/17 18:57:32 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/20 13:41:21 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,31 @@ int		ft_pwd(int fd)
 	return (0);
 }
 
-
+void	ft_exit()
+{
+	write(1,"exit", 4);
+	exit(1);
+}
 
 int main(void)
 {
 	// int fd;
 	// char *str;
-	
-	
+	// str = ft_strdup("../../..");
+	// ft_exit();
 	// fd = open("caca", O_WRONLY | O_CREAT, S_IRWXU);
 	// ft_echo("Coucou fils", fd, FALSE);
-	ft_cd("../../..");
+	// ft_cd(str);
 	// fd = open("docker.sh", O_RDONLY);
 	// printf("%d\n", fd);
-	ft_pwd(1);
+	// ft_pwd(1);
+	
+	t_parsing alk;
+
+	alk.builtin_detected = 1;
+	alk.echo_option = 0;
+	alk.param = ft_strdup("salut les salops");
+	alk.redirection = ft_strdup("> 1 > 2 >> 3");
+	find_fd(&alk);
 	return (0);
 }

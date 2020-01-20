@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:01:40 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/17 18:29:42 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/20 10:42:27 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ char	*ft_whitespace(char *str)
 		i++;
 	if (!(copy = ft_strdup(str + i)))
 		return (NULL);
+	free(str);
 	return (copy);
 }
