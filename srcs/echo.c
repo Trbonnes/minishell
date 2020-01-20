@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:17:38 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/20 13:41:11 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/20 15:15:33 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*skip_file(char *str)
 		i++;
 		j++;
 	}
-	copy[i] = '\0';
+	copy[j] = '\0';
 	free(str);
 	return (copy);
 }
@@ -120,6 +120,7 @@ int		open_echo(char *str, int fd)
 		else
 			fd = open(fd_open, O_WRONLY | O_APPEND | O_CREAT, S_IRWXU);
 		printf("file = %s et fd = %d\n", fd_open, fd);
+		free(fd_open);
 		str = ft_whitespace(str);
 		if (str[0] != '\0')
 		{

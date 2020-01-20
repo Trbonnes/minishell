@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/17 18:27:17 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/20 10:51:48 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,9 @@ char	*ft_home(char *str);
 int		ft_cd(char *str);
 int		ft_echo(char *str, int end_fd, int bool);
 int		ft_pwd(int fd);
+
+int		find_fd(t_parsing *alk);
+
+int		open_echo(char *str, int fd);
 
 #endif 
