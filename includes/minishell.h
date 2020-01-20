@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/20 09:51:03 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/20 13:39:59 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ typedef struct	s_parsing
 	char *redirection;
 }				t_parsing;
 
-int ft_detect_builtin();
-int	ft_tolower(int c);
-int	ft_strcmp(const char *s1, const char *s2);
+int 	ft_detect_builtin();
+int		ft_tolower(int c);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strjoin(const char *s1, char *s2);
+char	*ft_strdup(const char *str);
+size_t	ft_strlen(const char *str);
 
 #endif

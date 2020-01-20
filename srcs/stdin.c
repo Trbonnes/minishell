@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/20 11:42:01 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/20 15:04:43 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,77 +70,81 @@ char *ft_parser_cmd(char *str)
 	return (parsed);
 }
 
-char *redirection_alloc(int len, char *str)
+int ft_redirection_setup(char *str, char **actual)
 {
-	int		i;
-	char	*redirection_str;
-	char	*tmp;
+	int i;
+	int j;
+	char *redirection;
+	char *tmp;
 
-	tmp = NULL;
 	i = 0;
-	printf("before: %s\n", str);
-	if(str)
-	{
-		while (str[i])
-			i++;
-		if ((tmp = malloc(sizeof(char) * i + 1)) == NULL)
-			return (NULL);
-		i = -1;
-		while (str[++i])
-			tmp[i] = str[i];
-		tmp[i] = '\0';
-		free(str);
-	}
-	if ((redirection_str = malloc(sizeof(char) * len + i + 1)) == NULL)
-			return (NULL);
-	i = -1;
-	while(++i && tmp[i])
-		redirection_str[i] = tmp[i];
-	redirection_str[i] = '\0';
+	j = -1;
+	tmp = NULL;
+	if (actual[0])
+		tmp = ft_strdup(actual[0]);
+	free(actual[0]);
+	while (str[i] && (str[i] == '<' || str[i] == '<' || str[i] == ' '))
+		i++;
+	while (str[i] && str[i] != '<' && str[i] != '<' && str[i] != ' ')
+		i++;
+	if (!(redirection = malloc(sizeof(char) * i + 1)))
+		return (-1);
+	while (++j <= i)
+		redirection[j] =  str[j];
+	redirection[j] = '\0';
+	actual[0] = ft_strjoin(tmp, redirection);
 	free(tmp);
-	printf("after: %s\n", redirection_str);
-	return (redirection_str);
+	free(redirection);
+	return (i);
+}
+
+char *ft_realloc_param_str(int i, int j, char *param_str)
+{
+	int		k;
+	char 	*cpy;
+
+	k = ft_strlen(param_str) - j;
+	if (!(cpy = malloc(sizeof(char) * k + 1)))
+		return (NULL);
+	k = -1;
+	while (++k < i)
+		cpy[k] = param_str[k];
+	i += j;
+	while (param_str[i])
+		cpy[k++] = param_str[i++];
+	free(param_str);
+	return (cpy);
 }
 
 char *ft_parser_redirection(char **builtin_str)
 {
 	int i;
 	int j;
-	int len;
 	char *redirection_str;
 
-	i = 0;
-	j = 0;
+	i = -1;
 	redirection_str = NULL;
-	while (builtin_str[0][i] && builtin_str[0][i] != ';' && builtin_str[0][i] != '|')
+	while (builtin_str[0][++i])
 	{
-		len = 0;
-		while (builtin_str[0][i] && builtin_str[0][i] != '<' && builtin_str[0][i] != '>')
-			i++;
-		while (builtin_str[0][i + len] && (builtin_str[0][i + len] == '<' || builtin_str[0][i + len] == '>' || builtin_str[0][i + len] == ' '))
-			len++;
-		while (builtin_str[0][i + len] && builtin_str[0][i + len] != ' ' && builtin_str[0][i + len] != ';' && builtin_str[0][i + len] != '|' && builtin_str[0][i + len] != '<' && builtin_str[0][i + len] != '>')
-			len++;
-		printf("len: %d\n", len);
-		if ((redirection_str = redirection_alloc(len, redirection_str)) == NULL)
-			return (NULL);
-		len += i;
-		while (i <= len)
+		printf("loop\n");
+		if (builtin_str[0][i] == '<' || builtin_str[0][i] == '>' )
 		{
-			printf("C: %c\n", builtin_str[0][i]);
-			redirection_str[j++] = builtin_str[0][i++];
+			printf("hum\n");
+			j = ft_redirection_setup(builtin_str[0] + i, &redirection_str);
+			//printf("j: %d\n", j);
+			builtin_str[0] = ft_realloc_param_str(i, j, builtin_str[0]);
+			//printf("redirection: %s\n", redirection_str);
+			printf("param: %s\n", builtin_str[0]);
+			i = -1;
 		}
-		redirection_str[j] = '\0';
 	}
-	if(!redirection_str)
+	printf("STP: %s\n", redirection_str);
+	if (!redirection_str)
 	{
-		printf("NULL\n");
-		if ((redirection_str = malloc(sizeof(char) * 2)) == NULL)
+		if (!(redirection_str = malloc(sizeof(char) * 1)))
 			return (NULL);
-		redirection_str[0] = '0';
 		redirection_str[0] = '\0';
 	}
-	printf("redirection_str: %s\n", redirection_str);
 	return (redirection_str);
 }
 
@@ -152,13 +156,13 @@ char *ft_parser_param(char *str)
 
 	j = 0;
 	i = 0;
-	while (str[i] /*&& str[i] != ' '*/ && str[i] != ';' && str[i] != '|' && ++i)
+	while (str[i] && str[i] != ';' && str[i] != '|' && ++i)
 		j++;
 	if (!(parsed = malloc(sizeof(char) * j + 1)))
 		return (NULL);
 	i = i - j;
 	j = 0;
-	while (str[i] /*&& str[i] != ' '*/ && str[i] != ';' && str[i] != '|')
+	while (str[i] && str[i] != ';' && str[i] != '|')
 		parsed[j++] = str[i++];
 	parsed[j] = '\0';
 	return (parsed);
@@ -171,11 +175,11 @@ int ft_detect_builtin()
 	t_parsing parser;
 	char *str;
 
-	i = -1;
+	i = 0;
 	parser = (t_parsing) { 0 };
 	write(1,"$>", 2);
 	get_next_line(0, &str);
-	while (str[++i])
+	while (str[i])
 	{
 		if ((parser.param = ft_parser_cmd(str + i)) == NULL)
 			return (-1);
@@ -201,15 +205,19 @@ int ft_detect_builtin()
 				i += 2;
 			}
 		}
+		printf("bonsoir\n");
 		if ((parser.param = ft_parser_param(str + i)) == NULL)
 			return (-1);
-		while (str[i] /*&& str[i] != ' '*/ && str[i] != ';' && str[i] != '|')
-			i++;
+		printf("bonjour\n");
+		printf("non\n");
 		if ((parser.redirection = ft_parser_redirection(&parser.param)) == NULL)
 			return (-1);
+		printf("ntm\n");
 		printf("builtin executed: %d\n", ft_execute_builtin(&parser));//Return -1 dans le cas d'une commande inconnue
 		free(parser.param);
 		free(parser.redirection);
+		while (str[i] != '\0' && str[i] != ';' && str[i] != '|')
+			i++;
 		if (str[i] != '\0')
 			i++;
 	}
