@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stdin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/21 17:38:24 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:00:02 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,8 +211,8 @@ int		ft_detect_builtin(void)
 		if ((parser.redirection = ft_parser_redirection(&parser.param)) == NULL)
 			return (-1);
 		ft_execute_builtin(&parser);
-		/*free(parser.param);
-		free(parser.redirection);*/
+		free(parser.param);
+		free(parser.redirection);
 		while (str[i] != '\0' && str[i] != ';' && str[i] != '|')
 			i++;
 		if (str[i] != '\0')

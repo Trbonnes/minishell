@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/21 16:27:29 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:53:23 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,19 @@
 # include <sys/stat.h>
 # include <stdio.h> // a enlever
 
-typedef struct	s_parsing
+typedef struct		s_env
 {
-	int builtin_detected;
-	int echo_option;
-	char *param;
-	char *redirection;
-}				t_parsing;
+	char			*key;
+	char			*ref;
+	struct s_env	*next;
+}					t_env;
+typedef struct		s_parsing
+{
+	int				builtin_detected;
+	int				echo_option;
+	char			*param;
+	char			*redirection;
+}					t_parsing;
 
 int 	ft_detect_builtin();
 int		ft_tolower(int c);
