@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 18:28:00 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:37:00 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		ft_cd(t_parsing *alk)
 	if (!alk->param)
 		return (-1);
 	alk->param = ft_whitespace(alk->param);
-	// if (str[0] == '.' && str[1] == '.')
-		// ft_up_directory();
+	if (alk->param[0] == '.' && alk->param[1] == '.')
+		ft_up_directory(alk);
 	if (alk->param[0] == '\0' || alk->param[0] == '~')
 		ft_home(alk);
 	ret = chdir(alk->param);

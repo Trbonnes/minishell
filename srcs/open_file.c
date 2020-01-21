@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:17:38 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 16:28:40 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:44:17 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,22 +99,22 @@ char	*skip_file(char *str)
 	return (copy);
 }
 
-void	open_file(char *str, t_fd *fd)
+void	open_file(t_parsing *alk, t_fd *fd)
 {
 	int		dbchevron;
 
 	dbchevron = 0;
-	str = ft_whitespace(str);
-	if (str[0] == '>')
+	alk->redirection = ft_whitespace(alk->redirection);
+	if (alk->redirection[0] == '>')
 	{
-		if (str[1] == '>')
+		if (alk->redirection[1] == '>')
 			dbchevron++;
-		superior(&str, dbchevron, fd);
+		superior(alk, dbchevron, fd);
 	}
-	if (str[0] == '<')
+	if (alk->redirection[0] == '<')
 	{
-		if (str[1] == '<')
+		if (alk->redirection[1] == '<')
 			dbchevron++;
-		inferior(&str, dbchevron, fd);
+		inferior(alk, dbchevron, fd);
 	}
 }

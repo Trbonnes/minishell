@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 18:28:26 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:37:26 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,18 @@ char	*ft_whitespace(char *str);
 char	*ft_strjoin(const char *s1, char *s2);
 
 void	ft_home(t_parsing *alk);
+int		ft_up_directory(t_parsing *alk);
 
 int		ft_cd(t_parsing *alk);
 int		ft_echo(t_parsing *alk, t_fd *fd);
 int		ft_pwd(t_fd *fd);
+void	ft_exit(void);
 
 int		find_fd(t_parsing *alk);
-void	superior(char **str, int dbchevron, t_fd *fd);
-void	inferior(char **str, int dbchevron, t_fd *fd);
+void	superior(t_parsing *alk, int dbchevron, t_fd *fd);
+void	inferior(t_parsing *alk, int dbchevron, t_fd *fd);
 
-void	open_file(char *str, t_fd *fd);
+void	open_file(t_parsing *alk, t_fd *fd);
 char	*skip_file(char *str);
 char	*file_name(char *str);
 char	*skip_operation(char *str);
