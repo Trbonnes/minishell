@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/21 17:57:33 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:01:38 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_env global = (t_env) { 0 };
 void	ft_environment_parsing(char **env)
 {
 	int i;
-	int j;
+	//int j;
 
 	i = 0;
 	while (env[i])
