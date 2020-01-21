@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/20 15:04:43 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:08:46 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ int ft_redirection_setup(char *str, char **actual)
 	if (actual[0])
 		tmp = ft_strdup(actual[0]);
 	free(actual[0]);
-	while (str[i] && (str[i] == '<' || str[i] == '<' || str[i] == ' '))
+	while (str[i] && (str[i] == '<' || str[i] == '>' || str[i] == ' '))
 		i++;
-	while (str[i] && str[i] != '<' && str[i] != '<' && str[i] != ' ')
+	while (str[i] && str[i] != '<' && str[i] != '>' && str[i] != ' ')
 		i++;
 	if (!(redirection = malloc(sizeof(char) * i + 1)))
 		return (-1);
-	while (++j <= i)
+	while (++j < i)
 		redirection[j] =  str[j];
 	redirection[j] = '\0';
 	actual[0] = ft_strjoin(tmp, redirection);
@@ -106,6 +106,7 @@ char *ft_realloc_param_str(int i, int j, char *param_str)
 	k = ft_strlen(param_str) - j;
 	if (!(cpy = malloc(sizeof(char) * k + 1)))
 		return (NULL);
+	ft_bzero(cpy, k + 1);
 	k = -1;
 	while (++k < i)
 		cpy[k] = param_str[k];
@@ -126,19 +127,13 @@ char *ft_parser_redirection(char **builtin_str)
 	redirection_str = NULL;
 	while (builtin_str[0][++i])
 	{
-		printf("loop\n");
 		if (builtin_str[0][i] == '<' || builtin_str[0][i] == '>' )
 		{
-			printf("hum\n");
 			j = ft_redirection_setup(builtin_str[0] + i, &redirection_str);
-			//printf("j: %d\n", j);
 			builtin_str[0] = ft_realloc_param_str(i, j, builtin_str[0]);
-			//printf("redirection: %s\n", redirection_str);
-			printf("param: %s\n", builtin_str[0]);
 			i = -1;
 		}
 	}
-	printf("STP: %s\n", redirection_str);
 	if (!redirection_str)
 	{
 		if (!(redirection_str = malloc(sizeof(char) * 1)))
@@ -205,14 +200,10 @@ int ft_detect_builtin()
 				i += 2;
 			}
 		}
-		printf("bonsoir\n");
 		if ((parser.param = ft_parser_param(str + i)) == NULL)
 			return (-1);
-		printf("bonjour\n");
-		printf("non\n");
 		if ((parser.redirection = ft_parser_redirection(&parser.param)) == NULL)
 			return (-1);
-		printf("ntm\n");
 		printf("builtin executed: %d\n", ft_execute_builtin(&parser));//Return -1 dans le cas d'une commande inconnue
 		free(parser.param);
 		free(parser.redirection);

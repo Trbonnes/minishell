@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:01:40 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/20 15:25:14 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:01:07 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,16 @@ char	*ft_whitespace(char *str)
 		return (NULL);
 	free(str);
 	return (copy);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char *ptr;
+
+	ptr = s;
+	while (n > 0)
+	{
+		*ptr++ = 0;
+		n--;
+	}
 }
