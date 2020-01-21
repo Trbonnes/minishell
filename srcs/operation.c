@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 14:48:44 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:19:27 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,16 @@ void	inferior(char **str, int dbchevron, t_fd *fd)
 int		find_fd(t_parsing *alk)
 {
 	t_fd fd;
-
+	char buf[1000];
 	fd.in = 0;
 	open_file(alk->redirection, &fd);
 	if (alk->builtin_detected == 0)
 		ft_cd(alk->redirection);
 	if (alk->builtin_detected == 1)
 		ft_echo(alk->param, &fd, alk->echo_option);
-	close(fd.out);
+	if (fd.out != 1)
+		close(fd.out);
+	if (fd.in != 0)
+		close(fd.in);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 14:48:51 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:14:40 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		main(void)
 	alk.builtin_detected = 1;
 	alk.echo_option = 0;
 	alk.param = ft_strdup("suce");
-	alk.redirection = ft_strdup(" > 1 >  2 <  3  <  4");
+	alk.redirection = ft_strdup(" > 1 >  2 < 3 < main.c");
 	find_fd(&alk);
 	return (0);
 }
