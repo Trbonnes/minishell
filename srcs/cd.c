@@ -6,28 +6,20 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 15:54:45 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 17:24:32 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:25:24 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-char	*ft_home(char *str)
+
+
+void	ft_home(t_parsing *alk)
 {
-	char *copy;
-	char *strafree;	
-	int len;
 	const char users[17] = "/Users/trdella-/";
 
-	len = ft_strlen(str);
-	if (!(copy = malloc(sizeof(char) * (16 + len + 1))))
-		return (NULL);
-	strafree = copy;
-	if (str[0] == '~')
-	copy = ft_strjoin(users, str + 2);	
+	if (alk->param[0] == '~')
+		alk->param = ft_strjoin(users, alk->param + 2);
 	else
-		copy = ft_strdup(users);
-	// free(str);
-	free(strafree);
-	return (copy);
+		alk->param = ft_strdup(users);
 }

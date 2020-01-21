@@ -6,37 +6,38 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 17:08:47 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:28:00 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-int		ft_echo(char *str, t_fd *fd, int bool)
+int		ft_echo(t_parsing *alk, t_fd *fd)
 {
 	int len;
 
 	if (fd->out == -1)
 		return (-1);
 	printf("%d\n", fd->out);
-	len = ft_strlen(str);
-	write(fd->out, str, len);
-	if (bool == FALSE)
+	len = ft_strlen(alk->param);
+	write(fd->out, alk->param, len);
+	if (alk->echo_option == FALSE)
 		write(fd->out, "\n", 1);
 	return (0);
 }
 
-int		ft_cd(char *str)
+int		ft_cd(t_parsing *alk)
 {
 	int		ret;
 
-	if (!str)
+	if (!alk->param)
 		return (-1);
-	str = ft_whitespace(str);
-	if (str[0] == '\0' || str[0] == '~')
-		str = ft_home(str);
-	ret = chdir(str);
-	free(str);
+	alk->param = ft_whitespace(alk->param);
+	// if (str[0] == '.' && str[1] == '.')
+		// ft_up_directory();
+	if (alk->param[0] == '\0' || alk->param[0] == '~')
+		ft_home(alk);
+	ret = chdir(alk->param);
 	return (ret);
 }
 

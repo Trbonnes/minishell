@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 13:10:16 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:28:26 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	*ft_strdup(const char *str);
 char	*ft_whitespace(char *str);
 char	*ft_strjoin(const char *s1, char *s2);
 
-char	*ft_home(char *str);
+void	ft_home(t_parsing *alk);
 
-int		ft_cd(char *str);
-int		ft_echo(char *str, t_fd *fd, int bool);
+int		ft_cd(t_parsing *alk);
+int		ft_echo(t_parsing *alk, t_fd *fd);
 int		ft_pwd(t_fd *fd);
 
 int		find_fd(t_parsing *alk);
