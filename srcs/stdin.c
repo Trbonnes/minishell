@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/21 16:08:46 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:12:09 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ int ft_detect_builtin()
 			i++;
 	}
 	free(str);
+	parser = (t_parsing) { 0 };
 	printf("End of command\n");
 	return (1);
 }
