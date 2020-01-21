@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 15:14:40 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:35:14 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		ft_echo(char *str, t_fd *fd, int bool)
 
 	if (fd->out == -1)
 		return (-1);
+	printf("%d\n", fd->out);
 	len = ft_strlen(str);
 	write(fd->out, str, len);
 	if (bool == FALSE)
@@ -62,25 +63,25 @@ void	ft_exit(void)
 	exit(1);
 }
 
-int		main(void)
-{
-	t_parsing alk;
-	
-	// int fd;
-	// char *str;
-	// str = ft_strdup("../../..");
-	// ft_exit();
-	// fd = open("caca", O_WRONLY | O_CREAT, S_IRWXU);
-	// ft_echo("Coucou fils", fd, FALSE);
-	// ft_cd(str);
-	// fd = open("docker.sh", O_RDONLY);
-	// printf("%d\n", fd);
-	// ft_pwd(1);
+// int		main(void)
+// {
+// 	t_parsing alk;
 
-	alk.builtin_detected = 1;
-	alk.echo_option = 0;
-	alk.param = ft_strdup("suce");
-	alk.redirection = ft_strdup(" > 1 >  2 < 3 < main.c");
-	find_fd(&alk);
-	return (0);
-}
+// 	// int fd;
+// 	// char *str;
+// 	// str = ft_strdup("../../..");
+// 	// ft_exit();
+// 	// fd = open("caca", O_WRONLY | O_CREAT, S_IRWXU);
+// 	// ft_echo("Coucou fils", fd, FALSE);
+// 	// ft_cd(str);
+// 	// fd = open("docker.sh", O_RDONLY);
+// 	// printf("%d\n", fd);
+// 	// ft_pwd(1);
+
+// 	// alk.builtin_detected = 1;
+// 	// alk.echo_option = 0;
+// 	// alk.param = ft_strdup("a");
+// 	// alk.redirection = ft_strdup("> b< c< d> e");
+// 	find_fd(&alk);
+// 	return (0);
+// }

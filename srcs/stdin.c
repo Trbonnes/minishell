@@ -3,36 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   stdin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/21 16:12:09 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:33:25 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/fonction.h"
 
 int ft_execute_builtin(t_parsing *parser)
 {
-	printf("cmd: %d\n", parser->builtin_detected);
-	printf("option: %d\n", parser->echo_option);
-	printf("param: %s\n", parser->param);
-	printf("redirection: %s\n", parser->redirection);
-	if (parser->builtin_detected == 0)
-		return(/*cd*/1);
-	else if (parser->builtin_detected == 1)
-		return(/*echo*/1);
-	else if (parser->builtin_detected == 2)
-		return(/*env*/1);
-	else if (parser->builtin_detected == 3)
-		return(/*exit*/1);
-	else if (parser->builtin_detected == 4)
-		return(/*export*/1);
-	else if (parser->builtin_detected == 5)
-		return(/*pwd*/1);
-	else if (parser->builtin_detected == 6)
-		return(/*unset*/1);
-	write(2, "bash: command not found\n", 24);
+	//printf("cmd: %d\n", parser->builtin_detected);
+	//printf("option: %d\n", parser->echo_option);
+	//printf("param: %s\n", parser->param);
+	//printf("redirection: %s\n", parser->redirection);
+	find_fd(parser);
+	// if (parser->builtin_detected == 0)
+	// 	return(/*cd*/1);
+	// else if (parser->builtin_detected == 1)
+	// 	return(/*echo*/1);
+	// else if (parser->builtin_detected == 2)
+	// 	return(/*env*/1);
+	// else if (parser->builtin_detected == 3)
+	// 	return(/*exit*/1);
+	// else if (parser->builtin_detected == 4)
+	// 	return(/*export*/1);
+	// else if (parser->builtin_detected == 5)
+	// 	return(/*pwd*/1);
+	// else if (parser->builtin_detected == 6)
+	// 	return(/*unset*/1);
+	//write(2, "bash: command not found\n", 24);
 	return (0);
 }
 
@@ -178,7 +179,7 @@ int ft_detect_builtin()
 	{
 		if ((parser.param = ft_parser_cmd(str + i)) == NULL)
 			return (-1);
-		printf("cmd: %s\n", parser.param);
+		//printf("cmd: %s\n", parser.param);
 		while (str[i] && str[i] != ' ' && str[i] != ';' && str[i] != '|' && str[i] != '<' && str[i] != '>')
 			i++;
 		parser.builtin_detected = ft_select_builtin(parser.param);//7 dans le cas d'une commande inconnue
@@ -204,9 +205,9 @@ int ft_detect_builtin()
 			return (-1);
 		if ((parser.redirection = ft_parser_redirection(&parser.param)) == NULL)
 			return (-1);
-		printf("builtin executed: %d\n", ft_execute_builtin(&parser));//Return -1 dans le cas d'une commande inconnue
-		free(parser.param);
-		free(parser.redirection);
+		/*printf("builtin executed: %d\n", */ft_execute_builtin(&parser);//Return -1 dans le cas d'une commande inconnue
+		//free(parser.param);
+		//free(parser.redirection);
 		while (str[i] != '\0' && str[i] != ';' && str[i] != '|')
 			i++;
 		if (str[i] != '\0')

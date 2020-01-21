@@ -6,17 +6,16 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 15:19:27 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:35:59 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-
 void	superior(char **str, int dbchevron, t_fd *fd)
 {
 	char *fd_open;
-	
+
 	*str = skip_operation(*str);
 	*str = ft_whitespace(*str);
 	fd_open = file_name(*str);
@@ -36,7 +35,7 @@ void	superior(char **str, int dbchevron, t_fd *fd)
 void	inferior(char **str, int dbchevron, t_fd *fd)
 {
 	char *fd_open;
-	
+
 	*str = skip_operation(*str);
 	*str = ft_whitespace(*str);
 	fd_open = file_name(*str);
@@ -44,19 +43,19 @@ void	inferior(char **str, int dbchevron, t_fd *fd)
 	if (fd->in != 0)
 		close(fd->in);
 	if (dbchevron == 0)
-		fd->in = open(fd_open, O_RDONLY | O_TRUNC | O_CREAT, S_IRWXU);
-	else
 		fd->in = open(fd_open, O_RDONLY | O_APPEND | O_CREAT, S_IRWXU);
 	free(fd_open);
 	*str = ft_whitespace(*str);
 	if (*str[0] != '\0')
 		open_file(*str, fd);
 }
+
 int		find_fd(t_parsing *alk)
 {
 	t_fd fd;
-	char buf[1000];
+
 	fd.in = 0;
+	fd.out = 1;
 	open_file(alk->redirection, &fd);
 	if (alk->builtin_detected == 0)
 		ft_cd(alk->redirection);

@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:17:38 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 14:48:54 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:28:40 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ char	*skip_file(char *str)
 
 void	open_file(char *str, t_fd *fd)
 {
-	char	*fd_open;
 	int		dbchevron;
 
 	dbchevron = 0;
