@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 16:35:59 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:28:04 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int		find_fd(t_parsing *alk)
 
 	fd.in = 0;
 	fd.out = 1;
+	ft_pwd(&fd);
+	write(1,"\n", 1);
 	open_file(alk->redirection, &fd);
 	if (alk->builtin_detected == 0)
 		ft_cd(alk->redirection);
@@ -65,5 +67,6 @@ int		find_fd(t_parsing *alk)
 		close(fd.out);
 	if (fd.in != 0)
 		close(fd.in);
+	ft_pwd(&fd);
 	return (0);
 }

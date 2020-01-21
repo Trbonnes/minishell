@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 16:35:14 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:08:47 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,15 @@ int		ft_echo(char *str, t_fd *fd, int bool)
 
 int		ft_cd(char *str)
 {
-	char	*copy;
 	int		ret;
 
 	if (!str)
 		return (-1);
-	copy = ft_whitespace(str);
-	if (copy[0] == '\0' || copy[0] == '~')
-		copy = ft_home(copy);
-	ret = chdir(copy);
-	free(copy);
+	str = ft_whitespace(str);
+	if (str[0] == '\0' || str[0] == '~')
+		str = ft_home(str);
+	ret = chdir(str);
+	free(str);
 	return (ret);
 }
 
