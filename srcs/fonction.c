@@ -6,31 +6,30 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 10:49:52 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/21 14:48:51 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-int		ft_echo(char *str, int fd, int bool)
+int		ft_echo(char *str, t_fd *fd, int bool)
 {
 	int len;
-	
-	if (fd == -1)
+
+	if (fd->out == -1)
 		return (-1);
-	printf("fd = ECHO = %d\n", fd);	
 	len = ft_strlen(str);
-	write(fd, str, len);
+	write(fd->out, str, len);
 	if (bool == FALSE)
-		write(fd, "\n", 1);
+		write(fd->out, "\n", 1);
 	return (0);
 }
 
 int		ft_cd(char *str)
 {
-	char *copy;
-	int ret;
-	
+	char	*copy;
+	int		ret;
+
 	if (!str)
 		return (-1);
 	copy = ft_whitespace(str);
@@ -41,31 +40,33 @@ int		ft_cd(char *str)
 	return (ret);
 }
 
-int		ft_pwd(int fd)
+int		ft_pwd(t_fd *fd)
 {
-	char *buf;
-	int len;
-	
-	if (fd == -1)
+	char	*buf;
+	int		len;
+
+	if (fd->out == -1)
 		return (-1);
 	if (!(buf = malloc(sizeof(char) * 1024)))
 		return (-1);
 	getcwd(buf, 1024);
 	len = ft_strlen(buf);
-	write(fd, buf, len);
+	write(fd->out, buf, len);
 	free(buf);
 	return (0);
 }
 
-void	ft_exit()
+void	ft_exit(void)
 {
-	write(1,"exit", 4);
+	write(1, "exit", 4);
 	exit(1);
 }
 
-int main(void)
+int		main(void)
 {
-	int fd;
+	t_parsing alk;
+	
+	// int fd;
 	// char *str;
 	// str = ft_strdup("../../..");
 	// ft_exit();
@@ -75,13 +76,11 @@ int main(void)
 	// fd = open("docker.sh", O_RDONLY);
 	// printf("%d\n", fd);
 	// ft_pwd(1);
-	
-	t_parsing alk;
 
 	alk.builtin_detected = 1;
-	alk.echo_option = 1;
+	alk.echo_option = 0;
 	alk.param = ft_strdup("suce");
-	alk.redirection = ft_strdup("> 1 >> 2 < 3");
+	alk.redirection = ft_strdup(" > 1 >  2 <  3  <  4");
 	find_fd(&alk);
 	return (0);
 }
