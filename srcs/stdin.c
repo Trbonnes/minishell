@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 14:36:30 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 14:38:42 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int		ft_execute_builtin(t_parsing *parser)
 	printf("option: %d\n", parser->echo_option);
 	printf("param: %s\n", parser->param);
 	printf("redirection: %s\n", parser->redirection);
-	find_fd(parser);
+	if (parser->builtin_detected == 7)
+		write(2, "minishell: command not found\n", 29);
+	else
+		find_fd(parser);
 	// if (parser->builtin_detected == 0)
 	// 	return(/*cd*/1);
 	// else if (parser->builtin_detected == 1)
@@ -33,7 +36,6 @@ int		ft_execute_builtin(t_parsing *parser)
 	// 	return(/*pwd*/1);
 	// else if (parser->builtin_detected == 6)
 	// 	return(/*unset*/1);
-	//write(2, "minishell: command not found\n", 29);
 	return (0);
 }
 
