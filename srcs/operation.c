@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 11:36:29 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:44:19 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,17 @@ int		find_fd(t_parsing *alk)
 
 	fd.in = 0;
 	fd.out = 1;
-	write(1,"\n", 1);
 	open_file(alk, &fd);
 	if (alk->builtin_detected == 0)
 		ft_cd(alk);
 	if (alk->builtin_detected == 1)
 		ft_echo(alk, &fd);
+	if (alk->builtin_detected == 2)
+		ft_env_display(&fd);
 	if (alk->builtin_detected == 3)
 		ft_exit();
+	if (alk->builtin_detected == 4)
+		ft_export();
 	if (alk->builtin_detected == 5)
 		ft_pwd(&fd);
 	if (fd.out != 1)

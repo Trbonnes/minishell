@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 12:15:24 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:45:46 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 extern t_env *global;
 
-void	ft_env_display(void)
+int		ft_env_display(t_fd *fd)
 {
 	t_env *save;
-
+	int len;
+	
 	save = global;
-
 	while (global)
 	{
-		printf("%s\n", global->ref);
+		len = ft_strlen(global->ref);
+		write(fd->out, global->ref, len);
+		write(fd->out, "\n", 1);
 		global = global->next;
 	}
 	global = save;
+	return (0);
 }
 
 int		ft_echo(t_parsing *alk, t_fd *fd)
@@ -78,26 +81,3 @@ void	ft_exit(void)
 	write(1, "exit", 4);
 	exit(1);
 }
-
-// int		main(void)
-// {
-// 	t_parsing alk;
-
-// 	// int fd;
-// 	// char *str;
-// 	// str = ft_strdup("../../..");
-// 	// ft_exit();
-// 	// fd = open("caca", O_WRONLY | O_CREAT, S_IRWXU);
-// 	// ft_echo("Coucou fils", fd, FALSE);
-// 	// ft_cd(str);
-// 	// fd = open("docker.sh", O_RDONLY);
-// 	// printf("%d\n", fd);
-// 	// ft_pwd(1);
-
-// 	// alk.builtin_detected = 1;
-// 	// alk.echo_option = 0;
-// 	// alk.param = ft_strdup("a");
-// 	// alk.redirection = ft_strdup("> b< c< d> e");
-// 	find_fd(&alk);
-// 	return (0);
-// }
