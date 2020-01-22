@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 16:01:59 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:05:20 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ void	ft_unquote(char **str)
 	free(tmp);
 }
 
+int		ft_detect_quote(char *prompt, char c)
+{
+	int i;
+
+	i = -1;
+	while (prompt[++i])
+		if (prompt[i] == c)
+		{
+			prompt[i + 1] = '\0';
+			return (1);
+		}
+	return (0);
+}
+
 int		ft_wait_quote(char c, char **quote_str)
 {
 	char	*prompt;
@@ -32,15 +46,9 @@ int		ft_wait_quote(char c, char **quote_str)
 	stop = 0;
 	while (stop != 1)
 	{
-		i = -1;
 		write(1, ">", 1);
 		get_next_line(0, &prompt);
-		while (prompt[++i])
-			if (prompt[i] == c)
-			{
-				stop = 1;
-				prompt[i + 1] = '\0';
-			}
+		stop = ft_detect_quote(prompt, c);
 		join = ft_strjoin(quote_str[0], prompt);
 		free(prompt);
 		free(quote_str[0]);
@@ -50,7 +58,8 @@ int		ft_wait_quote(char c, char **quote_str)
 	join = ft_strdup_chr(quote_str[0], c);
 	free(quote_str[0]);
 	i = ft_strlen(join);
-	quote_str[0] = malloc(sizeof(char) * i + 1);
+	if (!(quote_str[0] = malloc(sizeof(char) * i + 1)))
+		return (-1);
 	i = -1;
 	while (join[++i])
 		quote_str[0][i] = join[i];

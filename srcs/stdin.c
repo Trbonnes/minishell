@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 15:21:00 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:49:47 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,14 +145,20 @@ char	*ft_parser_redirection(char **builtin_str)
 	quote = 0;
 	while (builtin_str[0][++i])
 	{
-		if (builtin_str[0][i] == 34 && quote == 34)
-			quote = 0;
-		if (builtin_str[0][i] == 39 && quote == 39)
-			quote = 0;
-		if (builtin_str[0][i] == 34 && quote == 0)
-			quote = 34;
-		if (builtin_str[0][i] == 39 && quote == 0)
-			quote = 39;
+		if (builtin_str[0][i] == 34)
+		{
+			if (quote == 0)
+				quote = 34;
+			else if (quote == 34)
+				quote = 0;
+		}
+		if (builtin_str[0][i] == 39)
+		{
+			if (quote == 0)
+				quote = 39;
+			else if (quote == 39)
+				quote = 0;
+		}
 		if ((builtin_str[0][i] == '<' || builtin_str[0][i] == '>') && quote == 0)
 		{
 			j = ft_redirection_setup(builtin_str[0] + i, &redirection_str);
