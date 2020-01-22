@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 15:56:32 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:01:45 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ size_t				ft_strlen_chr(const char *str, char c);
 int					ft_wait_quote(char c, char **quote_str);
 int					ft_redirection_calculate(int i, char **str, char **q);
 void				ft_unquote(char **str);
+void				ft_environment_parsing(char **env);
 
 #endif

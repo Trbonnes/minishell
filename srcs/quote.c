@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 15:07:38 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:01:59 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int		ft_wait_quote(char c, char **quote_str)
 
 int		ft_redirection_calculate(int i, char **str, char **quote_str)
 {
-	while (str[0][i] && (str[0][i] == '<' || str[0][i] == '>' || str[0][i] == ' '))
+	while (str[0][i] && (str[0][i] == '<'
+	|| str[0][i] == '>' || str[0][i] == ' '))
 		i++;
 	if (str[0][i] == 34)
 	{
@@ -84,10 +85,10 @@ int		ft_redirection_calculate(int i, char **str, char **quote_str)
 			i += ft_wait_quote(39, quote_str);
 		else
 			i++;
-		
 	}
 	else
-		while (str[0][i] && str[0][i] != '<' && str[0][i] != '>' && str[0][i] != ' ')
+		while (str[0][i] && str[0][i] != '<'
+		&& str[0][i] != '>' && str[0][i] != ' ')
 			i++;
 	return (i);
 }
