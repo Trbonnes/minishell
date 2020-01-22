@@ -6,13 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 09:28:07 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 15:25:16 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 15:48:14 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int		ft_strcmp(const char *s1, const char *s2)
 {
 	size_t i;
 
@@ -24,14 +24,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	return (0);
-}
-
-int	ft_tolower(int c)
-{
-	if (c >= 65 && c <= 90)
-		return (c + 32);
-	else
-		return (c);
 }
 
 void	ft_envdelone(t_env *lst)
@@ -81,10 +73,10 @@ size_t	ft_strlen_chr(const char *str, char c)
 
 char	*ft_strdup_chr(const char *str, char c)
 {
-	char *copy;
-	int i;
-	int j;
-	int len;
+	char	*copy;
+	int		i;
+	int		j;
+	int		len;
 
 	i = 0;
 	j = 0;
