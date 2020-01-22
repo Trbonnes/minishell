@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 15:54:45 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 12:06:22 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:13:35 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int		ft_up_directory(t_parsing *alk)
 	char *buf;
 	int i;
 	int j;
+	char *afree;
 
+	afree = alk->param;
 	j = 0;
 	i = 0;
 	if (!(buf = malloc(sizeof(char) * 1024)))
@@ -36,17 +38,21 @@ int		ft_up_directory(t_parsing *alk)
 	else
 		alk->param = ft_substr(buf, 0, i);
 	free(buf);
+	free(afree);
 	return (0);
 }
 
 void	ft_home(t_parsing *alk)
 {
 	const char users[17] = "/Users/trdella-/";
+	char *afree;
 
+	afree = alk->param;
 	if (alk->param[0] == '~')
 		alk->param = ft_strjoin(users, alk->param + 2);
 	else
 		alk->param = ft_strdup(users);
+	free(afree);
 }
 
 // int main(void)
