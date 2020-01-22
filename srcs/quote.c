@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 16:05:20 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:39:14 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,33 +68,27 @@ int		ft_wait_quote(char c, char **quote_str)
 	return (ft_strlen(quote_str[0]));
 }
 
+int		ft_redirection_quote(int i, char **str, char **quote_str, char c)
+{
+	i++;
+	while (str[0][i] && str[0][i] != c)
+		i++;
+	if (str[0][i] == '\0')
+		i += ft_wait_quote(c, quote_str);
+	else
+		i++;
+	return (i);
+}
+
 int		ft_redirection_calculate(int i, char **str, char **quote_str)
 {
 	while (str[0][i] && (str[0][i] == '<'
 	|| str[0][i] == '>' || str[0][i] == ' '))
 		i++;
 	if (str[0][i] == 34)
-	{
-		i++;
-		printf("double quote\n");
-		while (str[0][i] && str[0][i] != 34)
-			i++;
-		if (str[0][i] == '\0')
-			i += ft_wait_quote(34, quote_str);
-		else
-			i++;
-	}
+		i = ft_redirection_quote(i, str, quote_str, 34);
 	else if (str[0][i] == 39)
-	{
-		i++;
-		printf("simple quote\n");
-		while (str[0][i] && str[0][i] != 39)
-			i++;
-		if (str[0][i] == '\0')
-			i += ft_wait_quote(39, quote_str);
-		else
-			i++;
-	}
+		i = ft_redirection_quote(i, str, quote_str, 39);
 	else
 		while (str[0][i] && str[0][i] != '<'
 		&& str[0][i] != '>' && str[0][i] != ' ')
