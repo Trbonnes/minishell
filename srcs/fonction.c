@@ -6,28 +6,28 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 14:02:50 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 15:53:30 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-extern t_env *global;
+extern t_env *g_env_list;
 
 int		ft_env_display(t_fd *fd)
 {
 	t_env *save;
 	int len;
-	
-	save = global;
-	while (global)
+
+	save = g_env_list;
+	while (g_env_list)
 	{
-		len = ft_strlen(global->ref);
-		write(fd->out, global->ref, len);
+		len = ft_strlen(g_env_list->ref);
+		write(fd->out, g_env_list->ref, len);
 		write(fd->out, "\n", 1);
-		global = global->next;
+		g_env_list = g_env_list->next;
 	}
-	global = save;
+	g_env_list = save;
 	return (0);
 }
 
