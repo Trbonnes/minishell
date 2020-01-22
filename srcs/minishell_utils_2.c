@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 09:28:07 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 11:08:04 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 11:56:32 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	ft_envdelone(t_env *lst)
 	free(lst);
 	lst = NULL;
 }
-
 
 void	ft_envclear(t_env **lst)
 {
