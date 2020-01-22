@@ -6,13 +6,13 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:17:38 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 16:06:55 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:08:25 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-int		strlen_word_file(char *str, int fileorstr)
+int		strlen_word_file(char *str)
 {
 	int i;
 	int j;
@@ -22,15 +22,6 @@ int		strlen_word_file(char *str, int fileorstr)
 	while (str[i] != ' ' && str[i] != ';' && str[i] != '<'
 	&& str[i] != '>' && str[i] != '!' && str[i] != '\0')
 		i++;
-	if (fileorstr == 1)
-	{
-		while (str[i])
-		{
-			i++;
-			j++;
-		}
-		return (j);
-	}
 	return (i);
 }
 
@@ -64,7 +55,7 @@ char	*file_name(char *str)
 	char	c;
 	
 	i = 0;
-	if (!(copy = malloc(sizeof(char) * (strlen_word_file(str, 0) + 1))))
+	if (!(copy = malloc(sizeof(char) * (strlen_word_file(str) + 1))))
 		return (NULL);
 	if (str[i] == '\'' || str[i] == '"')
 	{
@@ -90,29 +81,24 @@ char	*skip_file(char *str)
 {
 	int		i;
 	char	*copy;
-	int		j;
+	int		len;
 	char	c;
 	
-	j = 0;
 	i = 0;
-	if (!(copy = malloc(sizeof(char) * (strlen_word_file(str, 1) + 1))))
-		return (NULL);
+	len = ft_strlen(str);
 	if (str[i] == '\'' || str[i] == '"')
+	{
 		c = str[i];
-	if (str[i] == '\'' || str[i] == '"')
-		while(str[i + 1] != c && str[i + 1] != '\0')
+		i++;
+		while(str[i] != c && str[i] != '\0')
 			i++;
+		i++;
+	}
 	else
 		while (str[i] != ' ' && str[i] != ';' && str[i] != '<'
 		&& str[i] != '>' && str[i] != '!' && str[i] != '\0' && str[i] != '\'' && str[i] != '"')
 			i++;
-	while (str[i])
-	{
-		copy[j] = str[i];
-		i++;
-		j++;
-	}
-	copy[j] = '\0';
+	copy = ft_substr(str, i, len - i);
 	free(str);
 	return (copy);
 }

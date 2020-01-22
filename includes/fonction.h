@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 12:58:23 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:06:58 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void	open_file(t_parsing *alk, t_fd *fd);
 char	*skip_file(char *str);
 char	*file_name(char *str);
 char	*skip_operation(char *str);
-int		strlen_word_file(char *str, int fileorstr);
+int		strlen_word_file(char *str);
 
 #endif 
