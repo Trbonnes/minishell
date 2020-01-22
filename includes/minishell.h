@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/21 17:53:23 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 09:33:25 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ char	*ft_strjoin(const char *s1, char *s2);
 char	*ft_strdup(const char *str);
 size_t	ft_strlen(const char *str);
 void	ft_bzero(void *s, size_t n);
+void	ft_envdelone(t_env *lst);
+void	ft_envclear(t_env **lst);
 
 #endif
