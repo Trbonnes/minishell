@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 12:30:43 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:58:27 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	ft_unquote(char **str)
 {
 	char *tmp;
 
-	printf("hum\n");
 	tmp = ft_strdup_chr(str[0], 34);
 	free(str[0]);
-	printf("humhum\n");
 	str[0] = ft_strdup_chr(tmp, 39);
 	free(tmp);
 }

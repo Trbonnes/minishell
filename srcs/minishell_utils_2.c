@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 09:28:07 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 12:32:19 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:00:01 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,21 @@ char	*ft_strdup_chr(const char *str, char c)
 {
 	char *copy;
 	int i;
+	int j;
 	int len;
 
 	i = 0;
+	j = 0;
 	len = ft_strlen_chr(str, c);
 	if (!(copy = malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	while (str[i])
 	{
 		if (str[i] != c)
-			copy[i] = str[i];
+		{
+			copy[j] = str[i];
+			j++;
+		}
 		i++;
 	}
 	copy[i] = '\0';

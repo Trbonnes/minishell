@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 12:29:30 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:16:54 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*ft_parser_cmd(char *str)
 
 	j = 0;
 	i = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
 	while (str[i] && str[i] != ' ' && str[i] != ';'
 	&& str[i] != '|' && str[i] != '<' && str[i] != '>' && ++i)
 		j++;
@@ -140,10 +142,7 @@ char	*ft_parser_redirection(char **builtin_str)
 			return (NULL);
 		redirection_str[0] = '\0';
 	}
-	printf("lol\n");
-	ft_unquote(&redirection_str);
 	ft_unquote(builtin_str);
-	printf("lolilol\n");
 	return (redirection_str);
 }
 
@@ -198,6 +197,8 @@ int		ft_detect_builtin(void)
 	{
 		if ((parser.param = ft_parser_cmd(str + i)) == NULL)
 			return (-1);
+		while (str[i] && str[i] == ' ')
+			i++;
 		while (str[i] && str[i] != ' ' && str[i] != ';'
 		&& str[i] != '|' && str[i] != '<' && str[i] != '>')
 			i++;
