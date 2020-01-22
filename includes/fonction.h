@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 12:52:19 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:58:23 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_pwd(t_fd *fd);
 void	ft_exit(void);
 int		ft_env_display(t_fd *fd);
 
-int		ft_export();
+int		ft_export(t_fd *fd, t_parsing *alk);
 
 int		find_fd(t_parsing *alk);
 void	superior(t_parsing *alk, int dbchevron, t_fd *fd);

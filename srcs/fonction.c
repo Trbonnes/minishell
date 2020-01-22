@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 12:45:46 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 14:02:50 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		ft_echo(t_parsing *alk, t_fd *fd)
 
 	if (fd->out == -1)
 		return (-1);
-	printf("%d\n", fd->out);
 	len = ft_strlen(alk->param);
 	write(fd->out, alk->param, len);
 	if (alk->echo_option == FALSE)
