@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 09:43:18 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 09:53:01 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,40 @@ void	ft_env_display(void)
 	global = save;
 }
 
+void	ft_env_key(int i, char **env)
+{
+	int j;
+
+	j = 0;
+	while (env[i][j] != '=')
+		j++;
+	global->key = malloc(sizeof(char) * j + 1);
+	j = 0;
+	while (env[i][j] != '=')
+	{
+		global->key[j] = env[i][j];
+		j++;
+	}
+	global->key[j] = '\0';
+}
+
+void	ft_env_ref(int i, char **env)
+{
+	int j;
+
+	j = 0;
+	while (env[i][j])
+		j++;
+	global->ref = malloc(sizeof(char) * j + 1);
+	j = 0;
+	while (env[i][j])
+	{
+		global->ref[j] = env[i][j];
+		j++;
+	}
+	global->ref[j] = '\0';
+}
+
 void	ft_environment_parsing(char **env)
 {
 	int i;
@@ -40,28 +74,8 @@ void	ft_environment_parsing(char **env)
 	save = global;
 	while (env[i])
 	{
-		j = 0;
-		while (env[i][j] != '=')
-			j++;
-		global->key = malloc(sizeof(char) * j + 1);
-		j = 0;
-		while (env[i][j] != '=')
-		{
-			global->key[j] = env[i][j];
-			j++;
-		}
-		global->key[j] = '\0';
-		j = 0;
-		while (env[i][j])
-			j++;
-		global->ref = malloc(sizeof(char) * j + 1);
-		j = 0;
-		while (env[i][j])
-		{
-			global->ref[j] = env[i][j];
-			j++;
-		}
-		global->ref[j] = '\0';
+		ft_env_key(i, env);
+		ft_env_ref(i, env);
 		if (env[i + 1])
 		{
 			global->next = malloc(sizeof(t_env));
