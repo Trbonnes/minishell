@@ -6,11 +6,25 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 21:37:00 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:10:21 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+void	ft_env_display(void)
+{
+	t_env *save;
+
+	save = global;
+
+	while (global)
+	{
+		printf("%s\n", global->ref);
+		global = global->next;
+	}
+	global = save;
+}
 
 int		ft_echo(t_parsing *alk, t_fd *fd)
 {

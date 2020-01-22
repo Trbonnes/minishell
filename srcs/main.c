@@ -3,30 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 11:55:20 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:10:14 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
 t_env *global = (t_env *) { 0 };
-
-void	ft_env_display(void)
-{
-	t_env *save;
-
-	save = global;
-
-	while (global)
-	{
-		printf("%s\n", global->ref);
-		global = global->next;
-	}
-	global = save;
-}
 
 void	ft_env_key(int i, char **env)
 {

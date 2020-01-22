@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/21 21:42:14 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 11:36:29 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ int		find_fd(t_parsing *alk)
 	if (fd.in != 0)
 		close(fd.in);
 		printf("\n");
-	system("leaks minishell");
 	return (0);
 }
