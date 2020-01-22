@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 09:28:07 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 15:48:14 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:48:49 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_envdelone(t_env *lst)
 {
 	if (lst == NULL)
 		return ;
+	lst = lst->next;
 	free(lst->key);
 	free(lst->ref);
 	free(lst);

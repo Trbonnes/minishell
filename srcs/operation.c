@@ -6,13 +6,13 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 16:04:00 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:01:28 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-void	superior(t_parsing *alk, int dbchevron, t_fd *fd)
+int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 {
 	char *fd_open;
 
@@ -27,12 +27,18 @@ void	superior(t_parsing *alk, int dbchevron, t_fd *fd)
 	else
 		fd->out = open(fd_open, O_WRONLY | O_APPEND | O_CREAT, S_IRWXU);
 	free(fd_open);
+	if (fd->out == -1)
+	{
+		ft_putstr(strerror(errno));
+		return (-1);
+	}
 	alk->redirection = ft_whitespace(alk->redirection);
 	if (alk->redirection[0] != '\0')
 		open_file(alk, fd);
+	return (0);
 }
 
-void	inferior(t_parsing *alk, int dbchevron, t_fd *fd)
+int		inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 {
 	char *fd_open;
 
@@ -43,11 +49,17 @@ void	inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 	if (fd->in != 0)
 		close(fd->in);
 	if (dbchevron == 0)
-		fd->in = open(fd_open, O_RDONLY | O_APPEND | O_CREAT, S_IRWXU);
+		fd->in = open(fd_open, O_RDONLY | O_APPEND);
 	free(fd_open);
+	if (fd->in == -1)
+	{
+		ft_putstr(strerror(errno));
+		return (-1);
+	}
 	alk->redirection = ft_whitespace(alk->redirection);
 	if (alk->redirection[0] != '\0')
 		open_file(alk, fd);
+	return (0);
 }
 
 int		find_fd(t_parsing *alk)
@@ -56,7 +68,8 @@ int		find_fd(t_parsing *alk)
 
 	fd.in = 0;
 	fd.out = 1;
-	open_file(alk, &fd);
+	if (open_file(alk, &fd) == -1)
+		return (0);
 	if (alk->builtin_detected == 0)
 		ft_cd(alk);
 	if (alk->builtin_detected == 1)
@@ -65,10 +78,12 @@ int		find_fd(t_parsing *alk)
 		ft_env_display(&fd);
 	if (alk->builtin_detected == 3)
 		ft_exit();
-	// if (alk->builtin_detected == 4)
-	// 	ft_export(&fd, alk);
+	if (alk->builtin_detected == 4)
+		ft_export(&fd, alk);
 	if (alk->builtin_detected == 5)
 		ft_pwd(&fd);
+	if (alk->builtin_detected == 6)
+		ft_unset(alk);
 	if (fd.out != 1)
 		close(fd.out);
 	if (fd.in != 0)

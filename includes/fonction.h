@@ -6,13 +6,15 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 17:06:58 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:02:33 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FONCTION_H
 # define FONCTION_H
 # include "minishell.h"
+# include <string.h>
+# include <errno.h>  
 # define TRUE 1
 # define FALSE 0
 
@@ -37,15 +39,19 @@ void	ft_exit(void);
 int		ft_env_display(t_fd *fd);
 
 int		ft_export(t_fd *fd, t_parsing *alk);
+int		ft_unset(t_parsing *alk);
 
 int		find_fd(t_parsing *alk);
-void	superior(t_parsing *alk, int dbchevron, t_fd *fd);
-void	inferior(t_parsing *alk, int dbchevron, t_fd *fd);
+int		superior(t_parsing *alk, int dbchevron, t_fd *fd);
+int		inferior(t_parsing *alk, int dbchevron, t_fd *fd);
 
-void	open_file(t_parsing *alk, t_fd *fd);
+int		open_file(t_parsing *alk, t_fd *fd);
 char	*skip_file(char *str);
 char	*file_name(char *str);
 char	*skip_operation(char *str);
 int		strlen_word_file(char *str);
 
+t_env	*ft_new_env(char *env);
+void	ft_lstadd_back(t_env **lst, t_env *new);
+void	ft_putstr(char *str);
 #endif 

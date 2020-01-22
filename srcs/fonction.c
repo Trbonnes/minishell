@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 15:53:30 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:30:40 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int		ft_env_display(t_fd *fd)
 	while (g_env_list)
 	{
 		len = ft_strlen(g_env_list->ref);
-		write(fd->out, g_env_list->ref, len);
-		write(fd->out, "\n", 1);
+		if (g_env_list->ref[0] != '\0')
+		{
+			write(fd->out, g_env_list->ref, len);
+			write(fd->out, "\n", 1);
+		}
 		g_env_list = g_env_list->next;
 	}
 	g_env_list = save;
