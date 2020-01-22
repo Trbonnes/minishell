@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stdin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/21 18:19:13 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 11:04:56 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,59 @@ char	*ft_parser_cmd(char *str)
 	return (parsed);
 }
 
+int		ft_wait_quote(char **str, char c)
+{
+	char	*quote;
+	char	*join;
+	int		stop;
+	int		i;
+
+	stop = 0;
+	while (stop != 1)
+	{
+		i = -1;
+		write(1, ">", 1);
+		get_next_line(0, &quote);
+		while (quote[++i])
+			if (quote[i] == c)
+				stop = 1;
+		join = ft_strjoin(str[0], quote);
+		free(str[0]);
+		str[0] = ft_strdup(join);
+		free(join);
+	}
+	i = 0;
+	join = ft_strdup_chr(str[0], c);
+	free(str[0]);
+	str[0] = ft_strdup(join);
+	free(join);
+	return (ft_strlen(str[0]));
+}
+
+int		ft_redirection_calculate(int i, char **str)
+{
+	while (str[0][i] && (str[0][i] == '<' || str[0][i] == '>' || str[0][i] == ' '))
+		i++;
+	if (str[0][i] == '\"')
+	{
+		while (str[0][i] != '\"')
+			i++;
+		if (str[0][i] == '\0')
+			i = ft_wait_quote(str, '\"');
+	}
+	else if (str[0][i] == '\'')
+	{
+		while (str[0][i] != '\'')
+			i++;
+		if (str[0][i] == '\0')
+			i = ft_wait_quote(str, '\'');
+	}
+	else
+		while (str[0][i] && str[0][i] != '<' && str[0][i] != '>' && str[0][i] != ' ')
+			i++;
+	return (i);
+}
+
 int		ft_redirection_setup(char *str, char **actual)
 {
 	int		i;
@@ -86,10 +139,7 @@ int		ft_redirection_setup(char *str, char **actual)
 	if (actual[0])
 		tmp = ft_strdup(actual[0]);
 	free(actual[0]);
-	while (str[i] && (str[i] == '<' || str[i] == '>' || str[i] == ' '))
-		i++;
-	while (str[i] && str[i] != '<' && str[i] != '>' && str[i] != ' ')
-		i++;
+	i = ft_redirection_calculate(i, &str);
 	if (!(redirection = malloc(sizeof(char) * i + 1)))
 		return (-1);
 	while (++j < i)
@@ -206,6 +256,7 @@ int		ft_detect_builtin(void)
 			i++;
 		if (str[i] == '-' && str[i] && parser.builtin_detected < 7)
 			i = ft_option(str, &parser, i);
+		
 		if ((parser.param = ft_parser_param(str + i)) == NULL)
 			return (-1);
 		if ((parser.redirection = ft_parser_redirection(&parser.param)) == NULL)
