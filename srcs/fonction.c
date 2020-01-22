@@ -6,11 +6,13 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 12:10:21 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:15:24 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+extern t_env *global;
 
 void	ft_env_display(void)
 {
