@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 12:58:27 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 14:33:30 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_unquote(char **str)
 	free(tmp);
 }
 
-int		ft_wait_quote(char **str, char c)
+int		ft_wait_quote(char c, char **quote_str)
 {
-	char	*quote;
+	char	*prompt;
 	char	*join;
 	int		stop;
 	int		i;
@@ -34,30 +34,30 @@ int		ft_wait_quote(char **str, char c)
 	{
 		i = -1;
 		write(1, ">", 1);
-		get_next_line(0, &quote);
-		while (quote[++i])
-			if (quote[i] == c)
+		get_next_line(0, &prompt);
+		while (prompt[++i])
+			if (prompt[i] == c)
 				stop = 1;
-		join = ft_strjoin(str[0], quote);
-		printf("free1\n");
-		free(quote);
-		printf("free2\n");
-		free(str[0]);
-		str[0] = ft_strdup(join);
-		printf("free3\n");
+		join = ft_strjoin(quote_str[0], prompt);
+		free(prompt);
+		free(quote_str[0]);
+		quote_str[0] = ft_strdup(join);
 		free(join);
 	}
-	i = 0;
-	join = ft_strdup_chr(str[0], c);
-	printf("free4\n");
-	free(str[0]);
-	str[0] = ft_strdup(join);
-	printf("free5\n");
+	join = ft_strdup_chr(quote_str[0], c);
+	free(quote_str[0]);
+	i = ft_strlen(join);
+	quote_str[0] = malloc(sizeof(char) * i + 1);
+	i = -1;
+	while (join[++i])
+		quote_str[0][i] = join[i];
+	//quote_str[0][i++] = c;
+	quote_str[0][i] = '\0';
 	free(join);
-	return (ft_strlen(str[0]));
+	return (ft_strlen(quote_str[0]));
 }
 
-int		ft_redirection_calculate(int i, char **str)
+int		ft_redirection_calculate(int i, char **str, char **quote_str)
 {
 	while (str[0][i] && (str[0][i] == '<' || str[0][i] == '>' || str[0][i] == ' '))
 		i++;
@@ -68,7 +68,7 @@ int		ft_redirection_calculate(int i, char **str)
 		while (str[0][i] && str[0][i] != 34)
 			i++;
 		if (str[0][i] == '\0')
-			i = ft_wait_quote(str, 34);
+			i += ft_wait_quote(34, quote_str);
 		else
 			i++;
 	}
@@ -79,7 +79,7 @@ int		ft_redirection_calculate(int i, char **str)
 		while (str[0][i] && str[0][i] != 39)
 			i++;
 		if (str[0][i] == '\0')
-			i = ft_wait_quote(str, 39);
+			i += ft_wait_quote(39, quote_str);
 		else
 			i++;
 		

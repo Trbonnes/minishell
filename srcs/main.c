@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 12:20:46 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:32:36 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ int		main(int ac, char **av, char **env)
 	(void)(ac + av);
 	ft_environment_parsing(env);
 	while(ft_detect_builtin() > 0)
+	{
+		system("leaks minishell");
 		printf("Command Executed\n");
+	}
 	ft_envclear(&global);
+	system("leaks minishell");
 	return (0);
 }
