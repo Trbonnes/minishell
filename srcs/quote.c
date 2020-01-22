@@ -6,14 +6,21 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 12:12:11 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:20:17 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
 void	ft_unquote(char **str)
-{}
+{
+	char *tmp;
+
+	tmp = ft_strdup_chr(str[0], 34);
+	free(str[0]);
+	str[0] = ft_strdup_chr(tmp, 39);
+	free(tmp);
+}
 
 int		ft_wait_quote(char **str, char c)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 12:10:14 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:20:46 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int		main(int ac, char **av, char **env)
 {
 	(void)(ac + av);
 	ft_environment_parsing(env);
-	ft_env_display();
 	while(ft_detect_builtin() > 0)
 		printf("Command Executed\n");
 	ft_envclear(&global);
