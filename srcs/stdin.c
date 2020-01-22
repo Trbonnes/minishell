@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 12:09:27 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:29:30 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,10 @@ char	*ft_parser_redirection(char **builtin_str)
 			return (NULL);
 		redirection_str[0] = '\0';
 	}
+	printf("lol\n");
 	ft_unquote(&redirection_str);
 	ft_unquote(builtin_str);
+	printf("lolilol\n");
 	return (redirection_str);
 }
 

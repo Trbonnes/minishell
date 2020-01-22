@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 09:28:07 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 11:56:32 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:32:19 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,20 @@ void	ft_envclear(t_env **lst)
 	lst = NULL;
 }
 
-
-
 size_t	ft_strlen_chr(const char *str, char c)
 {
 	size_t i;
+	size_t len;
 
 	i = 0;
+	len = 0;
 	while (str[i])
+	{
 		if (str[i] != c)
-			i++;
-	return (i);
+			len++;
+		i++;
+	}
+	return (len);
 }
 
 char	*ft_strdup_chr(const char *str, char c)
