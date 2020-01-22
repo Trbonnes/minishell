@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 09:28:07 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 13:00:01 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 15:25:16 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ char	*ft_strdup_chr(const char *str, char c)
 		}
 		i++;
 	}
-	copy[i] = '\0';
+	copy[j] = '\0';
 	return (copy);
 }

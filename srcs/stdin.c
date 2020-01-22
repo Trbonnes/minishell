@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 14:45:04 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 15:21:00 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,19 +137,31 @@ char	*ft_parser_redirection(char **builtin_str)
 {
 	int		i;
 	int		j;
+	int		quote;
 	char	*redirection_str;
 
 	i = -1;
 	redirection_str = NULL;
+	quote = 0;
 	while (builtin_str[0][++i])
 	{
-		if (builtin_str[0][i] == '<' || builtin_str[0][i] == '>')
+		if (builtin_str[0][i] == 34 && quote == 34)
+			quote = 0;
+		if (builtin_str[0][i] == 39 && quote == 39)
+			quote = 0;
+		if (builtin_str[0][i] == 34 && quote == 0)
+			quote = 34;
+		if (builtin_str[0][i] == 39 && quote == 0)
+			quote = 39;
+		if ((builtin_str[0][i] == '<' || builtin_str[0][i] == '>') && quote == 0)
 		{
 			j = ft_redirection_setup(builtin_str[0] + i, &redirection_str);
 			builtin_str[0] = ft_realloc_param_str(i, j, builtin_str[0]);
 			i = -1;
 		}
 	}
+	if (quote != 0)
+		ft_wait_quote(quote, builtin_str);
 	if (!redirection_str)
 	{
 		if (!(redirection_str = malloc(sizeof(char) * 1)))
