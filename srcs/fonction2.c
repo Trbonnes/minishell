@@ -6,15 +6,17 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 12:52:12 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:25:08 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-extern t_env *global;
+// extern t_env *global;
 
-int		ft_export()
-{
-	return (0);
-}
+// int		ft_export(t_fd *fd, t_parsing *alk)
+// {
+
+	
+// 	return (0);
+// }
