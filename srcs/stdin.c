@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 14:29:38 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 14:36:30 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,39 +207,30 @@ int		ft_detect_builtin(void)
 	get_next_line(0, &str);
 	while (str[i])
 	{
-		//printf("1\n");
 		if ((parser.param = ft_parser_cmd(str + i)) == NULL)
 			return (-1);
 		while (str[i] && str[i] == ' ')
 			i++;
-		//printf("2\n");
 		while (str[i] && str[i] != ' ' && str[i] != ';'
 		&& str[i] != '|' && str[i] != '<' && str[i] != '>')
 			i++;
-		//printf("3\n");
 		parser.builtin_detected = ft_select_builtin(parser.param);
 		free(parser.param);
 		while (str[i] == ' ')
 			i++;
 		if (str[i] == '-' && str[i] && parser.builtin_detected < 7)
 			i = ft_option(str, &parser, i);
-		//printf("3\n");
 		if ((parser.param = ft_parser_param(str + i)) == NULL)
 			return (-1);
-		//printf("4\n");
 		if ((parser.redirection = ft_parser_redirection(&parser.param)) == NULL)
 			return (-1);
-		//printf("5\n");
 		ft_execute_builtin(&parser);
-		//printf("6\n");
 		free(parser.param);
 		free(parser.redirection);
 		while (str[i] != '\0' && str[i] != ';' && str[i] != '|')
 			i++;
-		//printf("7\n");
 		if (str[i] != '\0')
 			i++;
-		//printf("8\n");
 		parser = (t_parsing) { 0 };
 	}
 	free(str);
