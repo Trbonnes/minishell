@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 14:38:42 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/22 14:45:04 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ int		ft_detect_builtin(void)
 
 	i = 0;
 	parser = (t_parsing) { 0 };
-	write(1, "$>", 2);
+	write(1, "minishell$>", 11);
 	get_next_line(0, &str);
 	while (str[i])
 	{
