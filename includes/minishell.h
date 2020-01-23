@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 11:33:46 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:29:12 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ typedef struct		s_env
 }					t_env;
 typedef struct		s_parsing
 {
-	int				builtin_detected;
-	int				echo_option;
-	char			*param;
-	char			*redirection;
+	int					builtin_detected;
+	int					echo_option;
+	char				*param;
+	char				*redirection;
+	struct s_parsing	*next;
 }					t_parsing;
 
 int					ft_detect_builtin();
@@ -63,5 +64,6 @@ int					ft_option(char *str, t_parsing *parser, int i);
 void				ft_quote_cpy(int i, int j, char **redirection, char **quote_str);
 int					ft_quote_check(char c, int quote);
 char				*ft_realloc_param_str(int i, int j, char *param_str);
+void				ft_parserclear(t_parsing **lst);
 
 #endif

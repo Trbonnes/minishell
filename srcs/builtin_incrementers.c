@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:34:56 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 10:35:26 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:14:23 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		ft_increment_end(char *str, int i)
 {
 	while (str[i] != '\0' && str[i] != ';' && str[i] != '|')
 		i++;
+	if (str[i] == '|')
+		return (i);
 	if (str[i] != '\0')
 		i++;
 	return (i);

@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 15:48:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 20:38:56 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:28:53 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+void	ft_parserclear(t_parsing **lst)
+{
+	t_parsing *tmp;
+	t_parsing *supp;
+
+	if (lst == NULL)
+		return ;
+	tmp = *lst;
+	while (tmp != 0)
+	{
+		free(tmp->param);
+		free(tmp->redirection);
+		supp = tmp;
+		tmp = tmp->next;
+		free(supp);
+	}
+	lst = NULL;
+}
 
 void	ft_putstr(char *str)
 {

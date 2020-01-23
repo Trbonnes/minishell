@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 10:41:49 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:31:11 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int		ft_option(char *str, t_parsing *parser, int i)
 int		ft_detect_builtin(void)
 {
 	int			i;
-	t_parsing	parser;
+	t_parsing	*parser;
+	t_parsing	*parser_save;
 	char		*str;
 
 	i = 0;
@@ -105,19 +106,35 @@ int		ft_detect_builtin(void)
 	get_next_line(0, &str);
 	while (str[i])
 	{
-		parser = (t_parsing) { 0 };
-		if ((parser.param = ft_parser_cmd(str + i)) == NULL)
+		if (str[i] != '|')
+		{
+			if(!(parser = malloc(sizeof(t_parsing))))
+				return (-1);
+			parser_save = parser;
+		}
+		else
+		{
+			if(!(parser->next = malloc(sizeof(t_parsing))))
+				return (-1);
+			parser = parser->next;
+			i++;
+		}
+		if ((parser->param = ft_parser_cmd(str + i)) == NULL)
 			return (-1);
 		i = ft_increment_begin(str, i);
-		parser.builtin_detected = ft_select_builtin(parser.param);
-		free(parser.param);
-		i = ft_increment_option(str, i, &parser);
-		if (ft_parser_get(&parser, str, i) == -1)
+		parser->builtin_detected = ft_select_builtin(parser->param);
+		free(parser->param);
+		i = ft_increment_option(str, i, parser);
+		if (ft_parser_get(parser, str, i) == -1)
 			return (-1);
-		ft_execute_builtin(&parser);
-		free(parser.param);
-		free(parser.redirection);
 		i = ft_increment_end(str, i);
+		if (str[i] != '|')
+		{
+			ft_execute_builtin(parser);
+			ft_parserclear(&parser_save);
+			parser_save = NULL;
+			parser = NULL;
+		}
 	}
 	free(str);
 	return (1);
