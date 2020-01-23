@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 21:53:00 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:23:57 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ft_unset(t_parsing *alk)
 	while((res = ft_strcmp(g_env_list->key, alk->param)) != 0 && g_env_list->next)
 		g_env_list = g_env_list->next;
 	if (res == 0)
-		ft_envdelone(g_env_list);
+		ft_envdelone(&g_env_list);
 	g_env_list = tmp;
 	return (0);
 }

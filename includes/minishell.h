@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 10:47:06 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:24:20 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char				*ft_strjoin(const char *s1, char *s2);
 char				*ft_strdup(const char *str);
 size_t				ft_strlen(const char *str);
 void				ft_bzero(void *s, size_t n);
-void				ft_envdelone(t_env *lst);
+void				ft_envdelone(t_env **lst);
 void				ft_envclear(t_env **lst);
 char				*ft_strdup_chr(const char *str, char c);
 size_t				ft_strlen_chr(const char *str, char c);
