@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/23 11:23:57 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:44:58 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,23 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 
 int		ft_unset(t_parsing *alk)
 {
-	t_env *tmp;
-	int res;
+	t_env	*save;
+	t_env	*tmp_free;
+	int		res;
 
-	tmp = g_env_list;
+	save = g_env_list;
 	if (alk->param[0] == '\0')
 		return (0);
 	while((res = ft_strcmp(g_env_list->key, alk->param)) != 0 && g_env_list->next)
+	{
+		tmp_free = g_env_list;
 		g_env_list = g_env_list->next;
+	}
 	if (res == 0)
-		ft_envdelone(&g_env_list);
-	g_env_list = tmp;
+	{
+		tmp_free->next = g_env_list->next;
+		ft_envdelone(g_env_list);
+	}
+	g_env_list = save;
 	return (0);
 }

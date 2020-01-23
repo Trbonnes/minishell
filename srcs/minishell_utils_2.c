@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 09:28:07 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 11:23:47 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:34:00 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,14 @@ int		ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-void	ft_envdelone(t_env **lst)
+void	ft_envdelone(t_env *lst)
 {
-	t_env *tmp;
-	t_env *supp;
-	
-	tmp = *lst;
 	if (lst == NULL)
 		return ;
-	free(tmp->key);
-	free(tmp->ref);
-	supp = tmp;
-	tmp = tmp->next;
-	free(supp);
+	free(lst->key);
+	free(lst->ref);
+	free(lst);
+	lst = NULL;
 }
 
 void	ft_envclear(t_env **lst)
