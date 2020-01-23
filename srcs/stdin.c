@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 14:00:51 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 14:48:49 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int		ft_detect_builtin(void)
 		i = ft_increment_end(str, i);
 		if (str[i] != '|')
 		{
-			ft_execute_builtin(parser);
+			ft_execute_builtin(parser_save);
 			ft_parserclear(&parser_save);
 			parser_save = NULL;
 			parser = NULL;
