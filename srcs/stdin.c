@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 13:48:10 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:49:07 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ int		ft_detect_builtin(void)
 		{
 			if(!(parser->next = malloc(sizeof(t_parsing))))
 				return (-1);
-			parser->echo_option = 0;
 			parser = parser->next;
+			parser->echo_option = 0;
 			i++;
 		}
 		if ((parser->param = ft_parser_cmd(str + i)) == NULL)
