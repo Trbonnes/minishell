@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 21:02:33 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:36:04 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef	struct	s_fd
 {
 	int in;
 	int out;
+	int	pipe_b;
+	int pipe[2];
 }				t_fd;
 
 size_t	ft_strlen(const char *str);
