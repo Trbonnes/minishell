@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:41:06 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 10:41:40 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:06:34 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_quote_cpy(int i, int j, char **redirection, char **quote_str)
 {
+	printf("quote_str: %s\n", quote_str[0]);
 	if (j < i)
 	{
 		i = 0;

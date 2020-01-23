@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 09:23:59 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:09:01 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ft_wait_quote(char c, char **quote_str)
 	i = -1;
 	while (join[++i])
 		quote_str[0][i] = join[i];
-	quote_str[0][i] = '\0';
+	quote_str[0][++i] = '\0';
 	free(join);
 	return (ft_strlen(quote_str[0]));
 }
