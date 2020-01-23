@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 17:39:14 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 09:23:59 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ int		ft_detect_quote(char *prompt, char c)
 	return (0);
 }
 
-int		ft_wait_quote(char c, char **quote_str)
+void	ft_prompt_quote(char c, char **quote_str)
 {
 	char	*prompt;
 	char	*join;
 	int		stop;
-	int		i;
 
 	stop = 0;
 	while (stop != 1)
@@ -55,6 +54,14 @@ int		ft_wait_quote(char c, char **quote_str)
 		quote_str[0] = ft_strdup(join);
 		free(join);
 	}
+}
+
+int		ft_wait_quote(char c, char **quote_str)
+{
+	char	*join;
+	int		i;
+
+	ft_prompt_quote(c, quote_str);
 	join = ft_strdup_chr(quote_str[0], c);
 	free(quote_str[0]);
 	i = ft_strlen(join);
@@ -77,21 +84,5 @@ int		ft_redirection_quote(int i, char **str, char **quote_str, char c)
 		i += ft_wait_quote(c, quote_str);
 	else
 		i++;
-	return (i);
-}
-
-int		ft_redirection_calculate(int i, char **str, char **quote_str)
-{
-	while (str[0][i] && (str[0][i] == '<'
-	|| str[0][i] == '>' || str[0][i] == ' '))
-		i++;
-	if (str[0][i] == 34)
-		i = ft_redirection_quote(i, str, quote_str, 34);
-	else if (str[0][i] == 39)
-		i = ft_redirection_quote(i, str, quote_str, 39);
-	else
-		while (str[0][i] && str[0][i] != '<'
-		&& str[0][i] != '>' && str[0][i] != ' ')
-			i++;
 	return (i);
 }
