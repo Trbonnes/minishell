@@ -6,11 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 14:48:49 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:50:42 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+extern pid_t g_pid;
 
 int		ft_execute_builtin(t_parsing *parser)
 {
@@ -101,10 +103,15 @@ int		ft_detect_builtin(void)
 	t_parsing	*parser;
 	t_parsing	*parser_save;
 	char		*str;
+	//int			stat_loc;
 
 	i = 0;
 	write(1, "minishell$>", 11);
 	get_next_line(0, &str);
+	//g_pid = fork();
+	//waitpid(g_pid, &stat_loc, 0);
+	//printf("returned pid: %d\n", g_pid);
+	//if (g_pid == 0)
 	while (str[i])
 	{
 		if (str[i] != '|')
@@ -140,7 +147,9 @@ int		ft_detect_builtin(void)
 			parser_save = NULL;
 			parser = NULL;
 		}
-	}
+		}
 	free(str);
+	//if (g_pid == 0)
+		//return (0);
 	return (1);
 }
