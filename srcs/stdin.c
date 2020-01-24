@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/24 14:52:02 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:19:39 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,64 @@
 
 extern t_env *g_env_list;
 
+char	*ft_path_cpy(char *env_path, int i, char *cmd)
+{
+	char *path;
+	int j;
+
+	j = 0;
+	while (env_path[i + j] && env_path[i + j] != ':')
+		j++;
+	if (!(path = malloc(sizeof(char) * (j + ft_strlen(cmd) + 2))))
+		return (NULL);
+		j = 0;
+	while (env_path[i] && env_path[i] != ':')
+		path[j++] = env_path[i++];
+	i = 0;
+	path[j++] = '/';
+	while (cmd[i])
+		path[j++] = cmd[i++];
+	path[j] = '\0';
+	return (path);
+}
+
 int		ft_executable(t_parsing *parser, char **env)
 {
-	t_env	*search;
-	char	**params;
-	char	*path;
+	int			i;
+	t_env		*search;
+	char		**params;
+	char		*path;
+	struct stat	*buf = NULL;
 
 	search = g_env_list;
-	(void)parser;
-	(void)env;
 	(void)params;
-	(void)path;
-	while (ft_strcmp("PATH", search->key) != 0)
-		search = search->next;
-	
-	return (-1);
+	i = 0;
+	if (parser->executable[0] == '.' && parser->executable[1] == '/')
+	{
+		if (execve(parser->executable, &parser->param, env) == -1)
+			return (-1);
+	}
+	else
+	{
+		while (ft_strcmp("PATH", search->key) != 0)
+			search = search->next;
+		while (search->ref[i] != '=')
+			i++;
+		i++;
+		path = ft_path_cpy(search->ref, i, parser->executable);
+		while (stat(path, buf) != 0 && search->ref[i])
+		{
+			free(path);
+			while (search->ref[i] && search->ref[i - 1] != ':')
+				i++;
+			path = ft_path_cpy(search->ref, i, parser->executable);
+			i++;
+		}
+		if (execve(path, &parser->param, env) == -1)
+			return (-1);
+		free(path);
+	}
+	return (1);
 }
 
 int		ft_execute_builtin(t_parsing *parser, char **env)
