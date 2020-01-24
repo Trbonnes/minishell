@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 13:29:12 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/24 14:36:18 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ typedef struct		s_env
 typedef struct		s_parsing
 {
 	int					builtin_detected;
+	char				*executable;
 	int					echo_option;
 	char				*param;
 	char				*redirection;
 	struct s_parsing	*next;
 }					t_parsing;
 
-int					ft_detect_builtin();
+int					ft_detect_builtin(char **env);
 int					ft_tolower(int c);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strjoin(const char *s1, char *s2);

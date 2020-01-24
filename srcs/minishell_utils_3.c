@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 15:48:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 13:28:53 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/24 14:52:42 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_parserclear(t_parsing **lst)
 	{
 		free(tmp->param);
 		free(tmp->redirection);
+		free(tmp->executable);
 		supp = tmp;
 		tmp = tmp->next;
 		free(supp);

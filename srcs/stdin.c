@@ -6,22 +6,43 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 16:50:42 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/24 14:52:02 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-extern pid_t g_pid;
+extern t_env *g_env_list;
 
-int		ft_execute_builtin(t_parsing *parser)
+int		ft_executable(t_parsing *parser, char **env)
+{
+	t_env	*search;
+	char	**params;
+	char	*path;
+
+	search = g_env_list;
+	(void)parser;
+	(void)env;
+	(void)params;
+	(void)path;
+	while (ft_strcmp("PATH", search->key) != 0)
+		search = search->next;
+	
+	return (-1);
+}
+
+int		ft_execute_builtin(t_parsing *parser, char **env)
 {
 	printf("cmd: %d\n", parser->builtin_detected);
+	printf("executable: %s\n", parser->executable);
 	printf("option: %d\n", parser->echo_option);
 	printf("param: %s\n", parser->param);
 	printf("redirection: %s\n", parser->redirection);
 	if (parser->builtin_detected == 7)
-		write(2, "minishell: command not found\n", 29);
+	{
+		if (ft_executable(parser, env) == -1)
+			write(2, "minishell: command not found\n", 29);
+	}
 	else
 		find_fd(parser);
 	// if (parser->builtin_detected == 0)
@@ -81,7 +102,7 @@ char	*ft_parser_cmd(char *str)
 
 int		ft_option(char *str, t_parsing *parser, int i)
 {
-	if (parser->builtin_detected != 1)
+	if (parser->builtin_detected != 1 && parser->builtin_detected != 7)
 	{
 		write(2, "minishell: ", 11);
 		write(2, &str[i], 1);
@@ -89,6 +110,8 @@ int		ft_option(char *str, t_parsing *parser, int i)
 		write(2, ": invalid option\n", 17);
 		parser->builtin_detected = 7;
 	}
+	if (parser->builtin_detected != 7)
+		return (i);
 	else if (str[i + 1] == 'n')
 	{
 		parser->echo_option = 1;
@@ -97,21 +120,16 @@ int		ft_option(char *str, t_parsing *parser, int i)
 	return (i);
 }
 
-int		ft_detect_builtin(void)
+int		ft_detect_builtin(char **env)
 {
 	int			i;
 	t_parsing	*parser;
 	t_parsing	*parser_save;
 	char		*str;
-	//int			stat_loc;
 
 	i = 0;
 	write(1, "minishell$>", 11);
 	get_next_line(0, &str);
-	//g_pid = fork();
-	//waitpid(g_pid, &stat_loc, 0);
-	//printf("returned pid: %d\n", g_pid);
-	//if (g_pid == 0)
 	while (str[i])
 	{
 		if (str[i] != '|')
@@ -135,6 +153,10 @@ int		ft_detect_builtin(void)
 			return (-1);
 		i = ft_increment_begin(str, i);
 		parser->builtin_detected = ft_select_builtin(parser->param);
+		if (parser->builtin_detected == 7)
+			parser->executable = strdup(parser->param);
+		else
+			parser->executable = NULL;
 		free(parser->param);
 		i = ft_increment_option(str, i, parser);
 		if (ft_parser_get(parser, str, i) == -1)
@@ -142,14 +164,12 @@ int		ft_detect_builtin(void)
 		i = ft_increment_end(str, i);
 		if (str[i] != '|')
 		{
-			ft_execute_builtin(parser_save);
+			ft_execute_builtin(parser_save, env);
 			ft_parserclear(&parser_save);
 			parser_save = NULL;
 			parser = NULL;
 		}
-		}
+	}
 	free(str);
-	//if (g_pid == 0)
-		//return (0);
 	return (1);
 }
