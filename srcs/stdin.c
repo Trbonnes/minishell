@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/24 16:19:39 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/24 17:12:18 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,16 @@ int		ft_executable(t_parsing *parser, char **env)
 		path = ft_path_cpy(search->ref, i, parser->executable);
 		while (stat(path, buf) != 0 && search->ref[i])
 		{
+			printf("path: %s\n", path);
+			printf("%d\n", stat(path, buf));
 			free(path);
 			while (search->ref[i] && search->ref[i - 1] != ':')
 				i++;
 			path = ft_path_cpy(search->ref, i, parser->executable);
 			i++;
 		}
-		if (execve(path, &parser->param, env) == -1)
+		char *lol = ".";
+		if (execve("/bin/ls", &lol, env) == -1)
 			return (-1);
 		free(path);
 	}
