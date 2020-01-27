@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 10:53:48 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 11:09:57 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ft_executable(t_parsing *parser, char **env)
 	(void)params;
 	i = 0;
 
-	params = ft_split(parser->param, ' ', 0);
+	params = ft_split(parser->param, ' ');
 	printf("%s\n", params[0]);
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')
 	{
