@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 13:34:05 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:32:08 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,56 +37,73 @@ char		*ft_path_cpy(char *env_path, int i, char *cmd)
 	return (path);
 }
 
-int			ft_executable(t_parsing *parser, char **env)
+char		*path_finding(int i, t_parsing *parser, t_env *search)
 {
-	int			i;
-	t_env		*search;
-	char		**params;
 	char		*path;
 	struct stat	buf;
 
-	search = g_env_list;
+	path = ft_path_cpy(search->ref, i, parser->executable);
+	while (stat(path, &buf) != 0 && search->ref[i])
+	{
+		free(path);
+		while (search->ref[i] && search->ref[i - 1] != ':')
+			i++;
+		path = ft_path_cpy(search->ref, i, parser->executable);
+		i++;
+	}
+	return (path);
+}
+
+int			ft_selfmade_binary(t_parsing *parser, char **env, char **params)
+{
+	g_pid = fork();
+	wait(&g_status);
+	if (g_pid == 0)
+		if (execve(parser->executable, params, env) == -1)
+			return (-1);
+	return (1);
+}
+
+int			ft_path_binary(t_parsing *parser, t_env *search,
+char **params, char **env)
+{
+	int		i;
+	char	*path;
+
 	i = 0;
+	while (ft_strcmp("PATH", search->key) != 0)
+		search = search->next;
+	while (search->ref[i] != '=')
+		i++;
+	i++;
+	path = path_finding(i, parser, search);
+	g_pid = fork();
+	wait(&g_status);
+	if (g_pid == 0)
+		if (execve(path, params, env) == -1)
+			return (-1);
+	free(path);
+	i = 0;
+	while (params[i])
+		free(params[i++]);
+	free(params);
+	return (1);
+}
+
+int			ft_executable(t_parsing *parser, char **env)
+{
+	t_env		*search;
+	char		**params;
+
+	search = g_env_list;
 	params = ft_split(parser->param, ' ');
-	printf("%s\n", params[0]);
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')
 	{
-		g_pid = fork();
-		wait(&g_status);
-		if (g_pid == 0)
-			if (execve(parser->executable, params, env) == -1)
-				return (-1);
+		if (ft_selfmade_binary(parser, env, params) == -1)
+			return (-1);
 	}
-	else
-	{
-		while (ft_strcmp("PATH", search->key) != 0)
-			search = search->next;
-		while (search->ref[i] != '=')
-			i++;
-		i++;
-		path = ft_path_cpy(search->ref, i, parser->executable);
-		while (stat(path, &buf) != 0 && search->ref[i])
-		{
-			free(path);
-			while (search->ref[i] && search->ref[i - 1] != ':')
-				i++;
-			path = ft_path_cpy(search->ref, i, parser->executable);
-			i++;
-		}
-		g_pid = fork();
-		wait(&g_status);
-		if (g_pid == 0)
-			if (execve(path, params, env) == -1)
-			{
-				printf("%s\n", strerror(errno));
-				return (-1);
-			}
-		free(path);
-		i = 0;
-		while (params[i])
-			free(params[i++]);
-		free(params);
-	}
+	else if (ft_path_binary(parser, search, params, env) == -1)
+		return (-1);
 	return (1);
 }
 
@@ -179,7 +196,8 @@ int			ft_option(char *str, t_parsing *parser, int i)
 	return (i);
 }
 
-int			parser_init(char *str, int i, t_parsing **parser, t_parsing	**parser_save)
+int			parser_init(char *str, int i, t_parsing **parser,
+t_parsing **parser_save)
 {
 	if (str[i] != '|')
 	{
@@ -187,6 +205,7 @@ int			parser_init(char *str, int i, t_parsing **parser, t_parsing	**parser_save)
 			return (-1);
 		parser[0]->echo_option = 0;
 		parser[0]->next = NULL;
+		parser[0]->executable = NULL;
 		parser_save[0] = parser[0];
 	}
 	else
@@ -196,11 +215,21 @@ int			parser_init(char *str, int i, t_parsing **parser, t_parsing	**parser_save)
 		parser[0] = parser[0]->next;
 		parser[0]->echo_option = 0;
 		parser[0]->next = NULL;
+		parser[0]->executable = NULL;
 		i++;
 	}
 	if ((parser[0]->param = ft_parser_cmd(str + i)) == NULL)
 		return (-1);
 	return (1);
+}
+
+void		ft_execute_and_clear(t_parsing *parser,
+t_parsing *parser_save, char **env)
+{
+	ft_execute_builtin(parser_save, env);
+	ft_parserclear(&parser_save);
+	parser_save = NULL;
+	parser = NULL;
 }
 
 int			ft_detect_builtin(char **env)
@@ -220,20 +249,13 @@ int			ft_detect_builtin(char **env)
 		parser->builtin_detected = ft_select_builtin(parser->param);
 		if (parser->builtin_detected == 7)
 			parser->executable = strdup(parser->param);
-		else
-			parser->executable = NULL;
 		free(parser->param);
 		i = ft_increment_option(str, i, parser);
 		if (ft_parser_get(parser, str, i) == -1)
 			return (-1);
 		i = ft_increment_end(str, i);
 		if (str[i] != '|')
-		{
-			ft_execute_builtin(parser_save, env);
-			ft_parserclear(&parser_save);
-			parser_save = NULL;
-			parser = NULL;
-		}
+			ft_execute_and_clear(parser, parser_save, env);
 	}
 	free(str);
 	return (1);
