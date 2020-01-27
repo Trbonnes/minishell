@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/24 14:49:02 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:02:35 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		find_fd(t_parsing *alk)
 		fd.pipe[1] = pipe_fd[1];
 	}
 	while (alk)
-	{	
+	{
 		if (open_file(alk, &fd) == -1)
 			return (0);
 		if (alk->builtin_detected == 0)
