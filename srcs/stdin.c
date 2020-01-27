@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 14:38:02 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 15:02:40 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,26 @@ int			ft_execute_builtin(t_parsing *parser, char **env)
 	return (0);
 }
 
+const static char *const	g_builtins[] = {
+	"cd",
+	"echo",
+	"env",
+	"exit",
+	"export",
+	"pwd",
+	"unset",
+	NULL
+};
+
 int			ft_select_builtin(char *builtin_str)
 {
 	int					i;
-	const char *const	*builtins = (const char *[]){"cd", "echo", "env", "exit", "export", "pwd", "unset", NULL};
 
 	i = -1;
 	while (builtin_str[++i])
 		builtin_str[i] = ft_tolower(builtin_str[i]);
 	i = -1;
-	while (builtins[++i] != NULL && ft_strcmp(builtin_str, builtins[i]) != 0)
+	while (g_builtins[++i] != NULL && ft_strcmp(builtin_str, g_builtins[i]) != 0)
 		;
 	return (i);
 }
