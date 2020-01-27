@@ -6,13 +6,15 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 08:37:04 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 09:05:07 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-extern t_env *g_env_list;
+extern t_env 	*g_env_list;
+extern pid_t 	g_pid;
+static int		status;
 
 char	*ft_path_cpy(char *env_path, int i, char *cmd)
 {
@@ -48,8 +50,11 @@ int		ft_executable(t_parsing *parser, char **env)
 	i = 0;
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')
 	{
-		if (execve(parser->executable, &parser->param, env) == -1)
-			return (-1);
+		g_pid = fork();
+		wait(&status);
+		if (g_pid == 0)
+			if (execve(parser->executable, &parser->param, env) == -1)
+				return (-1);
 	}
 	else
 	{
@@ -61,7 +66,7 @@ int		ft_executable(t_parsing *parser, char **env)
 		path = ft_path_cpy(search->ref, i, parser->executable);
 		while (stat(path, &buf) != 0 && search->ref[i])
 		{
-			printf("%s\n", strerror(errno));
+			//printf("%s\n", strerror(errno));
 			free(path);
 			while (search->ref[i] && search->ref[i - 1] != ':')
 				i++;
@@ -69,11 +74,14 @@ int		ft_executable(t_parsing *parser, char **env)
 			i++;
 		}
 		char* lol[]={".", NULL};
-		if (execve(path, lol, env) == -1)
-		{
-			printf("%s\n", strerror(errno));
-			return (-1);
-		}
+		g_pid = fork();
+		wait(&status);
+		if (g_pid == 0)
+			if (execve(path, lol, env) == -1)
+			{
+				printf("%s\n", strerror(errno));
+				return (-1);
+			}
 		free(path);
 	}
 	return (1);
