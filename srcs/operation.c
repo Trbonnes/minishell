@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/27 14:02:35 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/27 20:44:01 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 {
 	char *fd_open;
 
+	fd->pipe_b = 0;
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
 	fd_open = file_name(alk->redirection);
@@ -42,6 +43,7 @@ int		inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 {
 	char *fd_open;
 
+	fd->pipe_b = 0;
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
 	fd_open = file_name(alk->redirection);
@@ -66,18 +68,21 @@ int		find_fd(t_parsing *alk)
 {
 	t_fd fd = (t_fd){ 0 };
 	int pipe_fd[2];
-	
+	t_parsing *tmp;
+
+	tmp = alk;
 	fd.in = 0;
 	fd.out = 1;
 	if (alk->next)
 	{
 		pipe(pipe_fd);
-		fd.pipe_b = 1;
 		fd.pipe[0] = pipe_fd[0];
 		fd.pipe[1] = pipe_fd[1];
 	}
 	while (alk)
 	{
+		if (alk->param[0] = '\0' && alk->next)
+			fd.pipe_b = 1;
 		if (open_file(alk, &fd) == -1)
 			return (0);
 		if (alk->builtin_detected == 0)
@@ -99,7 +104,8 @@ int		find_fd(t_parsing *alk)
 		if (fd.in != 0)
 			close(fd.in);
 		alk = alk->next;
-		printf("\n");
 	}
+	fd.pipe_b = 0;
+	alk = tmp;
 	return (0);
 }

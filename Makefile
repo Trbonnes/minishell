@@ -22,6 +22,8 @@ all:		${NAME}
 
 bonus:		${NAME}
 
+test:		
+			${CC} ${SRCS} && ./a.out
 clean:
 			rm -f ${OBJS}
 

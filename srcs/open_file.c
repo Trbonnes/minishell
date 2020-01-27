@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:17:38 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/27 14:34:25 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/27 20:41:42 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,9 @@ int		open_file(t_parsing *alk, t_fd *fd)
 	}
 	if (alk->next && fd->pipe_b)
 	{
+		fd->in = fd->pipe[1];
+		fd->out = fd->pipe[0];
 		return (ret);
 	}
-		
 	return (ret);
 }
