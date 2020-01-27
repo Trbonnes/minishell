@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 09:05:07 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 10:53:48 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,15 @@ int		ft_executable(t_parsing *parser, char **env)
 	search = g_env_list;
 	(void)params;
 	i = 0;
+
+	params = ft_split(parser->param, ' ', 0);
+	printf("%s\n", params[0]);
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')
 	{
 		g_pid = fork();
 		wait(&status);
 		if (g_pid == 0)
-			if (execve(parser->executable, &parser->param, env) == -1)
+			if (execve(parser->executable, params, env) == -1)
 				return (-1);
 	}
 	else
@@ -66,23 +69,25 @@ int		ft_executable(t_parsing *parser, char **env)
 		path = ft_path_cpy(search->ref, i, parser->executable);
 		while (stat(path, &buf) != 0 && search->ref[i])
 		{
-			//printf("%s\n", strerror(errno));
 			free(path);
 			while (search->ref[i] && search->ref[i - 1] != ':')
 				i++;
 			path = ft_path_cpy(search->ref, i, parser->executable);
 			i++;
 		}
-		char* lol[]={".", NULL};
 		g_pid = fork();
 		wait(&status);
 		if (g_pid == 0)
-			if (execve(path, lol, env) == -1)
+			if (execve(path, params, env) == -1)
 			{
 				printf("%s\n", strerror(errno));
 				return (-1);
 			}
 		free(path);
+		i = 0;
+		while (params[i])
+			free(params[i++]);
+		free(params);
 	}
 	return (1);
 }
