@@ -6,27 +6,27 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 11:09:57 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:34:05 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-extern t_env 	*g_env_list;
-extern pid_t 	g_pid;
-static int		status;
+extern t_env	*g_env_list;
+extern pid_t	g_pid;
+static int		g_status;
 
-char	*ft_path_cpy(char *env_path, int i, char *cmd)
+char		*ft_path_cpy(char *env_path, int i, char *cmd)
 {
-	char *path;
-	int j;
+	char	*path;
+	int		j;
 
 	j = 0;
 	while (env_path[i + j] && env_path[i + j] != ':')
 		j++;
 	if (!(path = malloc(sizeof(char) * (j + ft_strlen(cmd) + 2))))
 		return (NULL);
-		j = 0;
+	j = 0;
 	while (env_path[i] && env_path[i] != ':')
 		path[j++] = env_path[i++];
 	i = 0;
@@ -37,7 +37,7 @@ char	*ft_path_cpy(char *env_path, int i, char *cmd)
 	return (path);
 }
 
-int		ft_executable(t_parsing *parser, char **env)
+int			ft_executable(t_parsing *parser, char **env)
 {
 	int			i;
 	t_env		*search;
@@ -46,15 +46,13 @@ int		ft_executable(t_parsing *parser, char **env)
 	struct stat	buf;
 
 	search = g_env_list;
-	(void)params;
 	i = 0;
-
 	params = ft_split(parser->param, ' ');
 	printf("%s\n", params[0]);
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')
 	{
 		g_pid = fork();
-		wait(&status);
+		wait(&g_status);
 		if (g_pid == 0)
 			if (execve(parser->executable, params, env) == -1)
 				return (-1);
@@ -76,7 +74,7 @@ int		ft_executable(t_parsing *parser, char **env)
 			i++;
 		}
 		g_pid = fork();
-		wait(&status);
+		wait(&g_status);
 		if (g_pid == 0)
 			if (execve(path, params, env) == -1)
 			{
@@ -92,7 +90,7 @@ int		ft_executable(t_parsing *parser, char **env)
 	return (1);
 }
 
-int		ft_execute_builtin(t_parsing *parser, char **env)
+int			ft_execute_builtin(t_parsing *parser, char **env)
 {
 	printf("cmd: %d\n", parser->builtin_detected);
 	printf("executable: %s\n", parser->executable);
@@ -123,7 +121,7 @@ int		ft_execute_builtin(t_parsing *parser, char **env)
 	return (0);
 }
 
-int		ft_select_builtin(char *builtin_str)
+int			ft_select_builtin(char *builtin_str)
 {
 	int					i;
 	const char *const	*builtins = (const char *[]){"cd", "echo", "env", "exit", "export", "pwd", "unset", NULL};
@@ -137,7 +135,7 @@ int		ft_select_builtin(char *builtin_str)
 	return (i);
 }
 
-char	*ft_parser_cmd(char *str)
+char		*ft_parser_cmd(char *str)
 {
 	char	*parsed;
 	int		i;
@@ -161,7 +159,7 @@ char	*ft_parser_cmd(char *str)
 	return (parsed);
 }
 
-int		ft_option(char *str, t_parsing *parser, int i)
+int			ft_option(char *str, t_parsing *parser, int i)
 {
 	if (parser->builtin_detected != 1 && parser->builtin_detected != 7)
 	{
@@ -181,7 +179,31 @@ int		ft_option(char *str, t_parsing *parser, int i)
 	return (i);
 }
 
-int		ft_detect_builtin(char **env)
+int			parser_init(char *str, int i, t_parsing **parser, t_parsing	**parser_save)
+{
+	if (str[i] != '|')
+	{
+		if (!(parser[0] = malloc(sizeof(t_parsing))))
+			return (-1);
+		parser[0]->echo_option = 0;
+		parser[0]->next = NULL;
+		parser_save[0] = parser[0];
+	}
+	else
+	{
+		if (!(parser[0]->next = malloc(sizeof(t_parsing))))
+			return (-1);
+		parser[0] = parser[0]->next;
+		parser[0]->echo_option = 0;
+		parser[0]->next = NULL;
+		i++;
+	}
+	if ((parser[0]->param = ft_parser_cmd(str + i)) == NULL)
+		return (-1);
+	return (1);
+}
+
+int			ft_detect_builtin(char **env)
 {
 	int			i;
 	t_parsing	*parser;
@@ -193,25 +215,7 @@ int		ft_detect_builtin(char **env)
 	get_next_line(0, &str);
 	while (str[i])
 	{
-		if (str[i] != '|')
-		{
-			if(!(parser = malloc(sizeof(t_parsing))))
-				return (-1);
-			parser->echo_option = 0;
-			parser->next = NULL;
-			parser_save = parser;
-		}
-		else
-		{
-			if(!(parser->next = malloc(sizeof(t_parsing))))
-				return (-1);
-			parser = parser->next;
-			parser->echo_option = 0;
-			parser->next = NULL;
-			i++;
-		}
-		if ((parser->param = ft_parser_cmd(str + i)) == NULL)
-			return (-1);
+		parser_init(str, i, &parser, &parser_save);
 		i = ft_increment_begin(str, i);
 		parser->builtin_detected = ft_select_builtin(parser->param);
 		if (parser->builtin_detected == 7)

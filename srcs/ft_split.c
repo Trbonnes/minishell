@@ -6,11 +6,11 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:24:44 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 13:04:50 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:27:42 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../includes/minishell.h"
 
 static int	ft_count(char const *str, char c)
 {

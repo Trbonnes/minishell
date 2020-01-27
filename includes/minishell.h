@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 13:08:39 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:27:09 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int					ft_quote_check(char c, int quote);
 char				*ft_realloc_param_str(int i, int j, char *param_str);
 void				ft_parserclear(t_parsing **lst);
 char				**ft_split(char const *str, char c);
+char				**ft_no_args(void);
 
 #endif
