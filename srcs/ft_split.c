@@ -6,24 +6,11 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:24:44 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 11:07:03 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:04:50 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
-char		**ft_no_args(void)
-{
-	char **tab;
-
-	if (!(tab = malloc(sizeof(char*) * 2)))
-		return (NULL);
-	if (!(tab[0] = malloc(sizeof(char*) * 1)))
-		return (NULL);
-	tab[0][0] = '\0';
-	tab[1] = 0;
-	return (tab);
-}
 
 static int	ft_count(char const *str, char c)
 {
@@ -67,6 +54,27 @@ static int	ft_length(char const *str, char c, int i)
 	return (length);
 }
 
+char		**ft_argnumber(int *count, int *i)
+{
+	char **tab;
+
+	if (*count == 1)
+	{
+		*count += 1;
+		*i = -1;
+	}
+	if (!(tab = malloc(sizeof(char*) * (*count + 1))))
+		return (NULL);
+	if (*i == -1)
+	{
+		if (!(tab[0] = malloc(sizeof(char) * 1)))
+			return (NULL);
+		tab[0][0] = '\0';
+		*i = 1;
+	}
+	return (tab);
+}
+
 char		**ft_split(char const *str, char c)
 {
 	char	**tab;
@@ -80,20 +88,7 @@ char		**ft_split(char const *str, char c)
 	count = ft_count(str, c);
 	if (count == 0)
 		return (ft_no_args());
-	if (count == 1)
-	{
-		count++;
-		i = -1;
-	}
-	if (!(tab = malloc(sizeof(char*) * (count + 1))))
-		return (NULL);
-	if (i == -1)
-	{
-		if (!(tab[0] = malloc(sizeof(char) * 1)))
-			return (NULL);
-		tab[0][0] = '\0';
-		i = 1;
-	}
+	tab = ft_argnumber(&count, &i);
 	while (i < count && str[s])
 	{
 		s = ft_next(str, c, s);

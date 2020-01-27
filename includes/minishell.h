@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 11:06:53 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:08:39 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					ft_parser_get(t_parsing *parser, char *str, int i);
 char				*ft_parser_param(char *str);
 char				*ft_parser_redirection(char **builtin_str);
 int					ft_option(char *str, t_parsing *parser, int i);
-void				ft_quote_cpy(int i, int j, char **redirection, char **quote_str);
+void				ft_quote_cpy(int i, int j, char **redirection, char **q);
 int					ft_quote_check(char c, int quote);
 char				*ft_realloc_param_str(int i, int j, char *param_str);
 void				ft_parserclear(t_parsing **lst);
