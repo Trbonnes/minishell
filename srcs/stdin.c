@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 14:32:08 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:38:02 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,20 +121,6 @@ int			ft_execute_builtin(t_parsing *parser, char **env)
 	}
 	else
 		find_fd(parser);
-	// if (parser->builtin_detected == 0)
-	// 	return(/*cd*/1);
-	// else if (parser->builtin_detected == 1)
-	// 	return(/*echo*/1);
-	// else if (parser->builtin_detected == 2)
-	// 	return(/*env*/1);
-	// else if (parser->builtin_detected == 3)
-	// 	return(/*exit*/1);
-	// else if (parser->builtin_detected == 4)
-	// 	return(/*export*/1);
-	// else if (parser->builtin_detected == 5)
-	// 	return(/*pwd*/1);
-	// else if (parser->builtin_detected == 6)
-	// 	return(/*unset*/1);
 	return (0);
 }
 
@@ -206,6 +192,7 @@ t_parsing **parser_save)
 		parser[0]->echo_option = 0;
 		parser[0]->next = NULL;
 		parser[0]->executable = NULL;
+		parser[0]->index = 0;
 		parser_save[0] = parser[0];
 	}
 	else
@@ -216,6 +203,7 @@ t_parsing **parser_save)
 		parser[0]->echo_option = 0;
 		parser[0]->next = NULL;
 		parser[0]->executable = NULL;
+		parser[0]->index = 0;
 		i++;
 	}
 	if ((parser[0]->param = ft_parser_cmd(str + i)) == NULL)

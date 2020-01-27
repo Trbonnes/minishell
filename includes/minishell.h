@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 14:27:40 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:37:23 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct		s_parsing
 	int					echo_option;
 	char				*param;
 	char				*redirection;
-	int					*index;
+	int					index;
 	struct s_parsing	*next;
 }					t_parsing;
 
