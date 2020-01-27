@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/24 14:36:18 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/27 08:26:35 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <errno.h>
 # include <stdio.h> // a enlever
 
 typedef struct		s_env
