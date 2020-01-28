@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 15:24:15 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/28 15:26:06 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,16 @@ t_parsing **parser_save)
 	return (1);
 }
 
-void		ft_execute_and_clear(t_parsing *parser,
+int			ft_execute_and_clear(t_parsing *parser,
 t_parsing *parser_save, char **env)
 {
-	ft_execute_builtin(parser_save, env);
+	int r;
+
+	r = ft_execute_builtin(parser_save, env);
 	ft_parserclear(&parser_save);
 	parser_save = NULL;
 	parser = NULL;
+	return (r);
 }
 
 int			ft_detect_builtin(char **env)
@@ -144,7 +147,11 @@ int			ft_detect_builtin(char **env)
 			return (-1);
 		i = ft_increment_end(str, i);
 		if (str[i] != '|')
-			ft_execute_and_clear(parser, parser_save, env);
+			if (ft_execute_and_clear(parser, parser_save, env) == -1)
+			{
+				free(str);
+				return (-1);
+			}
 	}
 	free(str);
 	return (1);

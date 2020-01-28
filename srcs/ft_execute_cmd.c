@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 15:22:51 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/28 15:23:05 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,10 @@ int			ft_execute_builtin(t_parsing *parser, char **env)
 	if (parser->builtin_detected == 7)
 	{
 		if (ft_executable(parser, env) == -1)
+		{
 			write(2, "minishell: command not found\n", 29);
+			return (-1);
+		}
 	}
 	else
 		find_fd(parser);
