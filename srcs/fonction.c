@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 21:30:40 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/28 13:33:56 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int		ft_pwd(t_fd *fd)
 
 void	ft_exit(void)
 {
-	write(1, "exit", 4);
+	write(1, "exit\n", 5);
 	exit(1);
 }

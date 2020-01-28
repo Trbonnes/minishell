@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 09:30:11 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/28 13:32:51 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ void	sigquit_handler(int sig)
 int		main(int ac, char **av, char **env)
 {
 	(void)(ac + av);
-	//signal(SIGINT, sigint_handler);
-	//signal(SIGQUIT, sigquit_handler);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigquit_handler);
 	ft_environment_parsing(env);
 	while (ft_detect_builtin(env) > 0)
 	{
-		system("leaks minishell");
-		printf("Command Executed\n");
+		//system("leaks minishell");
+		//printf("Command Executed\n");
+		;
 	}
 	ft_envclear(&g_env_list);
 	return (0);
