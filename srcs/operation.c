@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/27 20:44:01 by trostan          ###   ########.fr       */
+/*   Updated: 2020/01/28 13:09:36 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		find_fd(t_parsing *alk)
 	}
 	while (alk)
 	{
-		if (alk->param[0] = '\0' && alk->next)
+		if (alk->param[0] == '\0' && alk->next)
 			fd.pipe_b = 1;
 		if (open_file(alk, &fd) == -1)
 			return (0);
