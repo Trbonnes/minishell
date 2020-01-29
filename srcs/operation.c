@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/29 16:39:51 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:34:55 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		find_fd(t_parsing *alk, char **env)
 	t_fd fd = (t_fd){ 0 };
 	int pipe_fd[2];
 	t_parsing *tmp;
-	
+
 	tmp = alk;
 	fd.in = 0;
 	fd.out = 1;
@@ -85,6 +85,14 @@ int		find_fd(t_parsing *alk, char **env)
 			fd.pipe_b = 1;
 		if (open_file(alk, &fd) == -1)
 			return (0);
+		if (alk->builtin_detected == 7)
+		{
+			if (ft_executable(alk, env) == -1)
+			{
+				write(2, "minishell: command not found\n", 29);
+				return (-1);
+			}
+		}
 		if (alk->builtin_detected == 0)
 			ft_cd(alk);	
 		if (alk->builtin_detected == 1)
@@ -99,14 +107,6 @@ int		find_fd(t_parsing *alk, char **env)
 			ft_pwd(&fd);
 		if (alk->builtin_detected == 6)
 			ft_unset(alk);
-		if (alk->builtin_detected == 7)
-		{
-			if (ft_executable(alk, env) == -1)
-			{
-				write(2, "minishell: command not found\n", 29);
-				return (-1);
-			}
-		}
 		if (fd.out != 1 && fd.pipe_b)
 			close(fd.out);
 		if (fd.in != 0)
