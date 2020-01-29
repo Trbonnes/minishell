@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/29 17:44:01 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/29 18:15:22 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,17 @@ char		*path_finding(int i, t_parsing *parser, t_env *search)
 	return (path);
 }
 
+int			ft_free_params(char **params, int ret)
+{
+	int i;
+
+	i = 0;
+	while (params[i])
+		free(params[i++]);
+	free(params);
+	return (ret);
+}
+
 int			ft_selfmade_binary(t_parsing *parser, char **env, char **params)
 {
 	g_pid = fork();
@@ -83,10 +94,6 @@ char **params, char **env)
 		if (execve(path, params, env) == -1)
 			return (-1);
 	free(path);
-	i = 0;
-	while (params[i])
-		free(params[i++]);
-	free(params);
 	return (1);
 }
 
@@ -100,11 +107,11 @@ int			ft_executable(t_parsing *parser, char **env)
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')
 	{
 		if (ft_selfmade_binary(parser, env, params) == -1)
-			return (-1);
+			return (ft_free_params(params, -1));
 	}
 	else if (ft_path_binary(parser, search, params, env) == -1)
-		return (-1);
-	return (1);
+		return (ft_free_params(params, -1));
+	return (ft_free_params(params, 1));
 }
 
 int			ft_execute_builtin(t_parsing *parser, char **env)
