@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 15:54:45 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 17:13:35 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:35:26 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		ft_up_directory(t_parsing *alk)
 
 void	ft_home(t_parsing *alk)
 {
-	const char users[17] = "/Users/trdella-/";
+	const char users[17] = "/Users/trdella-/"; // modifier avec env
 	char *afree;
 
 	afree = alk->param;
@@ -54,16 +54,3 @@ void	ft_home(t_parsing *alk)
 		alk->param = ft_strdup(users);
 	free(afree);
 }
-
-// int main(void)
-// {
-// 	t_parsing alk;
-
-// 	alk.builtin_detected = 1;
-// 	alk.echo_option = 0;
-// 	alk.param = ft_strdup("..");
-// 	alk.redirection = ft_strdup("");
-// 	ft_cd(&alk);
-
-// 	return (0);
-// }

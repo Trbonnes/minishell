@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/28 13:09:36 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:03:24 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 	return (0);
 }
 
-int		find_fd(t_parsing *alk)
+int		find_fd(t_parsing *alk, char **env)
 {
 	t_fd fd = (t_fd){ 0 };
 	int pipe_fd[2];
@@ -86,7 +86,7 @@ int		find_fd(t_parsing *alk)
 		if (open_file(alk, &fd) == -1)
 			return (0);
 		if (alk->builtin_detected == 0)
-			ft_cd(alk);
+			ft_cd(alk);	
 		if (alk->builtin_detected == 1)
 			ft_echo(alk, &fd);
 		if (alk->builtin_detected == 2)
@@ -99,10 +99,16 @@ int		find_fd(t_parsing *alk)
 			ft_pwd(&fd);
 		if (alk->builtin_detected == 6)
 			ft_unset(alk);
-		if (fd.out != 1)
+		if (alk->builtin_detected == 7)
+		{
+			if (ft_executable(alk, env) == -1)
+				write(2, "minishell: command not found\n", 29);
+					return (-1);
+		}
+		if (fd.out != 1 && fd.pipe_b)
 			close(fd.out);
 		if (fd.in != 0)
-			close(fd.in);
+			close(fd.in && fd.pipe_b);
 		alk = alk->next;
 	}
 	fd.pipe_b = 0;

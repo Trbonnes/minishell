@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:31:36 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 15:23:25 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:04:11 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void				ft_parserclear(t_parsing **lst);
 char				**ft_split(char const *str, char c);
 char				**ft_no_args(void);
 int					ft_execute_builtin(t_parsing *parser, char **env);
+int					ft_executable(t_parsing *parser, char **env);
 
 #endif

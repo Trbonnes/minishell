@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/27 13:08:37 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:03:40 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int				ft_env_display(t_fd *fd);
 int				ft_export(t_fd *fd, t_parsing *alk);
 int				ft_unset(t_parsing *alk);
 
-int				find_fd(t_parsing *alk);
+int				find_fd(t_parsing *alk, char **env);
 int				superior(t_parsing *alk, int dbchevron, t_fd *fd);
 int				inferior(t_parsing *alk, int dbchevron, t_fd *fd);
 

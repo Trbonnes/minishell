@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/28 15:23:05 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:04:53 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,15 +114,6 @@ int			ft_execute_builtin(t_parsing *parser, char **env)
 	printf("option: %d\n", parser->echo_option);
 	printf("param: %s\n", parser->param);
 	printf("redirection: %s\n", parser->redirection);
-	if (parser->builtin_detected == 7)
-	{
-		if (ft_executable(parser, env) == -1)
-		{
-			write(2, "minishell: command not found\n", 29);
-			return (-1);
-		}
-	}
-	else
-		find_fd(parser);
+	find_fd(parser, env);
 	return (0);
 }
