@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/29 16:10:01 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/29 16:40:06 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int			ft_execute_builtin(t_parsing *parser, char **env)
 	printf("option: %d\n", parser->echo_option);
 	printf("param: %s\n", parser->param);
 	printf("redirection: %s\n", parser->redirection);
-	find_fd(parser, env);
+	if (find_fd(parser, env) == -1)
+		return (-1);
 	return (0);
 }
