@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/29 14:03:24 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/29 16:07:55 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		find_fd(t_parsing *alk, char **env)
 	t_fd fd = (t_fd){ 0 };
 	int pipe_fd[2];
 	t_parsing *tmp;
-
+	
 	tmp = alk;
 	fd.in = 0;
 	fd.out = 1;

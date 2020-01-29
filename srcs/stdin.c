@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stdin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/28 15:26:06 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/29 16:33:10 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,25 +134,32 @@ int			ft_detect_builtin(char **env)
 	i = 0;
 	write(1, "minishell$>", 11);
 	get_next_line(0, &str);
-	while (str[i])
-	{
-		parser_init(str, i, &parser, &parser_save);
-		i = ft_increment_begin(str, i);
-		parser->builtin_detected = ft_select_builtin(parser->param);
-		if (parser->builtin_detected == 7)
-			parser->executable = strdup(parser->param);
-		free(parser->param);
-		i = ft_increment_option(str, i, parser);
-		if (ft_parser_get(parser, str, i) == -1)
-			return (-1);
-		i = ft_increment_end(str, i);
-		if (str[i] != '|')
-			if (ft_execute_and_clear(parser, parser_save, env) == -1)
-			{
-				free(str);
+	while (str[i] && str[i] == ' ')
+		i++;
+	if (str[i] != '|')
+		while (str[i])
+		{
+			parser_init(str, i, &parser, &parser_save);
+			if (str[i] == '|')
+				i++;
+			i = ft_increment_begin(str, i);
+			parser->builtin_detected = ft_select_builtin(parser->param);
+			if (parser->builtin_detected == 7)
+				parser->executable = strdup(parser->param);
+			free(parser->param);
+			i = ft_increment_option(str, i, parser);
+			if (ft_parser_get(parser, str, i) == -1)
 				return (-1);
-			}
-	}
+			i = ft_increment_end(str, i);
+			if (str[i] != '|')
+				if (ft_execute_and_clear(parser, parser_save, env) == -1)
+				{
+					free(str);
+					return (-1);
+				}
+		}
+	else
+		write(2, "syntax error near unexpected token |\n", 37);
 	free(str);
 	return (1);
 }
