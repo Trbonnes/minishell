@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/30 13:56:05 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/30 14:14:24 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char **params, char **env)
 	return (1);
 }
 
-int			ft_executable(t_parsing *parser, char **env)
+int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 {
 	t_env		*search;
 	char		**params;
@@ -102,6 +102,8 @@ int			ft_executable(t_parsing *parser, char **env)
 	wait(&g_status);
 	if (g_pid == 0)
 	{
+		dup2(fd->out, 1);
+		dup2(fd->in, 0);
 		if (parser->executable[0] == '.' && parser->executable[1] == '/')
 		{
 			if (ft_selfmade_binary(parser, env, params) == -1)

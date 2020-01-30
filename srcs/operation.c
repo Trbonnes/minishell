@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/29 18:15:31 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/30 14:07:53 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		find_fd(t_parsing *alk, char **env)
 			return (0);
 		if (alk->builtin_detected == 7)
 		{
-			if (ft_executable(alk, env) == -1)
+			if (ft_executable(alk, env, & fd) == -1)
 			{
 				write(2, "minishell: command not found\n", 29);
 				return (-1);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:24:44 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/27 13:27:42 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/30 14:10:56 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/fonction.h"
 
 static int	ft_count(char const *str, char c)
 {
