@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/29 18:15:22 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/30 13:56:05 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,8 @@ int			ft_free_params(char **params, int ret)
 
 int			ft_selfmade_binary(t_parsing *parser, char **env, char **params)
 {
-	g_pid = fork();
-	wait(&g_status);
-	if (g_pid == 0)
-		if (execve(parser->executable, params, env) == -1)
-			return (-1);
+	if (execve(parser->executable, params, env) == -1)
+		return (-1);
 	return (1);
 }
 
@@ -88,11 +85,8 @@ char **params, char **env)
 		i++;
 	i++;
 	path = path_finding(i, parser, search);
-	g_pid = fork();
-	wait(&g_status);
-	if (g_pid == 0)
-		if (execve(path, params, env) == -1)
-			return (-1);
+	if (execve(path, params, env) == -1)
+		return (-1);
 	free(path);
 	return (1);
 }
@@ -104,13 +98,18 @@ int			ft_executable(t_parsing *parser, char **env)
 
 	search = g_env_list;
 	params = ft_split(parser->param, ' ');
-	if (parser->executable[0] == '.' && parser->executable[1] == '/')
+	g_pid = fork();
+	wait(&g_status);
+	if (g_pid == 0)
 	{
-		if (ft_selfmade_binary(parser, env, params) == -1)
+		if (parser->executable[0] == '.' && parser->executable[1] == '/')
+		{
+			if (ft_selfmade_binary(parser, env, params) == -1)
+				return (ft_free_params(params, -1));
+		}
+		else if (ft_path_binary(parser, search, params, env) == -1)
 			return (ft_free_params(params, -1));
 	}
-	else if (ft_path_binary(parser, search, params, env) == -1)
-		return (ft_free_params(params, -1));
 	return (ft_free_params(params, 1));
 }
 
