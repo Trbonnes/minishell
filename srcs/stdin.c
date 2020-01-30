@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/30 16:52:41 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:15:46 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,12 @@ int			ft_detect_builtin(char **env)
 	i = 0;
 	write(1, "minishell$>", 11);
 	get_next_line(0, &str);
+	if (str[0] == 3)
+	{
+		write(1, " exit\n", 6);
+		free(str);
+		return (0);
+	}
 	while (str[i] && str[i] == ' ')
 		i++;
 	if (str[i] != '|')
@@ -162,12 +168,6 @@ int			ft_detect_builtin(char **env)
 		}
 	else
 		write(2, "syntax error near unexpected token |\n", 37);
-	if (str[0] == '\0')
-	{
-		write(1, " exit\n", 6);
-		free(str);
-		return (0);
-	}
 	free(str);
 	return (1);
 }

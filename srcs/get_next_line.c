@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/29 16:17:35 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:14:57 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int		get_next_line(int fd, char **line)
 	{
 		if (!(*line = malloc(1)))
 			return (-1);
-		*line[0] = '\0';
+		*line[0] = 3;
 	}
 	if (i == 0)
 		ft_lst_remove(fd, &lst);
