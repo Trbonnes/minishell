@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/30 16:11:54 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:30:29 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 	if (g_pid == 0)
 	{
 		dup2(fd->out, 1);
-		// dup2(fd->in, 0);
+		dup2(fd->in, 0);
 		if (parser->executable[0] == '.' && parser->executable[1] == '/')
 		{
 			if (ft_selfmade_binary(parser, env, params) == -1)
