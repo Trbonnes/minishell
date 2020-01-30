@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stdin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/30 15:56:28 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:38:28 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ int			ft_option(char *str, t_parsing *parser, int i)
 		write(2, &str[i], 1);
 		write(2, &str[++i], 1);
 		write(2, ": invalid option\n", 17);
-		parser->builtin_detected = 7;
+		parser->builtin_detected = 8;
 	}
-	if (parser->builtin_detected != 7)
+	if (parser->builtin_detected == 8)
 		return (i);
-	else if (str[i + 1] == 'n')
+	else if (str[i + 1] == 'n' && str[i + 2] == ' ')
 	{
 		parser->echo_option = 1;
-		i += 2;
+		i += 3;
 	}
 	return (i);
 }
@@ -117,7 +117,9 @@ t_parsing *parser_save, char **env)
 {
 	int r;
 
-	r = ft_execute_builtin(parser_save, env);
+	r = 0;
+	if (parser->builtin_detected != 8)
+		r = ft_execute_builtin(parser_save, env);
 	ft_parserclear(&parser_save);
 	parser_save = NULL;
 	parser = NULL;
