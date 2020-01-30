@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/28 13:33:56 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:40:12 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,15 @@ int		ft_env_display(t_fd *fd)
 int		ft_echo(t_parsing *alk, t_fd *fd)
 {
 	int len;
-
+	char *buf;
 	if (fd->out == -1)
 		return (-1);
+	
 	len = ft_strlen(alk->param);
-	write(fd->out, alk->param, len);
+	if (!(buf = malloc(sizeof(char) * len + 1)))
+		return (-1);
+	if (fd->in == 0)
+		write(fd->out, alk->param, len);
 	if (alk->echo_option == FALSE)
 		write(fd->out, "\n", 1);
 	return (0);

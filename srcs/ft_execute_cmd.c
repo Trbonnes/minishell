@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/30 14:14:24 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:11:54 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char		*path_finding(int i, t_parsing *parser, t_env *search)
 		while (search->ref[i] && search->ref[i - 1] != ':')
 			i++;
 		path = ft_path_cpy(search->ref, i, parser->executable);
-		i++;
+		if (search->ref[i] != '\0')
+			i++;
 	}
 	return (path);
 }
@@ -103,7 +104,7 @@ int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 	if (g_pid == 0)
 	{
 		dup2(fd->out, 1);
-		dup2(fd->in, 0);
+		// dup2(fd->in, 0);
 		if (parser->executable[0] == '.' && parser->executable[1] == '/')
 		{
 			if (ft_selfmade_binary(parser, env, params) == -1)

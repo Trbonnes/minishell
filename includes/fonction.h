@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/30 14:09:29 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:56:26 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef	struct	s_fd
 {
 	int			in;
 	int			out;
-	int			pipe_b;
 	int			pipe[2];
 }				t_fd;
 
@@ -107,5 +106,4 @@ int					strlen_word_file(char *str);
 t_env				*ft_new_env(char *env);
 void				ft_lstadd_back(t_env **lst, t_env *new);
 void				ft_putstr(char *str);
-
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/28 15:18:31 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:59:40 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		main(int ac, char **av, char **env)
 	ft_environment_parsing(env);
 	while (ft_detect_builtin(env) > 0)
 	{
+		write(1, "\n", 1);
 		//system("leaks minishell");
 		//printf("Command Executed\n");
 	}
