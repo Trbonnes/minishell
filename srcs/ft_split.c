@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:24:44 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/30 14:10:56 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/31 11:20:35 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,28 @@ static int	ft_length(char const *str, char c, int i)
 
 char		**ft_argnumber(int *count, int *i)
 {
-	char **tab;
+	char **split;
 
 	if (*count == 1)
 	{
 		*count += 1;
 		*i = -1;
 	}
-	if (!(tab = malloc(sizeof(char*) * (*count + 1))))
+	if (!(split = malloc(sizeof(char*) * (*count + 1))))
 		return (NULL);
 	if (*i == -1)
 	{
-		if (!(tab[0] = malloc(sizeof(char) * 1)))
+		if (!(split[0] = malloc(sizeof(char) * 1)))
 			return (NULL);
-		tab[0][0] = '\0';
+		split[0][0] = '\0';
 		*i = 1;
 	}
-	return (tab);
+	return (split);
 }
 
 char		**ft_split(char const *str, char c)
 {
-	char	**tab;
+	char	**split;
 	int		count;
 	int		s;
 	int		i;
@@ -88,18 +88,18 @@ char		**ft_split(char const *str, char c)
 	count = ft_count(str, c);
 	if (count == 0)
 		return (ft_no_args());
-	tab = ft_argnumber(&count, &i);
+	split = ft_argnumber(&count, &i);
 	while (i < count && str[s])
 	{
 		s = ft_next(str, c, s);
 		j = 0;
-		if (!(tab[i] = malloc(sizeof(char) * (ft_length(str, c, s) + 1))))
+		if (!(split[i] = malloc(sizeof(char) * (ft_length(str, c, s) + 1))))
 			return (NULL);
 		while (str[s] != c && str[s])
-			tab[i][j++] = str[s++];
-		tab[i][j] = '\0';
+			split[i][j++] = str[s++];
+		split[i][j] = '\0';
 		i++;
 	}
-	tab[i] = 0;
-	return (tab);
+	split[i] = 0;
+	return (split);
 }
