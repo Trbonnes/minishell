@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/30 15:40:12 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/01/31 10:53:32 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int		ft_echo(t_parsing *alk, t_fd *fd)
 	char *buf;
 	if (fd->out == -1)
 		return (-1);
-	
 	len = ft_strlen(alk->param);
 	if (!(buf = malloc(sizeof(char) * len + 1)))
 		return (-1);
