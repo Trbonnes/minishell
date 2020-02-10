@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/10 08:12:58 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/10 10:42:06 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef	struct	s_fd
+typedef	struct		s_fd
 {
-	int			in;
-	int			out;
-	int			pipe[2];
-}				t_fd;
+	int				in;
+	int				out;
+	int				pipe[2];
+}					t_fd;
 
 typedef struct		s_env
 {

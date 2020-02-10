@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 14:01:40 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/22 11:02:38 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/10 10:44:38 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	*ft_strjoin(const char *s1, char *s2)
 	return (copy);
 }
 
-
 size_t	ft_strlen(const char *str)
 {
 	size_t i;
@@ -51,9 +50,9 @@ size_t	ft_strlen(const char *str)
 
 char	*ft_strdup(const char *str)
 {
-	char *copy;
-	int i;
-	int len;
+	char	*copy;
+	int		i;
+	int		len;
 
 	i = 0;
 	len = ft_strlen(str);
@@ -70,9 +69,9 @@ char	*ft_strdup(const char *str)
 
 char	*ft_whitespace(char *str)
 {
-	int i;
-	char *copy;
-	
+	int		i;
+	char	*copy;
+
 	i = 0;
 	while (str[i] == ' ')
 		i++;

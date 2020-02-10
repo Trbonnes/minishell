@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 15:48:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/24 14:52:42 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/10 10:54:23 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_env	*ft_new_env(char *env)
 void	ft_lstadd_back(t_env **lst, t_env *new)
 {
 	t_env *save;
-	
+
 	save = *lst;
 	if (!lst)
 		return ;
@@ -72,7 +72,7 @@ void	ft_lstadd_back(t_env **lst, t_env *new)
 	}
 }
 
-int	ft_tolower(int c)
+int		ft_tolower(int c)
 {
 	if (c >= 65 && c <= 90)
 		return (c + 32);
