@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/10 11:40:03 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/10 12:41:49 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,11 @@ int			ft_str_check(char *str)
 	return (i);
 }
 
-int			ft_str_loop(char **env, int i, t_parsing *parser, t_parsing	*parser_save, char *str)
+int			ft_str_loop(char **env, int i, char *str)
 {
+	t_parsing	*parser;
+	t_parsing	*parser_save;
+
 	while (str[i])
 	{
 		parser_init(str, i, &parser, &parser_save);
@@ -172,8 +175,6 @@ int			ft_str_loop(char **env, int i, t_parsing *parser, t_parsing	*parser_save, 
 int			ft_detect_builtin(char **env)
 {
 	int			i;
-	t_parsing	*parser;
-	t_parsing	*parser_save;
 	char		*str;
 
 	i = 0;
@@ -183,7 +184,7 @@ int			ft_detect_builtin(char **env)
 		return (0);
 	if (str[i] != '|')
 	{
-		if (ft_str_loop(env, i, parser, parser_save, str) == -1)
+		if ((i = ft_str_loop(env, i, str)) == -1)
 			return (-1);
 	}
 	else
