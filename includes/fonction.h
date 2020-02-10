@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/31 11:14:30 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/10 08:12:58 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <stdio.h>
 # include <curses.h>
 # include <term.h>
+# include <termios.h>
 # define TRUE 1
 # define FALSE 0
 
