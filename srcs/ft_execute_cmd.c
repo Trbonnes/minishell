@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/10 11:32:09 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/13 03:59:57 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_env	*g_env_list;
 extern pid_t	g_pid;
-static int		g_status;
+
 
 char		*ft_path_cpy(char *env_path, int i, char *cmd)
 {
@@ -99,10 +99,7 @@ int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 
 	search = g_env_list;
 	params = ft_split(parser->param, ' ');
-	g_pid = fork();
-	wait(&g_status);
-	if (g_pid == 0)
-	{
+
 		dup2(fd->out, 1);
 		dup2(fd->in, 0);
 		if (parser->executable[0] == '.' && parser->executable[1] == '/')
@@ -112,7 +109,7 @@ int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 		}
 		else if (ft_path_binary(parser, search, params, env) == -1)
 			return (ft_free_params(params, -1));
-	}
+
 	return (ft_free_params(params, 1));
 }
 

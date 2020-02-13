@@ -6,11 +6,37 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 15:54:45 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/29 13:35:26 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/13 05:57:52 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+extern t_env	*g_env_list;
+
+char	*ft_find_home()
+{
+	int i;
+	char *path;
+
+	t_env *tmp;
+	
+	tmp = g_env_list;
+	i = 0;
+	while (ft_strcmp("HOME", g_env_list->key) != 0 && g_env_list)
+		g_env_list = g_env_list->next;
+	if (ft_strcmp("HOME", g_env_list->key) == 0)
+	{
+		write(1, "bash: cd: HOME not set", 23);
+		return (NULL);
+	}
+	while (g_env_list->ref[i] != '=')
+		i++;
+	path = ft_strdup(g_env_list->ref + i + 1);
+	g_env_list = tmp;
+	return (path);
+}
+
 
 int		ft_up_directory(t_parsing *alk)
 {
@@ -44,13 +70,19 @@ int		ft_up_directory(t_parsing *alk)
 
 void	ft_home(t_parsing *alk)
 {
-	const char users[17] = "/Users/trdella-/"; // modifier avec env
+	char *users;
 	char *afree;
 
-	afree = alk->param;
-	if (alk->param[0] == '~')
-		alk->param = ft_strjoin(users, alk->param + 2);
+	if (!(users = ft_find_home()))
+		;
 	else
-		alk->param = ft_strdup(users);
-	free(afree);
+	{
+		afree = alk->param;
+		if (alk->param[0] == '~')
+			alk->param = ft_strjoin(users, alk->param + 2);
+		else
+			alk->param = ft_strdup(users);
+		free(afree);
+		free(users);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/10 10:42:06 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/13 05:36:33 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef	struct		s_fd
 {
 	int				in;
 	int				out;
+	int				index;
 	int				pipe[2];
+	int				last_pipe[2];
 }					t_fd;
 
 typedef struct		s_env
@@ -50,6 +52,7 @@ typedef struct		s_parsing
 	char				*param;
 	char				*redirection;
 	int					index;
+	int					pid;
 	struct s_parsing	*next;
 }					t_parsing;
 
@@ -109,4 +112,7 @@ int					strlen_word_file(char *str);
 t_env				*ft_new_env(char *env);
 void				ft_lstadd_back(t_env **lst, t_env *new);
 void				ft_putstr(char *str);
+int					builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env);
+int					ft_pipe(t_parsing *alk, t_fd *fd, char **env);
+int					builtin_exec(t_parsing *alk, t_fd *fd, char **env);
 #endif
