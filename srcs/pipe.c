@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/13 05:59:36 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/13 07:36:01 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		ft_pipe(t_parsing *alk, t_fd *fd, char **env)
 
 int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 {
+	printf("pid = %d\n", g_pid);
 	if (alk->builtin_detected == 7)
 	{
 		if (ft_executable(alk, env, fd) == -1)

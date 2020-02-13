@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 15:54:45 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/13 05:57:52 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/13 08:41:21 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ char	*ft_find_home()
 {
 	int i;
 	char *path;
-
 	t_env *tmp;
-	
+
 	tmp = g_env_list;
 	i = 0;
-	while (ft_strcmp("HOME", g_env_list->key) != 0 && g_env_list)
+	while (g_env_list && ft_strcmp("HOME", g_env_list->key) != 0)
 		g_env_list = g_env_list->next;
-	if (ft_strcmp("HOME", g_env_list->key) == 0)
+	if (!g_env_list)
 	{
-		write(1, "bash: cd: HOME not set", 23);
+		write(1, "bash: cd: HOME not set\n", 23);
+		g_env_list = tmp;
 		return (NULL);
 	}
 	while (g_env_list->ref[i] != '=')
@@ -72,16 +72,15 @@ void	ft_home(t_parsing *alk)
 {
 	char *users;
 	char *afree;
+	int boo;
 
+	boo = 0;
 	if (!(users = ft_find_home()))
-		;
-	else
+		boo = 1;
+	afree = alk->param;
+	if (boo == 0)
 	{
-		afree = alk->param;
-		if (alk->param[0] == '~')
-			alk->param = ft_strjoin(users, alk->param + 2);
-		else
-			alk->param = ft_strdup(users);
+		alk->param = ft_strdup(users);
 		free(afree);
 		free(users);
 	}

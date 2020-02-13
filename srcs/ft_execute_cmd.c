@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/13 03:59:57 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/13 07:34:58 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,15 @@ int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 
 	search = g_env_list;
 	params = ft_split(parser->param, ' ');
-
-		dup2(fd->out, 1);
-		dup2(fd->in, 0);
-		if (parser->executable[0] == '.' && parser->executable[1] == '/')
-		{
-			if (ft_selfmade_binary(parser, env, params) == -1)
-				return (ft_free_params(params, -1));
-		}
-		else if (ft_path_binary(parser, search, params, env) == -1)
+	dup2(fd->out, 1);
+	dup2(fd->in, 0);
+	if (parser->executable[0] == '.' && parser->executable[1] == '/')
+	{
+		if (ft_selfmade_binary(parser, env, params) == -1)
 			return (ft_free_params(params, -1));
-
+	}
+	else if (ft_path_binary(parser, search, params, env) == -1)
+		return (ft_free_params(params, -1));
 	return (ft_free_params(params, 1));
 }
 

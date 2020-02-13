@@ -6,11 +6,60 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/13 04:05:23 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/13 08:18:42 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+extern t_env	*g_env_list;
+
+char	*ft_word(t_parsing *alk, int i)
+{
+	char *word;
+	char *ret;
+	int j;
+	t_env *tmp;
+
+	tmp = g_env_list;
+	j = 0;
+	while (alk->param[i] != ' ' && alk->param[i] != '\n' && alk->param[i] != '\0')
+	{
+		i++;
+		j++;
+	}
+	if (!(word = malloc(sizeof(char) * j)))
+		return (NULL);
+	word = ft_substr(alk->param, i + 1 - j, j);
+	printf("word = %s\n", word);
+	while (ft_strcmp(word, g_env_list->key) != 0)
+		g_env_list = g_env_list->next;
+	if (ft_strcmp("HOME", g_env_list->key) != 0)
+		return ("");
+	ret = g_env_list->ref + j + 1;
+	free(word);
+	g_env_list = tmp;
+	return (ret);
+}
+
+
+int		ft_check_env(t_parsing *alk)
+{
+	int		i;
+	char	*word;
+
+	i = 0;
+	while (alk->param[i])
+	{
+		if (alk->param[i] == '$')
+		{
+			word = ft_word(alk, i);
+			printf("%s\n",word);
+		}
+		i++;
+	}
+	return (0);
+}
 
 int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 {
@@ -70,6 +119,7 @@ int		find_fd(t_parsing *alk, char **env)
 	tmp = alk;
 	fd.in = 0;
 	fd.out = 1;
+	ft_check_env(alk);
 	if (alk->next)
 		ft_pipe(alk, &fd, env);
 	else
