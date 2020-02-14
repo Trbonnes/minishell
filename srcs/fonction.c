@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/13 06:44:46 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:35:21 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,11 @@ int		ft_env_display(t_fd *fd)
 int		ft_echo(t_parsing *alk, t_fd *fd)
 {
 	int len;
-	char *buf;
+
 	if (fd->out == -1)
 		return (-1);
 	len = ft_strlen(alk->param);
-	if (!(buf = malloc(sizeof(char) * len + 1)))
-		return (-1);
-	if (fd->in == 0)
-		write(fd->out, alk->param, len);
+	write(fd->out, alk->param, len);
 	if (alk->echo_option == FALSE)
 		write(fd->out, "\n", 1);
 	return (0);
@@ -56,7 +53,7 @@ int		ft_cd(t_parsing *alk)
 
 	if (!alk->param)
 		return (-1);
-	alk->param = ft_whitespace(alk->param);
+	alk->param = ft_no_space(alk->param);
 	if (alk->param[0] == '.' && alk->param[1] == '.')
 		ft_up_directory(alk);
 	if (alk->param[0] == '\0' || alk->param[0] == '~')

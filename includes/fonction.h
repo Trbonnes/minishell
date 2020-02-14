@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/13 05:36:33 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:36:35 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <curses.h>
 # include <term.h>
 # include <termios.h>
+#include <sys/wait.h>
 # define TRUE 1
 # define FALSE 0
 
@@ -55,6 +56,13 @@ typedef struct		s_parsing
 	int					pid;
 	struct s_parsing	*next;
 }					t_parsing;
+
+typedef struct		s_pid
+{
+	pid_t			pid;
+	struct	s_pid	*next;
+}					t_pid;
+
 
 int					ft_detect_builtin(char **env);
 int					ft_tolower(int c);
@@ -115,4 +123,10 @@ void				ft_putstr(char *str);
 int					builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env);
 int					ft_pipe(t_parsing *alk, t_fd *fd, char **env);
 int					builtin_exec(t_parsing *alk, t_fd *fd, char **env);
+
+t_pid				*ft_newelem(int pid);
+void				ft_lstclear(t_pid	**jul);
+void				ft_wait_children(t_pid *jul);
+void				ft_pid_back(t_pid **lst, t_pid *new);
+char				*ft_no_space(char *str);
 #endif

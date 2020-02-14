@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:36:14 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 11:04:07 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:35:55 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ char	*ft_parser_redirection(char **builtin_str)
 	if (quote != 0)
 		ft_wait_quote(quote, builtin_str);
 	ft_redirection_check(&redirection_str);
-	printf("%s\n", redirection_str);
 	ft_unquote(builtin_str);
 	return (redirection_str);
 }

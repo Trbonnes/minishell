@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/13 10:59:22 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:31:24 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int		find_fd(t_parsing *alk, char **env)
 	t_fd fd = (t_fd){ 0 };
 	t_parsing *tmp;
 
+	printf("param = {%s}\n", alk->param);
+	printf("red = {%s}\n", alk->redirection);
 	tmp = alk;
 	fd.in = 0;
 	fd.out = 1;
@@ -80,6 +82,10 @@ int		find_fd(t_parsing *alk, char **env)
 			return (0);
 		builtin_exec_simple(alk, &fd, env);
 	}
+	if (fd.out != 1)
+		close(fd.out);
+	if (fd.in != 0)
+		close(fd.in);
 	alk = tmp;
 	return (0);
 }

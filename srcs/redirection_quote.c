@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_quote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:41:06 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 11:06:34 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:10:49 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_quote_cpy(int i, int j, char **redirection, char **quote_str)
 {
-	printf("quote_str: %s\n", quote_str[0]);
 	if (j < i)
 	{
 		i = 0;

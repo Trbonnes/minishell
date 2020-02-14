@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/13 07:34:58 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:09:58 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,6 @@ int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 
 int			ft_execute_builtin(t_parsing *parser, char **env)
 {
-	printf("cmd: %d\n", parser->builtin_detected);
-	printf("executable: %s\n", parser->executable);
-	printf("option: %d\n", parser->echo_option);
-	printf("param: %s\n", parser->param);
-	printf("redirection: %s\n", parser->redirection);
 	if (find_fd(parser, env) == -1)
 		return (-1);
 	return (0);

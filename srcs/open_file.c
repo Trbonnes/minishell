@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:17:38 by trdella-          #+#    #+#             */
-/*   Updated: 2020/01/30 15:40:14 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:36:00 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,5 @@ int		open_file(t_parsing *alk, t_fd *fd)
 			dbchevron++;
 		ret = inferior(alk, dbchevron, fd);
 	}
-
 	return (ret);
 }
