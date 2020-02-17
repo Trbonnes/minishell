@@ -6,13 +6,11 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/14 15:31:24 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 06:55:48 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
-
-
 
 int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 {
@@ -66,11 +64,10 @@ int		inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 
 int		find_fd(t_parsing *alk, char **env)
 {
-	t_fd fd = (t_fd){ 0 };
-	t_parsing *tmp;
+	t_fd		fd;
+	t_parsing	*tmp;
 
-	printf("param = {%s}\n", alk->param);
-	printf("red = {%s}\n", alk->redirection);
+	fd = (t_fd) { 0 };
 	tmp = alk;
 	fd.in = 0;
 	fd.out = 1;

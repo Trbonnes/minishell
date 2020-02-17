@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/14 15:35:21 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 06:41:42 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ extern t_env *g_env_list;
 
 int		ft_env_display(t_fd *fd)
 {
-	t_env *save;
-	int len;
+	t_env	*save;
+	int		len;
 
 	save = g_env_list;
 	while (g_env_list)

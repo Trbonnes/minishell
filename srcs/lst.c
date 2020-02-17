@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:44:17 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/14 15:37:32 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 06:53:33 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_pid_back(t_pid **lst, t_pid *new)
 	}
 }
 
-t_pid				*ft_newelem(pid_t	pid)
+t_pid	*ft_newelem(pid_t pid)
 {
 	t_pid	*elem;
 
@@ -60,7 +60,7 @@ t_pid				*ft_newelem(pid_t	pid)
 	return (elem);
 }
 
-void	ft_lstclear(t_pid	**jul)
+void	ft_lstclear(t_pid **jul)
 {
 	t_pid	*tmp;
 	t_pid	*supp;

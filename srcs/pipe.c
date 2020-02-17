@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/14 15:17:26 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 07:04:50 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,46 @@ extern t_env	*g_env_list;
 extern pid_t	g_pid;
 static int		g_status;
 
+void	ft_close_redirect_pipe(t_parsing *alk, t_fd *fd)
+{
+	fd->last_pipe[0] = fd->pipe[0];
+	fd->last_pipe[1] = fd->pipe[1];
+	if (alk->next)
+		pipe(fd->pipe);
+	if (!fd->index)
+		fd->out = fd->pipe[1];
+	if (fd->index && alk->next)
+	{
+		fd->in = fd->last_pipe[0];
+		fd->out = fd->pipe[1];
+	}
+	if (fd->index && !alk->next)
+	{
+		fd->in = fd->last_pipe[0];
+		fd->out = 1;
+	}
+	if (fd->index && alk->next)
+		close(fd->last_pipe[1]);
+	if (fd->index && !alk->next)
+		close(fd->last_pipe[1]);
+}
+
 void	list_builtin(t_parsing *alk, t_fd *fd)
 {
-		if (alk->builtin_detected == 0)
-			ft_cd(alk);	
-		if (alk->builtin_detected == 1)
-			ft_echo(alk, fd);
-		if (alk->builtin_detected == 2)
-			ft_env_display(fd);
-		if (alk->builtin_detected == 3)
-			ft_exit();
-		if (alk->builtin_detected == 4)
-			ft_export(fd, alk);
-		if (alk->builtin_detected == 5)
-			ft_pwd(fd);
-		if (alk->builtin_detected == 6)
-			ft_unset(alk);
+	if (alk->builtin_detected == 0)
+		ft_cd(alk);
+	if (alk->builtin_detected == 1)
+		ft_echo(alk, fd);
+	if (alk->builtin_detected == 2)
+		ft_env_display(fd);
+	if (alk->builtin_detected == 3)
+		ft_exit();
+	if (alk->builtin_detected == 4)
+		ft_export(fd, alk);
+	if (alk->builtin_detected == 5)
+		ft_pwd(fd);
+	if (alk->builtin_detected == 6)
+		ft_unset(alk);
 }
 
 int		ft_pipe(t_parsing *alk, t_fd *fd, char **env)
@@ -41,26 +65,7 @@ int		ft_pipe(t_parsing *alk, t_fd *fd, char **env)
 	jul = NULL;
 	while (alk)
 	{
-		fd->last_pipe[0] = fd->pipe[0];
-		fd->last_pipe[1] = fd->pipe[1];
-		if (alk->next)
-			pipe(fd->pipe);
-		if (!fd->index)
-			fd->out = fd->pipe[1];
-		if (fd->index && alk->next)
-		{
-			fd->in = fd->last_pipe[0];
-			fd->out = fd->pipe[1];
-		}
-		if (fd->index && !alk->next)
-		{
-			fd->in = fd->last_pipe[0];
-			fd->out = 1;
-		}
-		if (fd->index && alk->next)
-			close(fd->last_pipe[1]);
-		if (fd->index && !alk->next)
-			close(fd->last_pipe[1]);
+		ft_close_redirect_pipe(alk, fd);
 		if (open_file(alk, fd) == -1)
 			return (-1);
 		if (alk->builtin_detected == 7)

@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:17:38 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/14 15:36:00 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 06:57:20 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ char	*file_name(char *str)
 	int		i;
 	char	*copy;
 	char	c;
-	
+
 	i = 0;
 	if (!(copy = malloc(sizeof(char) * (strlen_word_file(str) + 1))))
 		return (NULL);
 	if (str[i] == '\'' || str[i] == '"')
 	{
 		c = str[i];
-		while(str[i + 1] != c && str[i + 1] != '\0')
+		while (str[i + 1] != c && str[i + 1] != '\0')
 		{
 			copy[i] = str[i + 1];
 			i++;
@@ -83,20 +83,21 @@ char	*skip_file(char *str)
 	char	*copy;
 	int		len;
 	char	c;
-	
+
 	i = 0;
 	len = ft_strlen(str);
 	if (str[i] == '\'' || str[i] == '"')
 	{
 		c = str[i];
 		i++;
-		while(str[i] != c && str[i] != '\0')
+		while (str[i] != c && str[i] != '\0')
 			i++;
 		i++;
 	}
 	else
 		while (str[i] != ' ' && str[i] != ';' && str[i] != '<'
-		&& str[i] != '>' && str[i] != '!' && str[i] != '\0' && str[i] != '\'' && str[i] != '"')
+		&& str[i] != '>' && str[i] != '!' && str[i] != '\0'
+		&& str[i] != '\'' && str[i] != '"')
 			i++;
 	copy = ft_substr(str, i, len - i);
 	free(str);

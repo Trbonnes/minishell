@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 15:54:45 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/13 08:41:21 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 06:44:37 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 extern t_env	*g_env_list;
 
-char	*ft_find_home()
+char	*ft_find_home(void)
 {
-	int i;
-	char *path;
-	t_env *tmp;
+	int		i;
+	char	*path;
+	t_env	*tmp;
 
 	tmp = g_env_list;
 	i = 0;
@@ -37,22 +37,19 @@ char	*ft_find_home()
 	return (path);
 }
 
-
 int		ft_up_directory(t_parsing *alk)
 {
-	char *buf;
-	int i;
-	int j;
-	char *afree;
+	char	*buf;
+	int		i;
+	char	*afree;
 
 	afree = alk->param;
-	j = 0;
 	i = 0;
 	if (!(buf = malloc(sizeof(char) * 1024)))
 		return (-1);
 	getcwd(buf, 1024);
 	while (buf[i])
-		i++;	
+		i++;
 	if (i > 0)
 		i--;
 	if (buf[i] == '/' && i > 0)
@@ -70,9 +67,9 @@ int		ft_up_directory(t_parsing *alk)
 
 void	ft_home(t_parsing *alk)
 {
-	char *users;
-	char *afree;
-	int boo;
+	char	*users;
+	char	*afree;
+	int		boo;
 
 	boo = 0;
 	if (!(users = ft_find_home()))

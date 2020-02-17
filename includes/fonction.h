@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/14 15:36:35 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 07:08:14 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,16 @@ void				ft_putstr(char *str);
 int					builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env);
 int					ft_pipe(t_parsing *alk, t_fd *fd, char **env);
 int					builtin_exec(t_parsing *alk, t_fd *fd, char **env);
-
+int					ft_free_params(char **params, int ret);
+int					ft_selfmade_binary(t_parsing *parser, char **env, char **params);
+int					ft_str_check(char *str);
+int					parser_init(char *str, int i, t_parsing **parser,
+t_parsing **parser_save);
+int					ft_execute_and_clear(t_parsing *parser,
+t_parsing *parser_save, char **env);
+int					ft_detect_builtin(char **env);
+int					ft_select_builtin(char *builtin_str);
+int					ft_str_loop(char **env, int i, char *str);
 t_pid				*ft_newelem(int pid);
 void				ft_lstclear(t_pid	**jul);
 void				ft_wait_children(t_pid *jul);

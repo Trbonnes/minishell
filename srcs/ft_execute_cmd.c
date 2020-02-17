@@ -6,7 +6,7 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/14 15:09:58 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 06:52:42 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 extern t_env	*g_env_list;
 extern pid_t	g_pid;
-
 
 char		*ft_path_cpy(char *env_path, int i, char *cmd)
 {
@@ -53,24 +52,6 @@ char		*path_finding(int i, t_parsing *parser, t_env *search)
 			i++;
 	}
 	return (path);
-}
-
-int			ft_free_params(char **params, int ret)
-{
-	int i;
-
-	i = 0;
-	while (params[i])
-		free(params[i++]);
-	free(params);
-	return (ret);
-}
-
-int			ft_selfmade_binary(t_parsing *parser, char **env, char **params)
-{
-	if (execve(parser->executable, params, env) == -1)
-		return (-1);
-	return (1);
 }
 
 int			ft_path_binary(t_parsing *parser, t_env *search,
