@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   stdin2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 07:07:01 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 09:17:08 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+extern t_env	*g_env_list;
+extern pid_t	g_pid;
 
 int			ft_free_params(char **params, int ret)
 {

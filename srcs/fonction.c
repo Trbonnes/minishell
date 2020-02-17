@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 06:41:42 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 10:24:51 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		ft_pwd(t_fd *fd)
 	getcwd(buf, 1024);
 	len = ft_strlen(buf);
 	write(fd->out, buf, len);
+	write(fd->out, "\n", 1);
 	free(buf);
 	return (0);
 }
