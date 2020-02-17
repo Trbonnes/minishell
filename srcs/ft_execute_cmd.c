@@ -6,12 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 09:00:23 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:17:08 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
+extern int		g_last_return_value;
 extern t_env	*g_env_list;
 extern pid_t	g_pid;
 
@@ -68,7 +69,11 @@ char **params, char **env)
 	i++;
 	path = path_finding(i, parser, search);
 	if (execve(path, params, env) == -1)
+	{
+		g_last_return_value = 1;
 		return (-1);
+	}
+	g_last_return_value = 0;
 	free(path);
 	return (1);
 }

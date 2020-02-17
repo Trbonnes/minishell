@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 13:08:28 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:46:50 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,6 @@ char				*ft_no_space(char *str);
 char				*ft_dollar_env(char *parsed);
 int					ft_toupper(int c);
 void				ft_export_loop(t_fd *fd, t_env *g_env_list);
+char				*ft_itoa(int n);
 
 #endif

@@ -6,12 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 12:22:56 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:15:58 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
+extern int		g_last_return_value;
 extern t_env	*g_env_list;
 extern pid_t	g_pid;
 
@@ -29,7 +30,11 @@ int			ft_free_params(char **params, int ret)
 int			ft_selfmade_binary(t_parsing *parser, char **env, char **params)
 {
 	if (execve(parser->executable, params, env) == -1)
+	{
+		g_last_return_value = 1;
 		return (-1);
+	}
+	g_last_return_value = 0;
 	return (1);
 }
 
@@ -94,7 +99,10 @@ int			ft_detect_builtin(char **env)
 			return (-1);
 	}
 	else
+	{
+		g_last_return_value = 258;
 		write(2, "syntax error near unexpected token |\n", 37);
+	}
 	free(str);
 	return (1);
 }

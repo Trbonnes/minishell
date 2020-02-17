@@ -6,12 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 12:34:33 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:23:44 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
+extern int		g_last_return_value;
 extern t_env	*g_env_list;
 extern pid_t	g_pid;
 
@@ -49,6 +50,7 @@ int			ft_select_builtin(char **builtin_str)
 			write(2, "minishell: ", 11);
 			write(2, builtin_str[0], ft_strlen(builtin_str[0]));
 			write(2, ": command not found\n", 20);
+			g_last_return_value = 127;
 		}
 	}
 	return (i);
@@ -86,6 +88,7 @@ int			ft_option(char *str, t_parsing *parser, int i)
 		write(2, &str[i], 1);
 		write(2, &str[++i], 1);
 		write(2, ": invalid option\n", 17);
+		g_last_return_value = 1;
 		parser->builtin_detected = 8;
 	}
 	if (parser->builtin_detected == 8)
