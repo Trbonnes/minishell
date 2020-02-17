@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 06:52:42 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 09:00:23 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 	char		**params;
 
 	search = g_env_list;
-	params = ft_split(parser->param, ' ');
+	params = ft_split(parser->param, ' ', parser->executable);
 	dup2(fd->out, 1);
 	dup2(fd->in, 0);
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')

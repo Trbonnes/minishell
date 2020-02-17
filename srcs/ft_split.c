@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:24:44 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/31 11:20:35 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 09:04:18 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,28 +54,24 @@ static int	ft_length(char const *str, char c, int i)
 	return (length);
 }
 
-char		**ft_argnumber(int *count, int *i)
+char		**ft_argnumber(int *count, int *i, char const *cmd)
 {
 	char **split;
 
-	if (*count == 1)
-	{
-		*count += 1;
-		*i = -1;
-	}
+	*count += 1;
+	*i = -1;
 	if (!(split = malloc(sizeof(char*) * (*count + 1))))
 		return (NULL);
 	if (*i == -1)
 	{
-		if (!(split[0] = malloc(sizeof(char) * 1)))
+		if (!(split[0] = ft_strdup(cmd)))
 			return (NULL);
-		split[0][0] = '\0';
 		*i = 1;
 	}
 	return (split);
 }
 
-char		**ft_split(char const *str, char c)
+char		**ft_split(char const *str, char c, char const *cmd)
 {
 	char	**split;
 	int		count;
@@ -88,7 +84,7 @@ char		**ft_split(char const *str, char c)
 	count = ft_count(str, c);
 	if (count == 0)
 		return (ft_no_args());
-	split = ft_argnumber(&count, &i);
+	split = ft_argnumber(&count, &i, cmd);
 	while (i < count && str[s])
 	{
 		s = ft_next(str, c, s);

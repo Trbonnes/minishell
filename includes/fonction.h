@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 07:08:14 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 09:00:07 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void				ft_quote_cpy(int i, int j, char **redirection, char **q);
 int					ft_quote_check(char c, int quote);
 char				*ft_realloc_param_str(int i, int j, char *param_str);
 void				ft_parserclear(t_parsing **lst);
-char				**ft_split(char const *str, char c);
+char				**ft_split(char const *str, char c, char const *cmd);
 char				**ft_no_args(void);
 int					ft_execute_builtin(t_parsing *parser, char **env);
 int					ft_executable(t_parsing *parser, char **env, t_fd *fd);
