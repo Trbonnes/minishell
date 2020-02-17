@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 10:40:08 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:25:18 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*ft_parser_param(char *str)
 	j = 0;
 	while (str[i] && str[i] != ';' && str[i] != '|')
 		parsed[j++] = str[i++];
+	if ((str[i] == ';' || str[i] == '|') && str[i - 1] == ' ')
+		parsed[j - 1] = '\0';
 	parsed[j] = '\0';
 	return (ft_dollar_env(parsed));
 }
