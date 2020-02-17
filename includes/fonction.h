@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 12:23:19 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:08:28 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <curses.h>
 # include <term.h>
 # include <termios.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 # define TRUE 1
 # define FALSE 0
 
@@ -60,9 +60,8 @@ typedef struct		s_parsing
 typedef struct		s_pid
 {
 	pid_t			pid;
-	struct	s_pid	*next;
+	struct s_pid	*next;
 }					t_pid;
-
 
 int					ft_detect_builtin(char **env);
 int					ft_tolower(int c);
@@ -124,7 +123,8 @@ int					builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env);
 int					ft_pipe(t_parsing *alk, t_fd *fd, char **env);
 int					builtin_exec(t_parsing *alk, t_fd *fd, char **env);
 int					ft_free_params(char **params, int ret);
-int					ft_selfmade_binary(t_parsing *parser, char **env, char **params);
+int					ft_selfmade_binary(t_parsing *parser, char **env,
+char **params);
 int					ft_str_check(char *str);
 int					parser_init(char *str, int i, t_parsing **parser,
 t_parsing **parser_save);
@@ -140,5 +140,6 @@ void				ft_pid_back(t_pid **lst, t_pid *new);
 char				*ft_no_space(char *str);
 char				*ft_dollar_env(char *parsed);
 int					ft_toupper(int c);
+void				ft_export_loop(t_fd *fd, t_env *g_env_list);
 
 #endif

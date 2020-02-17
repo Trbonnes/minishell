@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 15:48:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/10 10:54:23 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:01:40 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ void	ft_putstr(char *str)
 
 t_env	*ft_new_env(char *env)
 {
-	t_env *new;
+	t_env	*new;
+	int		i;
 
+	i = 0;
+	while (env[i] != '=' && env[i])
+		i++;
 	if (!(new = malloc(sizeof(t_env))))
 		return (NULL);
+	new->key = ft_substr(env, 0, i);
 	new->ref = ft_strdup(env);
-	new->next = 0;
+	new->next = NULL;
 	return (new);
 }
 

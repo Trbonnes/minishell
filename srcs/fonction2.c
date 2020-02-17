@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 06:41:13 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:06:40 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@ extern t_env *g_env_list;
 
 int		ft_export(t_fd *fd, t_parsing *alk)
 {
-	int		len;
 	t_env	*save;
+	int		i;
 
+	i = 0;
+	while (alk->param[i] != '=' && alk->param[i])
+		i++;
+	if (alk->param[i] == '\0' && i != 0)
+		return (0);
 	save = g_env_list;
 	if (alk->param[0] != '\0')
 		ft_lstadd_back(&g_env_list, ft_new_env(alk->param));
@@ -26,13 +31,7 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 	{
 		while (g_env_list)
 		{
-			len = ft_strlen(g_env_list->ref);
-			if (g_env_list->ref[0] != '\0')
-			{
-				write(fd->out, "declare -x ", 11);
-				write(fd->out, g_env_list->ref, len);
-				write(fd->out, "\n", 1);
-			}
+			ft_export_loop(fd, g_env_list);
 			g_env_list = g_env_list->next;
 		}
 	}
