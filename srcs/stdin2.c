@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 09:17:08 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:22:56 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			ft_str_loop(char **env, int i, char *str)
 		if (str[i] == '|')
 			i++;
 		i = ft_increment_begin(str, i);
-		parser->builtin_detected = ft_select_builtin(parser->param);
+		parser->builtin_detected = ft_select_builtin(&parser->param);
 		if (parser->builtin_detected == 7)
 			parser->executable = strdup(parser->param);
 		free(parser->param);

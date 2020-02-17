@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 10:40:45 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:23:19 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ t_parsing **parser_save);
 int					ft_execute_and_clear(t_parsing *parser,
 t_parsing *parser_save, char **env);
 int					ft_detect_builtin(char **env);
-int					ft_select_builtin(char *builtin_str);
+int					ft_select_builtin(char **builtin_str);
 int					ft_str_loop(char **env, int i, char *str);
 t_pid				*ft_newelem(int pid);
 void				ft_lstclear(t_pid	**jul);
@@ -139,5 +139,6 @@ void				ft_wait_children(t_pid *jul);
 void				ft_pid_back(t_pid **lst, t_pid *new);
 char				*ft_no_space(char *str);
 char				*ft_dollar_env(char *parsed);
+int					ft_toupper(int c);
 
 #endif

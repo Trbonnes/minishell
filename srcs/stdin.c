@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stdin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 07:09:05 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:34:33 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,31 @@ const static char *const	g_builtins[] = {
 	NULL
 };
 
-int			ft_select_builtin(char *builtin_str)
+int			ft_select_builtin(char **builtin_str)
 {
 	int	i;
 
 	i = -1;
-	while (builtin_str[++i])
-		builtin_str[i] = ft_tolower(builtin_str[i]);
+	while (builtin_str[0][++i])
+		builtin_str[0][i] = ft_tolower(builtin_str[0][i]);
 	i = -1;
 	while (g_builtins[++i] != NULL
-	&& ft_strcmp(builtin_str, g_builtins[i]) != 0)
+	&& ft_strcmp(builtin_str[0], g_builtins[i]) != 0)
 		;
+	if (i == 7 && builtin_str[0][0] == '$')
+	{
+		i = -1;
+		while (builtin_str[0][++i])
+			builtin_str[0][i] = ft_toupper(builtin_str[0][i]);
+		builtin_str[0] = ft_dollar_env(builtin_str[0]);
+		i = 8;
+		if (builtin_str[0][0])
+		{
+			write(2, "minishell: ", 11);
+			write(2, builtin_str[0], ft_strlen(builtin_str[0]));
+			write(2, ": command not found\n", 20);
+		}
+	}
 	return (i);
 }
 
