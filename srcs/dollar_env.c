@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 14:52:12 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/18 12:56:35 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_last_value(char *parsed)
 	j = 0;
 	k = 0;
 	tmp = ft_itoa(g_last_return_value);
-	while(tmp[j])
+	while (tmp[j])
 		j++;
 	if (!(parsed_cpy = malloc(sizeof(char) * (j + ft_strlen(parsed) + 1))))
 		return (NULL);
