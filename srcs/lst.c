@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 08:44:17 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 06:53:33 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/18 08:18:55 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
+extern int		g_last_return_value;
 static int		g_status;
 
 char	*ft_no_space(char *str)
@@ -89,6 +90,7 @@ void	ft_wait_children(t_pid *jul)
 			waitpid(jul->pid, &g_status, 0);
 		jul = jul->next;
 	}
+	g_last_return_value = g_status;
 	jul = save;
 	ft_lstclear(&jul);
 }

@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 15:07:10 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/18 08:57:54 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@ void	sigint_handler(int sig)
 	if (g_pid == 0)
 	{
 		ft_envclear(&g_env_list);
-		exit(0);
+		exit(130);
 	}
 	else if (g_pid != 1)
-	{
-		g_last_return_value = 130;
 		write(1, "\n", 1);
-	}
 	else
 	{
 		g_last_return_value = 1;
@@ -42,13 +39,10 @@ void	sigquit_handler(int sig)
 	if (g_pid == 0)
 	{
 		ft_envclear(&g_env_list);
-		exit(0);
+		exit(131);
 	}
 	else if (g_pid != 1)
-	{
 		write(1, "Quit: 3\n", 8);
-		g_last_return_value = 131;
-	}
 }
 
 int		main(int ac, char **av, char **env)

@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 15:29:41 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/18 08:58:11 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 		if (ft_executable(alk, env, fd) == -1)
 		{
 			write(2, "minishell: command not found\n", 29);
-			exit(1);
+			exit(127);
 			return (-1);
 		}
 		if (fd->index && !alk->next)
@@ -121,11 +121,20 @@ int		builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env)
 	{
 		g_pid = fork();
 		wait(&g_status);
+		g_last_return_value = g_status;
+		if (g_status == 2)
+			g_last_return_value = 130;
+		if (g_status == 3)
+			g_last_return_value = 131;
+		if (g_status == 32512)
+			g_last_return_value = 127;
+		if (g_status == 65280)
+			g_last_return_value = 255;
 		if (g_pid == 0)
 			if (ft_executable(alk, env, fd) == -1)
 			{
 				write(2, "minishell: command not found\n", 29);
-				exit(1);
+				exit(127);
 				return (-1);
 			}
 	}
