@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 13:07:29 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/18 09:12:35 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,20 @@ int		ft_toupper(int c)
 		return (c - 32);
 	else
 		return (c);
+}
+
+int		last_return_setup(int status)
+{
+	int last_return_value;
+
+	last_return_value = status;
+	if (status == 2)
+		last_return_value = 130;
+	if (status == 3)
+		last_return_value = 131;
+	if (status == 32512)
+		last_return_value = 127;
+	if (status == 65280)
+		last_return_value = 255;
+	return (last_return_value);
 }
