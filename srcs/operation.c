@@ -6,11 +6,55 @@
 /*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 06:55:48 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/19 08:51:21 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+extern pid_t	g_pid;
+
+void	ft_wait_chevron_2(char *line, t_parsing *alk)
+{
+	int end;
+	int i;
+
+	i = 0;
+	end = 0;
+	while (end != 1)
+	{
+		write(1, "> ", 2);
+		if (get_next_line(0, &line) > 0 &&
+		ft_strcmp(line, alk->redirection) != 0)
+		{
+			i++;
+			free(line);
+		}
+		else
+		{
+			if (i != 0)
+				free(line);
+			end = 1;
+		}
+	}
+	exit(1);
+}
+
+void	ft_wait_chevron(t_parsing *alk)
+{
+	char	*line;
+	int		i;
+	int		value;
+	int		end;
+
+	end = 0;
+	g_pid = fork();
+	wait(&value);
+	i = 0;
+	line = NULL;
+	if (g_pid == 0)
+		ft_wait_chevron_2(line, alk);
+}
 
 int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 {
@@ -44,6 +88,8 @@ int		inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
+	if (dbchevron == 1)
+		ft_wait_chevron(alk);
 	fd_open = file_name(alk->redirection);
 	alk->redirection = skip_file(alk->redirection);
 	if (fd->in != 0)
