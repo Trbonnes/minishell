@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/19 09:22:51 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:17:00 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ void	ft_wait_chevron_2(char *line, t_parsing *alk)
 	i = 0;
 	end = 0;
 	if (alk->redirection[0] == '\0')
-	{
-		write(2, "minishell: syntax error near unexpected token `newline\'\n", 56);
+		write(2, "minishell: syntax error near unexpected token `newline'\n", 57);
+	if (alk->redirection[0] == '\0')
 		exit (258);
-	}
 	while (end != 1)
 	{
 		write(1, "> ", 2);
@@ -69,6 +68,10 @@ int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
+	if (alk->redirection[0] == '\0')
+		write(2, "minishell: syntax error near unexpected token `newline'\n", 57);
+	if (alk->redirection[0] == '\0')
+		return (-1);
 	fd_open = file_name(alk->redirection);
 	alk->redirection = skip_file(alk->redirection);
 	if (fd->out != 1)
@@ -95,6 +98,10 @@ int		inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
+	if (alk->redirection[0] == '\0')
+		write(2, "minishell: syntax error near unexpected token `newline'\n", 56);
+	if (alk->redirection[0] == '\0')
+		return (-1);
 	if (dbchevron == 1)
 		ft_wait_chevron(alk);
 	fd_open = file_name(alk->redirection);
