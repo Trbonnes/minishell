@@ -6,12 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 12:42:26 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:20:13 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
+extern int		g_last_return_value;
 extern t_env *g_env_list;
 
 int		ft_env_display(t_fd *fd)
@@ -82,5 +83,5 @@ int		ft_pwd(t_fd *fd)
 void	ft_exit(void)
 {
 	write(1, "exit\n", 5);
-	exit(1);
+	exit(0);
 }

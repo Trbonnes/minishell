@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 15:23:44 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:15:27 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ t_parsing **parser_save)
 		parser[0]->next = NULL;
 		parser[0]->executable = NULL;
 		parser[0]->index = 0;
+		parser[0]->builtin_detected = -1;
 		parser_save[0] = parser[0];
 	}
 	else
@@ -123,6 +124,7 @@ t_parsing **parser_save)
 		parser[0]->next = NULL;
 		parser[0]->executable = NULL;
 		parser[0]->index = 0;
+		parser[0]->builtin_detected = -1;
 		i++;
 	}
 	if ((parser[0]->param = ft_parser_cmd(str + i)) == NULL)

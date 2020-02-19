@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/18 09:13:48 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:29:03 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void	ft_close_redirect_pipe(t_parsing *alk, t_fd *fd)
 void	list_builtin(t_parsing *alk, t_fd *fd)
 {
 	if (alk->builtin_detected == 0)
-		ft_cd(alk);
+		g_last_return_value = ft_cd(alk);
 	if (alk->builtin_detected == 1)
-		ft_echo(alk, fd);
+		g_last_return_value = ft_echo(alk, fd);
 	if (alk->builtin_detected == 2)
-		ft_env_display(fd);
+		g_last_return_value = ft_env_display(fd);
 	if (alk->builtin_detected == 3)
 		ft_exit();
 	if (alk->builtin_detected == 4)
-		ft_export(fd, alk);
+		g_last_return_value = ft_export(fd, alk);
 	if (alk->builtin_detected == 5)
-		ft_pwd(fd);
+		g_last_return_value = ft_pwd(fd);
 	if (alk->builtin_detected == 6)
-		ft_unset(alk);
+		g_last_return_value = ft_unset(alk);
 }
 
 int		ft_pipe(t_parsing *alk, t_fd *fd, char **env)

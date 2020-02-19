@@ -6,12 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 13:06:40 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:20:19 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
+extern int		g_last_return_value;
 extern t_env *g_env_list;
 
 int		ft_export(t_fd *fd, t_parsing *alk)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/19 10:17:00 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:25:37 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,11 @@ int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
 	if (alk->redirection[0] == '\0')
+	{
 		write(2, "minishell: syntax error near unexpected token `newline'\n", 57);
-	if (alk->redirection[0] == '\0')
+		g_last_return_value = 258;
 		return (-1);
+	}
 	fd_open = file_name(alk->redirection);
 	alk->redirection = skip_file(alk->redirection);
 	if (fd->out != 1)
@@ -99,9 +101,11 @@ int		inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
 	if (alk->redirection[0] == '\0')
+	{
 		write(2, "minishell: syntax error near unexpected token `newline'\n", 56);
-	if (alk->redirection[0] == '\0')
+		g_last_return_value = 258;
 		return (-1);
+	}
 	if (dbchevron == 1)
 		ft_wait_chevron(alk);
 	fd_open = file_name(alk->redirection);
