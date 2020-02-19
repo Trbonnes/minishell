@@ -6,11 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/23 11:09:01 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 08:56:44 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+extern pid_t	g_pid;
 
 void	ft_unquote(char **str)
 {
@@ -41,18 +43,25 @@ void	ft_prompt_quote(char c, char **quote_str)
 	char	*prompt;
 	char	*join;
 	int		stop;
+	int		status;
 
+	g_pid = fork();
+	wait(&status);
 	stop = 0;
-	while (stop != 1)
+	if (g_pid == 0)
 	{
-		write(1, ">", 1);
-		get_next_line(0, &prompt);
-		stop = ft_detect_quote(prompt, c);
-		join = ft_strjoin(quote_str[0], prompt);
-		free(prompt);
-		free(quote_str[0]);
-		quote_str[0] = ft_strdup(join);
-		free(join);
+		while (stop != 1)
+		{
+			write(1, "> ", 2);
+			get_next_line(0, &prompt);
+			stop = ft_detect_quote(prompt, c);
+			join = ft_strjoin(quote_str[0], prompt);
+			free(prompt);
+			free(quote_str[0]);
+			quote_str[0] = ft_strdup(join);
+			free(join);
+		}
+		exit (0);
 	}
 }
 

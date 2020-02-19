@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/18 09:12:35 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 09:18:18 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,17 @@ int		last_return_setup(int status)
 	last_return_value = status;
 	if (status == 2)
 		last_return_value = 130;
-	if (status == 3)
+	else if (status == 3)
 		last_return_value = 131;
-	if (status == 32512)
+	else if (status == 32512)
 		last_return_value = 127;
-	if (status == 65280)
+	else if (status == 65280)
 		last_return_value = 255;
+	else if (status == 512)
+		last_return_value = 258;
+	else if (status == 256)
+		last_return_value = 0;
+	else if (status == 33280)
+		last_return_value = 1;
 	return (last_return_value);
 }

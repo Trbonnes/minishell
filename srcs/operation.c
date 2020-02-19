@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/19 08:51:21 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/02/19 09:22:51 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
+extern int		g_last_return_value;
 extern pid_t	g_pid;
 
 void	ft_wait_chevron_2(char *line, t_parsing *alk)
@@ -21,6 +22,11 @@ void	ft_wait_chevron_2(char *line, t_parsing *alk)
 
 	i = 0;
 	end = 0;
+	if (alk->redirection[0] == '\0')
+	{
+		write(2, "minishell: syntax error near unexpected token `newline\'\n", 56);
+		exit (258);
+	}
 	while (end != 1)
 	{
 		write(1, "> ", 2);
@@ -50,6 +56,7 @@ void	ft_wait_chevron(t_parsing *alk)
 	end = 0;
 	g_pid = fork();
 	wait(&value);
+	g_last_return_value = last_return_setup(value);
 	i = 0;
 	line = NULL;
 	if (g_pid == 0)
