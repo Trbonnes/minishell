@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/19 08:56:44 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:32:44 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_prompt_quote(char c, char **quote_str)
 			quote_str[0] = ft_strdup(join);
 			free(join);
 		}
-		exit (0);
+		exit(0);
 	}
 }
 

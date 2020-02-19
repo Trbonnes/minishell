@@ -6,13 +6,14 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/19 09:18:18 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:51:57 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-extern t_env *g_env_list;
+extern int		g_last_return_value;
+extern t_env	*g_env_list;
 
 void	ft_export_loop(t_fd *fd, t_env *g_env_list)
 {
@@ -55,4 +56,12 @@ int		last_return_setup(int status)
 	else if (status == 33280)
 		last_return_value = 1;
 	return (last_return_value);
+}
+
+int		chevron_error(void)
+{
+	write(2,
+	"minishell: syntax error near unexpected token `newline'\n", 56);
+	g_last_return_value = 258;
+	return (-1);
 }

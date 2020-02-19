@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/19 10:25:37 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:52:04 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	ft_wait_chevron_2(char *line, t_parsing *alk)
 	i = 0;
 	end = 0;
 	if (alk->redirection[0] == '\0')
-		write(2, "minishell: syntax error near unexpected token `newline'\n", 57);
+		write(2,
+		"minishell: syntax error near unexpected token `newline'\n", 56);
 	if (alk->redirection[0] == '\0')
-		exit (258);
+		exit(258);
 	while (end != 1)
 	{
 		write(1, "> ", 2);
@@ -36,11 +37,7 @@ void	ft_wait_chevron_2(char *line, t_parsing *alk)
 			free(line);
 		}
 		else
-		{
-			if (i != 0)
-				free(line);
 			end = 1;
-		}
 	}
 	exit(1);
 }
@@ -69,11 +66,7 @@ int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
 	if (alk->redirection[0] == '\0')
-	{
-		write(2, "minishell: syntax error near unexpected token `newline'\n", 57);
-		g_last_return_value = 258;
-		return (-1);
-	}
+		return (chevron_error());
 	fd_open = file_name(alk->redirection);
 	alk->redirection = skip_file(alk->redirection);
 	if (fd->out != 1)
@@ -101,11 +94,7 @@ int		inferior(t_parsing *alk, int dbchevron, t_fd *fd)
 	alk->redirection = skip_operation(alk->redirection);
 	alk->redirection = ft_whitespace(alk->redirection);
 	if (alk->redirection[0] == '\0')
-	{
-		write(2, "minishell: syntax error near unexpected token `newline'\n", 56);
-		g_last_return_value = 258;
-		return (-1);
-	}
+		return (chevron_error());
 	if (dbchevron == 1)
 		ft_wait_chevron(alk);
 	fd_open = file_name(alk->redirection);

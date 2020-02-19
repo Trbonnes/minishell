@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/19 10:15:27 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/02/19 10:36:51 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,6 @@ t_parsing **parser_save)
 	{
 		if (!(parser[0] = malloc(sizeof(t_parsing))))
 			return (-1);
-		parser[0]->echo_option = 0;
-		parser[0]->next = NULL;
-		parser[0]->executable = NULL;
-		parser[0]->index = 0;
-		parser[0]->builtin_detected = -1;
 		parser_save[0] = parser[0];
 	}
 	else
@@ -120,13 +115,13 @@ t_parsing **parser_save)
 		if (!(parser[0]->next = malloc(sizeof(t_parsing))))
 			return (-1);
 		parser[0] = parser[0]->next;
-		parser[0]->echo_option = 0;
-		parser[0]->next = NULL;
-		parser[0]->executable = NULL;
-		parser[0]->index = 0;
-		parser[0]->builtin_detected = -1;
 		i++;
 	}
+	parser[0]->echo_option = 0;
+	parser[0]->next = NULL;
+	parser[0]->executable = NULL;
+	parser[0]->index = 0;
+	parser[0]->builtin_detected = -1;
 	if ((parser[0]->param = ft_parser_cmd(str + i)) == NULL)
 		return (-1);
 	return (1);
