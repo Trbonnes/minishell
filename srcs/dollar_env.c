@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/18 12:56:35 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/03/02 08:32:59 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_replace_env(t_env *search, char *parsed)
 		parsed_cpy[j++] = parsed[i++];
 	while (search->ref[k])
 		parsed_cpy[j++] = search->ref[k++];
-	while (parsed[i] != ' ' && parsed[i])
+	while (parsed[i] != ' ' && parsed[i] != '\"' && parsed[i] != '\'' && parsed[i])
 		i++;
 	while (parsed[i])
 		parsed_cpy[j++] = parsed[i++];
@@ -86,7 +86,7 @@ char	*ft_delete_dollar(char *parsed)
 		i++;
 	if (parsed[i + 1] == '?')
 		return (ft_last_value(parsed));
-	while (parsed[i + j] != ' ' && parsed[i + j])
+	while (parsed[i + j] != ' ' && parsed[i + j] != '\"' && parsed[i + j] != '\'' && parsed[i + j])
 		j++;
 	if (!(parsed_cpy = malloc(sizeof(char) * (ft_strlen(parsed) - j + 1))))
 		return (NULL);
@@ -94,7 +94,7 @@ char	*ft_delete_dollar(char *parsed)
 	j = 0;
 	while (parsed[i] != '$')
 		parsed_cpy[j++] = parsed[i++];
-	while (parsed[i] && parsed[i] != ' ')
+	while (parsed[i] && parsed[i] != ' ' && parsed[i] != '\"' && parsed[i] != '\'')
 		i++;
 	while (parsed[i])
 		parsed_cpy[j++] = parsed[i++];
@@ -112,10 +112,10 @@ char	*ft_dollar_call(char *parsed, char *env_check)
 	j = -1;
 	i = 0;
 	while (parsed[++j])
-		if (parsed[j] == '$')
+		if (parsed[j] == '$' && parsed[j + 1] != '\"' && parsed[j + 1] != '\'')
 		{
 			j++;
-			while (parsed[j] != ' ' && parsed[j])
+			while (parsed[j] != ' ' && parsed[j] != '\"' && parsed[j] != '\'' && parsed[j])
 				env_check[i++] = parsed[j++];
 			env_check[i] = '\0';
 			break ;
@@ -123,7 +123,7 @@ char	*ft_dollar_call(char *parsed, char *env_check)
 	search = g_env_list;
 	while (search && ft_strcmp(env_check, search->key) != 0)
 		search = search->next;
-	if (search != NULL)
+	if (search != NULL && env_check[0] != '\0')
 		parsed_cpy = ft_replace_env(search, parsed);
 	else
 		parsed_cpy = ft_delete_dollar(parsed);
@@ -150,6 +150,7 @@ char	*ft_dollar_env(char *parsed)
 		return (parsed);
 	if (!(env_check = malloc(sizeof(char) * i + 1)))
 		return (NULL);
+	env_check[0] = '\0';
 	parsed_cpy = ft_dollar_call(parsed, env_check);
 	free(parsed);
 	free(env_check);
