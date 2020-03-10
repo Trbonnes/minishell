@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:34:56 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 09:19:31 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:01:51 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int		ft_increment_begin(char *str, int i)
 int		ft_increment_end(char *str, int i)
 {
 	while (str[i] != '\0' && str[i] != ';' && str[i] != '|')
+	{
+		if (str[i] == '\"' || str[i] == '\'')
+			i += ft_parser_param_quote(str + i, str[i]);
 		i++;
+	}
 	if (str[i] == '|')
 		return (i);
 	if (str[i] != '\0')

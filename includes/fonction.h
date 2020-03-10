@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/19 10:52:29 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:02:15 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,6 @@ void				ft_export_loop(t_fd *fd, t_env *g_env_list);
 char				*ft_itoa(int n);
 int					last_return_setup(int status);
 int					chevron_error(void);
+int					ft_parser_param_quote(char *str, char c);
 
 #endif
