@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/19 10:20:19 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/03/10 21:59:09 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,34 @@
 
 extern int		g_last_return_value;
 extern t_env *g_env_list;
+
+void	ft_same_export(t_parsing *alk)
+{
+	t_env		*save;
+	t_parsing	key;
+	int			i;
+
+	i = 0;
+	key = (t_parsing){ 0 };
+	while (alk->param && alk->param[i] != '=')
+		i++;
+	if (alk->param[i])
+	{
+		if (!(key.param = malloc(sizeof(char) * (i + 1))))
+			return ;
+		i = 0;
+		while (alk->param && alk->param[i] != '=')
+		{
+			key.param[i] = alk->param[i];
+			i++;
+		}
+	}
+	save = g_env_list;
+	while (save && ft_strcmp(key.param, save->key) != 0)
+		save = save->next;
+	ft_unset(&key);
+	free(key.param);
+}
 
 int		ft_export(t_fd *fd, t_parsing *alk)
 {
@@ -26,6 +54,7 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 	if (alk->param[i] == '\0' && i != 0)
 		return (0);
 	save = g_env_list;
+	ft_same_export(alk);
 	if (alk->param[0] != '\0')
 		ft_lstadd_back(&g_env_list, ft_new_env(alk->param));
 	else

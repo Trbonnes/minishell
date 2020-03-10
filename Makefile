@@ -10,6 +10,9 @@ LIB =	minishell.a
 
 LINK = ar rcs
 
+all:
+	$(MAKE) ${NAME} -j
+
 ${NAME}:	${OBJS}
 			${LINK} ${LIB} ${OBJS}
 			ranlib minishell.a
@@ -18,7 +21,6 @@ ${NAME}:	${OBJS}
 
 
 
-all:		${NAME}
 
 bonus:		${NAME}
 

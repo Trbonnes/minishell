@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/03/02 08:32:59 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/03/10 21:32:45 by trdella-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ char	*ft_replace_env(t_env *search, char *parsed)
 		parsed_cpy[j++] = parsed[i++];
 	while (search->ref[k])
 		parsed_cpy[j++] = search->ref[k++];
-	while (parsed[i] != ' ' && parsed[i] != '\"' && parsed[i] != '\'' && parsed[i])
+	while (parsed[i] != ' ' && parsed[i] != '\"' &&
+	parsed[i] != '\'' && parsed[i])
 		i++;
 	while (parsed[i])
 		parsed_cpy[j++] = parsed[i++];
@@ -86,7 +87,8 @@ char	*ft_delete_dollar(char *parsed)
 		i++;
 	if (parsed[i + 1] == '?')
 		return (ft_last_value(parsed));
-	while (parsed[i + j] != ' ' && parsed[i + j] != '\"' && parsed[i + j] != '\'' && parsed[i + j])
+	while (parsed[i + j] != ' ' && parsed[i + j] != '\"' &&
+	parsed[i + j] != '\'' && parsed[i + j])
 		j++;
 	if (!(parsed_cpy = malloc(sizeof(char) * (ft_strlen(parsed) - j + 1))))
 		return (NULL);
