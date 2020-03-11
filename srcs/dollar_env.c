@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/03/10 21:32:45 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/03/11 15:14:00 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ char	*ft_replace_env(t_env *search, char *parsed)
 	while (parsed[i] != ' ' && parsed[i] != '\"' &&
 	parsed[i] != '\'' && parsed[i])
 		i++;
-	while (parsed[i])
+	while ((parsed_cpy[j] = '\0') && parsed[i])
 		parsed_cpy[j++] = parsed[i++];
-	parsed_cpy[j] = '\0';
 	return (parsed_cpy);
 }
 
@@ -96,11 +95,11 @@ char	*ft_delete_dollar(char *parsed)
 	j = 0;
 	while (parsed[i] != '$')
 		parsed_cpy[j++] = parsed[i++];
-	while (parsed[i] && parsed[i] != ' ' && parsed[i] != '\"' && parsed[i] != '\'')
+	while (parsed[i] && parsed[i] != ' '
+	&& parsed[i] != '\"' && parsed[i] != '\'')
 		i++;
-	while (parsed[i])
+	while ((parsed_cpy[j] = '\0') && parsed[i])
 		parsed_cpy[j++] = parsed[i++];
-	parsed_cpy[j] = '\0';
 	return (parsed_cpy);
 }
 
@@ -117,7 +116,8 @@ char	*ft_dollar_call(char *parsed, char *env_check)
 		if (parsed[j] == '$' && parsed[j + 1] != '\"' && parsed[j + 1] != '\'')
 		{
 			j++;
-			while (parsed[j] != ' ' && parsed[j] != '\"' && parsed[j] != '\'' && parsed[j])
+			while (parsed[j] != ' ' && parsed[j] != '\"'
+			&& parsed[j] != '\'' && parsed[j])
 				env_check[i++] = parsed[j++];
 			env_check[i] = '\0';
 			break ;
@@ -142,7 +142,7 @@ char	*ft_dollar_env(char *parsed)
 	j = -1;
 	i = 0;
 	while (parsed[++j])
-		if (parsed[j] == '$')
+		if (parsed[j] == '$' && parsed[j + 1] != '\0')
 		{
 			while (parsed[j] != ' ' && parsed[j++])
 				i++;
