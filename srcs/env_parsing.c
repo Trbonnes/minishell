@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 15:54:05 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/22 15:54:30 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/03/14 21:20:47 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ void	ft_env_ref(int i, char **env)
 void	ft_environment_parsing(char **env)
 {
 	int		i;
-	int		j;
 	t_env	*save;
 
 	i = 0;
-	j = 0;
 	g_env_list = malloc(sizeof(t_env));
 	save = g_env_list;
 	while (env[i])

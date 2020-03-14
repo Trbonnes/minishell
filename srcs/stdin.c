@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stdin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/19 10:36:51 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/03/14 21:04:28 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern int		g_last_return_value;
 extern t_env	*g_env_list;
 extern pid_t	g_pid;
 
-const static char *const	g_builtins[] = {
+static const char *const	g_builtins[] = {
 	"cd",
 	"echo",
 	"env",

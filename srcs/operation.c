@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/19 10:52:04 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/03/14 21:21:16 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,11 @@ void	ft_wait_chevron_2(char *line, t_parsing *alk)
 void	ft_wait_chevron(t_parsing *alk)
 {
 	char	*line;
-	int		i;
 	int		value;
-	int		end;
 
-	end = 0;
 	g_pid = fork();
 	wait(&value);
 	g_last_return_value = last_return_setup(value);
-	i = 0;
 	line = NULL;
 	if (g_pid == 0)
 		ft_wait_chevron_2(line, alk);
