@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/03/11 15:14:00 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/04/09 18:49:56 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ char	*ft_replace_env(t_env *search, char *parsed)
 	while (parsed[i] != ' ' && parsed[i] != '\"' &&
 	parsed[i] != '\'' && parsed[i])
 		i++;
-	while ((parsed_cpy[j] = '\0') && parsed[i])
+	while (parsed[i])
 		parsed_cpy[j++] = parsed[i++];
+	parsed_cpy[j] = '\0';
 	return (parsed_cpy);
 }
 
