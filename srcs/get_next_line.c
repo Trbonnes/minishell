@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/10 13:21:18 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/10 14:12:08 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,9 @@ int		ft_reading(int fd, char *buffer, t_line *s_line, t_list *current)
 		while (++i < BUFFER_SIZE)
 			buffer[i] = 0;
 	}
-	if (rd == -1)
-		return (-1);
 	if (rd == 0)
 		return (0);
-	if (ft_alloc(s_line, buffer, eol))
+	if (rd == -1 || ft_alloc(s_line, buffer, eol))
 		return (-1);
 	if (eol + 1 == rd)
 		current->left = 0;

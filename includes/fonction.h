@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/03/10 18:02:15 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/04/10 14:14:52 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,6 @@ char				*ft_itoa(int n);
 int					last_return_setup(int status);
 int					chevron_error(void);
 int					ft_parser_param_quote(char *str, char c);
+int					ft_ref_len(t_env *search);
 
 #endif

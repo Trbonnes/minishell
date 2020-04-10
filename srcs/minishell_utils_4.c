@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_4.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/19 10:51:57 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/04/10 14:14:34 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,18 @@ int		chevron_error(void)
 	"minishell: syntax error near unexpected token `newline'\n", 56);
 	g_last_return_value = 258;
 	return (-1);
+}
+
+int		ft_ref_len(t_env *search)
+{
+	int		j;
+	int		k;
+
+	j = 0;
+	k = 0;
+	while (search->ref[k - 1] != '=')
+		k++;
+	while (search->ref[k + j])
+		j++;
+	return (j);
 }
