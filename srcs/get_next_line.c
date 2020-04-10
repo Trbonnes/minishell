@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/01/30 17:14:57 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/04/10 13:21:18 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ int		ft_reading(int fd, char *buffer, t_line *s_line, t_list *current)
 	int		eol;
 	int		i;
 
-	while ((rd = read(fd, buffer, BUFFER_SIZE)) > 0
+	while ((rd = read(fd, buffer, BUFFER_SIZE)) >= 0
 	&& (eol = ft_eol(buffer, rd)) == -1)
 	{
+		if (rd == 0 && !*(s_line->line))
+			return (0);
 		if (ft_alloc(s_line, buffer, rd))
 			return (-1);
 		i = -1;
