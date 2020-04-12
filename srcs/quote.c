@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:08:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/19 10:32:44 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/04/12 15:41:10 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
 extern pid_t	g_pid;
-
-void	ft_unquote(char **str)
-{
-	char *tmp;
-
-	tmp = ft_strdup_chr(str[0], 34);
-	free(str[0]);
-	str[0] = ft_strdup_chr(tmp, 39);
-	free(tmp);
-}
 
 int		ft_detect_quote(char *prompt, char c)
 {
