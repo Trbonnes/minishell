@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/09 18:49:55 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 11:53:12 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*ft_parser_param(char *str)
 		j++;
 		i++;
 	}
-	if ((str[i] == ';' || str[i] == '|') && str[i - 1] == ' ')
+	if ((str[i] == ';' || str[i] == '|') && str[i - 1] == ' ' && j != 0)
 		parsed[j - 1] = '\0';
 	parsed[j] = '\0';
 	return (ft_dollar_env(parsed));
