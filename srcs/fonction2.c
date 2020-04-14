@@ -15,6 +15,17 @@
 extern int		g_last_return_value;
 extern t_env *g_env_list;
 
+void	ft_export_norme(t_env *save, t_parsing *key)
+{
+	if (key->param)
+	{
+		while (save && ft_strcmp(key->param, save->key) != 0)
+			save = save->next;
+		ft_unset(key);
+		free(key->param);
+	}
+}
+
 void	ft_same_export(t_parsing *alk)
 {
 	t_env		*save;
@@ -37,13 +48,7 @@ void	ft_same_export(t_parsing *alk)
 		}
 	}
 	save = g_env_list;
-	if (key.param)
-	{
-		while (save && ft_strcmp(key.param, save->key) != 0)
-			save = save->next;
-		ft_unset(&key);
-		free(key.param);
-	}
+	ft_export_norme(save, &key);
 }
 
 int		ft_export(t_fd *fd, t_parsing *alk)
