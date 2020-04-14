@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/12 15:40:16 by trombone          #+#    #+#             */
-/*   Updated: 2020/04/12 16:00:34 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 11:07:10 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,21 @@ static size_t	ft_strlen_quote(const char *str)
 		if (str[i] == 34)
 		{
 			len--;
-			while (str[++i] != 34)
+			while (str[i] && str[++i] != 34)
 				;
 			len--;
+			i++;
 		}
-		i++;
-		if (str[i] == 39)
+		else if (str[i] == 39)
 		{
 			len--;
-			while (str[++i] != 39)
+			while (str[i] && str[++i] != 39)
 				;
 			len--;
+			i++;
 		}
-		i++;
+		else
+			i++;
 	}
 	return (len);
 }
@@ -52,17 +54,18 @@ static void		ft_strdup_quote(const char *str, char *copy)
 	{
 		if (str[i] == 34)
 		{
-			while (str[++i] != 34)
+			while (str[i] && str[++i] != 34)
 				copy[j++] = str[i];
 			i++;
 		}
-		if (str[i] == 39)
+		else if (str[i] == 39)
 		{
-			while (str[++i] != 39)
+			while (str[i] && str[++i] != 39)
 				copy[j++] = str[i];
 			i++;
 		}
-		copy[j++] = str[i++];
+		else
+			copy[j++] = str[i++];
 	}
 	copy[j] = '\0';
 }
