@@ -6,19 +6,17 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/12 15:40:16 by trombone          #+#    #+#             */
-/*   Updated: 2020/04/14 11:07:10 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 12:48:46 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-static size_t	ft_strlen_quote(const char *str)
+static size_t	ft_strlen_quote_loop(const char *str, size_t len)
 {
 	size_t i;
-	size_t len;
 
 	i = 0;
-	len = ft_strlen(str);
 	while (str[i])
 	{
 		if (str[i] == 34)
@@ -41,6 +39,14 @@ static size_t	ft_strlen_quote(const char *str)
 			i++;
 	}
 	return (len);
+}
+
+static size_t	ft_strlen_quote(const char *str)
+{
+	size_t len;
+
+	len = ft_strlen(str);
+	return (ft_strlen_quote_loop(str, len));
 }
 
 static void		ft_strdup_quote(const char *str, char *copy)
