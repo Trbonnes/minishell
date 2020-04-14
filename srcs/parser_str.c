@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/14 11:53:12 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 16:06:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int		ft_parser_alloc_calculate(char *str)
 	{
 		if (str[i] == '\"' || str[i] == '\'')
 			i += ft_parser_param_quote(str + i, str[i]);
-		i++;
+		else
+			i++;
 	}
 	return (i);
 }
@@ -82,22 +83,22 @@ char	*ft_parser_param(char *str)
 	int		j;
 	int		k;
 
-	i = ft_parser_alloc_calculate(str);
-	if (!(parsed = malloc(sizeof(char) * i + 1)))
+	if (!(parsed = malloc(sizeof(char) * ft_parser_alloc_calculate(str) + 1)))
 		return (NULL);
 	i = 0;
 	j = 0;
 	while (str[i] && str[i] != ';' && str[i] != '|' && (parsed[j] = str[i]))
-	{
 		if (str[i] == '\"' || str[i] == '\'')
 		{
 			k = ft_parser_full_quote(str[i], str + i, parsed + j);
 			j += k;
 			i += k;
 		}
-		j++;
-		i++;
-	}
+		else
+		{
+			j++;
+			i++;
+		}
 	if ((str[i] == ';' || str[i] == '|') && str[i - 1] == ' ' && j != 0)
 		parsed[j - 1] = '\0';
 	parsed[j] = '\0';

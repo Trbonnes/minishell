@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/14 13:27:54 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 15:50:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ char	*ft_last_value(char *parsed)
 	j = 0;
 	k = 0;
 	tmp = ft_itoa(g_last_return_value);
-	while (tmp[j])
-		j++;
-	if (!(parsed_cpy = malloc(sizeof(char) * (j + ft_strlen(parsed) + 1))))
+	if (!(parsed_cpy = malloc(sizeof(char) * (ft_strlen(tmp)
+	+ ft_strlen(parsed) + 1))))
 		return (NULL);
-	j = 0;
 	while (parsed[i] != '$')
 		parsed_cpy[j++] = parsed[i++];
 	while (tmp[k])

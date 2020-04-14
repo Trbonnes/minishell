@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/10 14:14:52 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 15:31:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void				ft_envdelone(t_env *lst);
 void				ft_envclear(t_env **lst);
 char				*ft_strdup_chr(const char *str, char c);
 size_t				ft_strlen_chr(const char *str, char c);
-int					ft_wait_quote(char c, char **quote_str);
+void				ft_wait_quote(char c, char **quote_str);
 int					ft_redirection_calculate(int i, char **str, char **q);
 void				ft_unquote(char **str);
 void				ft_environment_parsing(char **env);

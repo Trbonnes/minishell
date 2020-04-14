@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_incrementers.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:34:56 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/09 18:49:29 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 15:46:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int		ft_increment_begin(char *str, int i)
 
 int		ft_increment_end(char *str, int i)
 {
-	while (str[i] != '\0' && str[i] != ';' && str[i] != '|')
+	while (str[i] && str[i] != ';' && str[i] != '|')
 	{
-		if (str[i] == '\"' || str[i] == '\'')
+		if ((str[i] == '\"' || str[i] == '\'') && str[i + 1])
 			i += ft_parser_param_quote(str + i, str[i]);
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 09:28:07 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/03/10 20:32:25 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/04/14 15:46:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		ft_strcmp(const char *s1, const char *s2)
 	size_t i;
 
 	i = 0;
-
 	while (s1[i])
 	{
 		if (s1[i] != s2[i] || s1[i] == '\0' || s2[i] == '\0')

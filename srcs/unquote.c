@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unquote.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/12 15:40:16 by trombone          #+#    #+#             */
-/*   Updated: 2020/04/14 12:48:46 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 15:37:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	ft_strlen_quote_loop(const char *str, size_t len)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == 34)
+		if (str[i] == 34 && str[i + 1])
 		{
 			len--;
 			while (str[i] && str[++i] != 34)
@@ -27,7 +27,7 @@ static size_t	ft_strlen_quote_loop(const char *str, size_t len)
 			len--;
 			i++;
 		}
-		else if (str[i] == 39)
+		else if (str[i] == 39 && str[i + 1])
 		{
 			len--;
 			while (str[i] && str[++i] != 39)
@@ -58,13 +58,13 @@ static void		ft_strdup_quote(const char *str, char *copy)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == 34)
+		if (str[i] == 34 && str[i + 1])
 		{
 			while (str[i] && str[++i] != 34)
 				copy[j++] = str[i];
 			i++;
 		}
-		else if (str[i] == 39)
+		else if (str[i] == 39 && str[i + 1])
 		{
 			while (str[i] && str[++i] != 39)
 				copy[j++] = str[i];
