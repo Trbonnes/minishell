@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/10 14:14:34 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 11:31:40 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		ft_ref_len(t_env *search)
 	int		k;
 
 	j = 0;
-	k = 0;
+	k = 1;
 	while (search->ref[k - 1] != '=')
 		k++;
 	while (search->ref[k + j])

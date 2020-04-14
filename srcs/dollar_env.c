@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/10 14:15:27 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/14 11:30:49 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ char	*ft_replace_env(t_env *search, char *parsed)
 
 	i = 0;
 	j = 0;
-	k = 0;
-	while (search->ref[k - 1] != '=')
+	k = 1;
+	while (search->ref[k] && search->ref[k - 1] != '=')
 		k++;
 	if (!(parsed_cpy = malloc(sizeof(char) * (ft_ref_len(search)
 	+ ft_strlen(parsed) + 1))))
