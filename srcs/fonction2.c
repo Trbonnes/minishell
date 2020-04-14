@@ -23,7 +23,7 @@ void	ft_same_export(t_parsing *alk)
 
 	i = 0;
 	key = (t_parsing){ 0 };
-	while (alk->param && alk->param[i] != '=')
+	while (alk->param && alk->param[i] != '=' && alk->param[0])
 		i++;
 	if (alk->param[i])
 	{
@@ -37,10 +37,13 @@ void	ft_same_export(t_parsing *alk)
 		}
 	}
 	save = g_env_list;
-	while (save && ft_strcmp(key.param, save->key) != 0)
-		save = save->next;
-	ft_unset(&key);
-	free(key.param);
+	if (key.param)
+	{
+		while (save && ft_strcmp(key.param, save->key) != 0)
+			save = save->next;
+		ft_unset(&key);
+		free(key.param);
+	}
 }
 
 int		ft_export(t_fd *fd, t_parsing *alk)
