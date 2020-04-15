@@ -46,6 +46,7 @@ void	ft_same_export(t_parsing *alk)
 			key.param[i] = alk->param[i];
 			i++;
 		}
+		key.param[i] = '\0';
 	}
 	save = g_env_list;
 	ft_export_norme(save, &key);
