@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/14 12:38:47 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/15 15:30:42 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,12 @@ char **params, char **env)
 	char	*path;
 
 	i = 0;
-	while (ft_strcmp("PATH", search->key) != 0)
+	while (search && ft_strcmp("PATH", search->key) != 0)
 		search = search->next;
+	if (!search)
+		g_last_return_value = 1;
+	if (!search)
+		return (-1);
 	while (search->ref[i] != '=')
 		i++;
 	i++;
