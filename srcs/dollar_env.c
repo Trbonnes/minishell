@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/14 15:50:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/15 17:18:20 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,14 @@ char	*ft_replace_env(t_env *search, char *parsed)
 		return (NULL);
 	while (parsed[i] != '$')
 		parsed_cpy[j++] = parsed[i++];
-	while (search->ref[k])
-		parsed_cpy[j++] = search->ref[k++];
-	while (parsed[i] != ' ' && parsed[i] != '\"' &&
-	parsed[i] != '\'' && parsed[i])
-		i++;
+	if (i == 0 || parsed[i - 1] != '\'')
+	{
+		while (search->ref[k])
+			parsed_cpy[j++] = search->ref[k++];
+		while (parsed[i] != ' ' && parsed[i] != '\"' &&
+		parsed[i] != '\'' && parsed[i])
+			i++;
+	}
 	while (parsed[i])
 		parsed_cpy[j++] = parsed[i++];
 	parsed_cpy[j] = '\0';

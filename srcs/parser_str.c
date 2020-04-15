@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/15 16:06:22 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/15 17:27:19 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int		ft_parser_full_quote(char c, char *str, char *parsed)
 		i++;
 	}
 	parsed[i] = str[i];
-	i++;
+	if (str[i] == '\"')
+		i++;
 	return (i);
 }
 
