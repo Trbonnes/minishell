@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/09 18:49:53 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/16 18:43:35 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int			ft_select_builtin(char **builtin_str)
 	int	i;
 
 	i = -1;
-	while (builtin_str[0][++i])
-		builtin_str[0][i] = ft_tolower(builtin_str[0][i]);
 	i = -1;
 	while (g_builtins[++i] != NULL
 	&& ft_strcmp(builtin_str[0], g_builtins[i]) != 0)
@@ -41,8 +39,6 @@ int			ft_select_builtin(char **builtin_str)
 	if (i == 7 && builtin_str[0][0] == '$')
 	{
 		i = -1;
-		while (builtin_str[0][++i])
-			builtin_str[0][i] = ft_toupper(builtin_str[0][i]);
 		builtin_str[0] = ft_dollar_env(builtin_str[0]);
 		i = 8;
 		if (builtin_str[0][0])

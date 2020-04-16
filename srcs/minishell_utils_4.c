@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/14 11:31:40 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/16 18:43:31 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ void	ft_export_loop(t_fd *fd, t_env *g_env_list)
 		write(fd->out, g_env_list->ref, len);
 		write(fd->out, "\n", 1);
 	}
-}
-
-int		ft_toupper(int c)
-{
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	else
-		return (c);
 }
 
 int		last_return_setup(int status)

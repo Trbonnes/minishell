@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/16 14:09:53 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/16 18:45:30 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct		s_pid
 }					t_pid;
 
 int					ft_detect_builtin(char **env);
-int					ft_tolower(int c);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strjoin(const char *s1, char *s2);
 char				*ft_strdup(const char *str);
@@ -139,7 +138,6 @@ void				ft_wait_children(t_pid *jul);
 void				ft_pid_back(t_pid **lst, t_pid *new);
 char				*ft_no_space(char *str);
 char				*ft_dollar_env(char *parsed);
-int					ft_toupper(int c);
 void				ft_export_loop(t_fd *fd, t_env *g_env_list);
 char				*ft_itoa(int n);
 int					last_return_setup(int status);
@@ -147,7 +145,7 @@ int					chevron_error(void);
 int					ft_parser_param_quote(char *str, char c);
 int					ft_ref_len(t_env *search);
 int					ft_find_dollar(char *parsed);
-char	*ft_replace_env_loop(t_env *search, char *parsed,
+char				*ft_replace_env_loop(t_env *search, char *parsed,
 char *parsed_cpy, int k);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 15:48:45 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 13:01:40 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/04/16 18:43:47 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,4 @@ void	ft_lstadd_back(t_env **lst, t_env *new)
 			save = save->next;
 		save->next = new;
 	}
-}
-
-int		ft_tolower(int c)
-{
-	if (c >= 65 && c <= 90)
-		return (c + 32);
-	else
-		return (c);
 }
