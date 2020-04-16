@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/16 12:49:49 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/16 13:29:00 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ char	*ft_delete_dollar(char *parsed)
 	int		j;
 
 	i = 0;
-	j = 0;
+	j = 1;
 	while (parsed[i] != '$')
 		i++;
 	if (parsed[i + 1] == '?')
 		return (ft_last_value(parsed));
-	while (parsed[i + j] != ' ' && parsed[i + j] != '\"' &&
+	while (parsed[i + j] != '$' && parsed[i + j] != '\"' &&
 	parsed[i + j] != '\'' && parsed[i + j])
 		j++;
 	if (!(parsed_cpy = malloc(sizeof(char) * (ft_strlen(parsed) - j + 1))))
@@ -101,11 +101,13 @@ char	*ft_delete_dollar(char *parsed)
 	j = 0;
 	while (parsed[i] != '$')
 		parsed_cpy[j++] = parsed[i++];
-	while (parsed[i] && parsed[i] != ' '
+	i++;
+	while (parsed[i] && parsed[i] != '$'
 	&& parsed[i] != '\"' && parsed[i] != '\'')
 		i++;
-	while ((parsed_cpy[j] = '\0') && parsed[i])
+	while (parsed[i])
 		parsed_cpy[j++] = parsed[i++];
+	parsed_cpy[j] = '\0';
 	return (parsed_cpy);
 }
 
