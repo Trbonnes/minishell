@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/14 15:31:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/16 14:09:53 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,8 @@ int					last_return_setup(int status);
 int					chevron_error(void);
 int					ft_parser_param_quote(char *str, char c);
 int					ft_ref_len(t_env *search);
+int					ft_find_dollar(char *parsed);
+char	*ft_replace_env_loop(t_env *search, char *parsed,
+char *parsed_cpy, int k);
 
 #endif

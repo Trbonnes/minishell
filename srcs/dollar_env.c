@@ -6,7 +6,7 @@
 /*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/16 13:29:00 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/16 14:10:30 by trombone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,37 +47,15 @@ char	*ft_last_value(char *parsed)
 char	*ft_replace_env(t_env *search, char *parsed)
 {
 	char	*parsed_cpy;
-	int		i;
-	int		j;
 	int		k;
 
-	i = 0;
-	j = 0;
 	k = 1;
 	while (search->ref[k] && search->ref[k - 1] != '=')
 		k++;
 	if (!(parsed_cpy = malloc(sizeof(char) * (ft_ref_len(search)
 	+ ft_strlen(parsed) + 1))))
 		return (NULL);
-	while (parsed[i])
-	{
-		if (parsed[i] == '$' && (i == 0 || parsed[i - 1] != '\''))
-		{
-			while (search->ref[k])
-				parsed_cpy[j++] = search->ref[k++];
-			i++;
-			while (parsed[i] != ' ' && parsed[i] != '\"' &&
-			parsed[i] != '\'' && parsed[i] != '$' && parsed[i])
-				i++;
-			while (parsed[i])
-				parsed_cpy[j++] = parsed[i++];
-			break ;
-		}
-		if (parsed[i])
-			parsed_cpy[j++] = parsed[i++];
-	}
-	parsed_cpy[j] = '\0';
-	return (parsed_cpy);
+	return (ft_replace_env_loop(search, parsed, parsed_cpy, k));
 }
 
 char	*ft_delete_dollar(char *parsed)
@@ -86,10 +64,8 @@ char	*ft_delete_dollar(char *parsed)
 	int		i;
 	int		j;
 
-	i = 0;
+	i = ft_find_dollar(parsed);
 	j = 1;
-	while (parsed[i] != '$')
-		i++;
 	if (parsed[i + 1] == '?')
 		return (ft_last_value(parsed));
 	while (parsed[i + j] != '$' && parsed[i + j] != '\"' &&
@@ -135,10 +111,9 @@ char	*ft_dollar_call(char *parsed, char *env_check)
 	while (search && ft_strcmp(env_check, search->key) != 0)
 		search = search->next;
 	if (search != NULL && env_check[0] != '\0')
-		parsed_cpy = ft_replace_env(search, parsed);
+		return (parsed_cpy = ft_replace_env(search, parsed));
 	else
-		parsed_cpy = ft_delete_dollar(parsed);
-	return (parsed_cpy);
+		return (parsed_cpy = ft_delete_dollar(parsed));
 }
 
 char	*ft_dollar_env(char *parsed)
@@ -151,10 +126,10 @@ char	*ft_dollar_env(char *parsed)
 	j = -1;
 	i = 0;
 	while (parsed[++j])
-		if (parsed[j] == '$' && parsed[j + 1] != '\0' && (j == 0 || parsed[j - 1] != '\''))
+		if (parsed[j] == '$' && parsed[j + 1] != '\0'
+		&& (j == 0 || parsed[j - 1] != '\''))
 		{
 			j++;
-			i++;
 			while (parsed[j] != ' ' && parsed[j] != '$' && parsed[j++])
 				i++;
 			break ;
