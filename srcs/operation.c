@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/03/14 21:21:16 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/18 15:05:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_wait_chevron_2(char *line, t_parsing *alk)
 		write(2,
 		"minishell: syntax error near unexpected token `newline'\n", 56);
 	if (alk->redirection[0] == '\0')
-		exit(258);
+		exit(2);
 	while (end != 1)
 	{
 		write(1, "> ", 2);

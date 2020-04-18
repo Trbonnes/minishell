@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/16 18:45:30 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/18 15:52:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char				*ft_strdup_chr(const char *str, char c);
 size_t				ft_strlen_chr(const char *str, char c);
 void				ft_wait_quote(char c, char **quote_str);
 int					ft_redirection_calculate(int i, char **str, char **q);
-void				ft_unquote(char **str);
+void				ft_unquote(char **str, int builtin_detected);
 void				ft_environment_parsing(char **env);
 int					ft_redirection_quote(int i, char **str,
 char **quote_str, char c);
@@ -84,7 +84,7 @@ int					ft_increment_end(char *str, int i);
 int					ft_increment_option(char *str, int i, t_parsing *parser);
 int					ft_parser_get(t_parsing *parser, char *str, int i);
 char				*ft_parser_param(char *str);
-char				*ft_parser_redirection(char **builtin_str);
+char				*ft_parser_redirection(char **builtin_str, int builtin_detected);
 int					ft_option(char *str, t_parsing *parser, int i);
 void				ft_quote_cpy(int i, int j, char **redirection, char **q);
 int					ft_quote_check(char c, int quote);

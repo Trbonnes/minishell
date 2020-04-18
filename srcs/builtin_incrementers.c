@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:34:56 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/14 15:46:28 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/18 15:08:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		ft_parser_get(t_parsing *parser, char *str, int i)
 {
 	if ((parser->param = ft_parser_param(str + i)) == NULL)
 		return (-1);
-	if ((parser->redirection = ft_parser_redirection(&parser->param)) == NULL)
+	if ((parser->redirection = ft_parser_redirection(&parser->param, parser->builtin_detected)) == NULL)
 		return (-1);
 	return (1);
 }

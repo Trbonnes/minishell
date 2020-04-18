@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/18 08:57:54 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/04/18 14:14:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sigint_handler(int sig)
 		write(1, "\n", 1);
 	else
 	{
-		g_last_return_value = 1;
+		g_last_return_value = 130;
 		write(1, "\nminishell$>", 12);
 	}
 }

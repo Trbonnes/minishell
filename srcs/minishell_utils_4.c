@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_4.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/16 18:43:31 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/18 15:05:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int		last_return_setup(int status)
 	else if (status == 65280)
 		last_return_value = 255;
 	else if (status == 512)
-		last_return_value = 258;
+		last_return_value = 2;
 	else if (status == 256)
-		last_return_value = 0;
+		last_return_value = 1;
 	else if (status == 33280)
 		last_return_value = 1;
 	return (last_return_value);
@@ -54,7 +54,7 @@ int		chevron_error(void)
 {
 	write(2,
 	"minishell: syntax error near unexpected token `newline'\n", 56);
-	g_last_return_value = 258;
+	g_last_return_value = 2;
 	return (-1);
 }
 

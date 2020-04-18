@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/19 10:20:13 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/04/18 15:43:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_echo(t_parsing *alk, t_fd *fd)
 	int len;
 
 	if (fd->out == -1)
-		return (-1);
+		return (1);
 	len = ft_strlen(alk->param);
 	write(fd->out, alk->param, len);
 	if (alk->echo_option == FALSE)
@@ -53,13 +53,19 @@ int		ft_cd(t_parsing *alk)
 	int		ret;
 
 	if (!alk->param)
-		return (-1);
+		return (1);
 	alk->param = ft_no_space(alk->param);
 	if (alk->param[0] == '.' && alk->param[1] == '.')
 		ft_up_directory(alk);
 	if (alk->param[0] == '\0' || alk->param[0] == '~')
 		ft_home(alk);
-	ret = chdir(alk->param);
+	if ((ret = chdir(alk->param)) == -1)
+	{
+		write(1, "minishell: ", 11);
+		ft_putstr(alk->param);
+		write(1, ": is not a directory or does not exist\n", 39);
+		ret = 1;
+	}
 	return (ret);
 }
 
@@ -69,7 +75,7 @@ int		ft_pwd(t_fd *fd)
 	int		len;
 
 	if (fd->out == -1)
-		return (-1);
+		return (1);
 	if (!(buf = malloc(sizeof(char) * 1024)))
 		return (-1);
 	getcwd(buf, 1024);
