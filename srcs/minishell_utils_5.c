@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 13:55:57 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/18 16:26:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/18 17:18:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,31 @@ char *parsed_cpy, int k)
 	}
 	parsed_cpy[j] = '\0';
 	return (parsed_cpy);
+}
+
+int		ft_dollar_env_loop(char *parsed)
+{
+	int		i;
+	int		j;
+	bool	into_q;
+
+	j = -1;
+	i = 0;
+	into_q = false;
+	while (parsed[++j])
+	{
+		if (parsed[j] == '\'' && into_q)
+			into_q = false;
+		else if (parsed[j] == '\'' && !into_q)
+			into_q = true;
+		if (parsed[j] == '$' && parsed[j + 1] != '\0'
+		&& !into_q)
+		{
+			j++;
+			while (parsed[j] != ' ' && parsed[j] != '$' && parsed[j++])
+				i++;
+			break ;
+		}
+	}
+	return (i);
 }

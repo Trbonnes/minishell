@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/18 15:52:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/18 19:08:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int					ft_increment_end(char *str, int i);
 int					ft_increment_option(char *str, int i, t_parsing *parser);
 int					ft_parser_get(t_parsing *parser, char *str, int i);
 char				*ft_parser_param(char *str);
-char				*ft_parser_redirection(char **builtin_str, int builtin_detected);
+char				*ft_parser_redirection(char **builtin_str,
+int builtin_detected);
 int					ft_option(char *str, t_parsing *parser, int i);
 void				ft_quote_cpy(int i, int j, char **redirection, char **q);
 int					ft_quote_check(char c, int quote);
@@ -147,5 +148,8 @@ int					ft_ref_len(t_env *search);
 int					ft_find_dollar(char *parsed);
 char				*ft_replace_env_loop(t_env *search, char *parsed,
 char *parsed_cpy, int k);
+int					ft_dollar_env_loop(char *parsed);
+int					ft_quote_before_after(const char *str, int i,
+int builtin_detected);
 
 #endif
