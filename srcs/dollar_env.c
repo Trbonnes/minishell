@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/16 14:10:30 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/18 16:36:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,18 +122,26 @@ char	*ft_dollar_env(char *parsed)
 	char	*parsed_cpy;
 	int		i;
 	int		j;
+	bool	into_q;
 
 	j = -1;
 	i = 0;
+	into_q = false;
 	while (parsed[++j])
+	{
+		if (parsed[j] == '\'' && into_q)
+			into_q = false;
+		else if (parsed[j] == '\'' && !into_q)
+			into_q = true;
 		if (parsed[j] == '$' && parsed[j + 1] != '\0'
-		&& (j == 0 || parsed[j - 1] != '\''))
+		&& !into_q)
 		{
 			j++;
 			while (parsed[j] != ' ' && parsed[j] != '$' && parsed[j++])
 				i++;
 			break ;
 		}
+	}
 	if (i == 0)
 		return (parsed);
 	if (!(env_check = malloc(sizeof(char) * i + 1)))

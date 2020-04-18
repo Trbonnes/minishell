@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_5.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 13:55:57 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/16 14:10:00 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/18 16:26:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,20 @@ int		ft_find_dollar(char *parsed)
 char	*ft_replace_env_loop(t_env *search, char *parsed,
 char *parsed_cpy, int k)
 {
-	int i;
-	int	j;
+	int		i;
+	int		j;
+	bool	into_q;
 
 	i = 0;
 	j = 0;
+	into_q = false;
 	while (parsed[i])
 	{
-		if (parsed[i] == '$' && (i == 0 || parsed[i - 1] != '\''))
+		if (parsed[i] == '\'' && into_q)
+			into_q = false;
+		else if (parsed[i] == '\'' && !into_q)
+			into_q = true;
+		if (parsed[i] == '$' && !into_q)
 		{
 			while (search->ref[k])
 				parsed_cpy[j++] = search->ref[k++];
