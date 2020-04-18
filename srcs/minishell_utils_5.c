@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 13:55:57 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/18 17:18:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/18 20:01:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@ int		ft_find_dollar(char *parsed)
 
 	i = 0;
 	while (parsed[i] != '$')
+		i++;
+	return (i);
+}
+
+bool	ft_into_quote(char *parsed, int i, bool into_q)
+{
+	if (parsed[i] == '\'' && into_q)
+		return (false);
+	else if (parsed[i] == '\'' && !into_q)
+		return (true);
+	return (into_q);
+}
+
+int		ft_replace_env_increment(char *parsed, int i)
+{
+	while (parsed[i] != ' ' && parsed[i] != '\"' &&
+	parsed[i] != '\'' && parsed[i] != '$' && parsed[i])
 		i++;
 	return (i);
 }
@@ -34,18 +51,13 @@ char *parsed_cpy, int k)
 	into_q = false;
 	while (parsed[i])
 	{
-		if (parsed[i] == '\'' && into_q)
-			into_q = false;
-		else if (parsed[i] == '\'' && !into_q)
-			into_q = true;
+		into_q = ft_into_quote(parsed, i, into_q);
 		if (parsed[i] == '$' && !into_q)
 		{
 			while (search->ref[k])
 				parsed_cpy[j++] = search->ref[k++];
 			i++;
-			while (parsed[i] != ' ' && parsed[i] != '\"' &&
-			parsed[i] != '\'' && parsed[i] != '$' && parsed[i])
-				i++;
+			i = ft_replace_env_increment(parsed, i);
 			while (parsed[i])
 				parsed_cpy[j++] = parsed[i++];
 			break ;

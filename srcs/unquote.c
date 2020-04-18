@@ -6,16 +6,23 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/12 15:40:16 by trombone          #+#    #+#             */
-/*   Updated: 2020/04/18 19:04:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/18 20:21:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
-static size_t	ft_strlen_quote_loop_increment(const char *str, int i, char c)
+static size_t	ft_strlen_quote_loop_increment(const char *str, int i,
+char c, size_t *len)
 {
+	*len -= 1;
 	while (str[i] && str[++i] != c)
 		;
+	if (str[i])
+	{
+		*len -= 1;
+		i++;
+	}
 	return (i);
 }
 
@@ -29,25 +36,9 @@ int builtin_detected)
 	{
 		i = ft_quote_before_after(str, i, builtin_detected);
 		if (str[i] == 34 && str[i] && str[i + 1])
-		{
-			len--;
-			i = ft_strlen_quote_loop_increment(str, i, 34);
-			if (str[i])
-			{
-				len--;
-				i++;
-			}
-		}
+			i = ft_strlen_quote_loop_increment(str, i, 34, &len);
 		else if (str[i] == 39 && str[i] && str[i + 1])
-		{
-			len--;
-			i = ft_strlen_quote_loop_increment(str, i, 39);
-			if (str[i])
-			{
-				len--;
-				i++;
-			}
-		}
+			i = ft_strlen_quote_loop_increment(str, i, 39, &len);
 		else if (str[i])
 			i++;
 	}

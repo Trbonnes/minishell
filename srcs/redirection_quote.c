@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:41:06 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/18 18:43:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/18 19:20:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int		ft_quote_check(char c, int quote)
 	return (quote);
 }
 
-int				ft_quote_before_after(const char *str, int i, int builtin_detected)
+int		ft_quote_before_after(const char *str, int i,
+int builtin_detected)
 {
 	if (builtin_detected == 7 && str[i] && str[i] == 34 && str[i + 1] == 34)
 		i += 2;
