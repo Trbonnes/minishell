@@ -43,12 +43,21 @@ void	ft_close_redirect_pipe(t_parsing *alk, t_fd *fd)
 
 void	list_builtin(t_parsing *alk, t_fd *fd)
 {
+	if (alk->builtin_detected == 2 || alk->builtin_detected == 4 ||
+	alk->builtin_detected == 6)
+	{
+		if (alk->param[0] != '\0')
+		{
+			error_message_builtin(alk);
+			return ;
+		}
+	}
 	if (alk->builtin_detected == 0)
 		g_last_return_value = ft_cd(alk);
 	if (alk->builtin_detected == 1)
 		g_last_return_value = ft_echo(alk, fd);
 	if (alk->builtin_detected == 2)
-		g_last_return_value = ft_env_display(fd, alk);
+		g_last_return_value = ft_env_display(fd);
 	if (alk->builtin_detected == 3)
 		ft_exit();
 	if (alk->builtin_detected == 4)

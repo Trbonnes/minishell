@@ -52,3 +52,19 @@ size_t	ft_strlen_quote(const char *str, int builtin_detected)
 	len = ft_strlen(str);
 	return (ft_strlen_quote_loop(str, len, builtin_detected));
 }
+
+void	error_message_builtin(t_parsing *alk)
+{
+	if (alk->param[0] != '\0')
+	{
+		if (alk->builtin_detected == 2)
+			ft_putstr("env");
+		if (alk->builtin_detected == 4)
+			ft_putstr("export");
+		if (alk->builtin_detected == 6)
+			ft_putstr("unset");
+		write(1, ":[", 2);
+		ft_putstr(alk->param);
+		write(1, "]: no such file or directory\n", 30);
+	}	
+}

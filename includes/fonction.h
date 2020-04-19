@@ -105,7 +105,7 @@ int					ft_cd(t_parsing *alk);
 int					ft_echo(t_parsing *alk, t_fd *fd);
 int					ft_pwd(t_fd *fd);
 void				ft_exit(void);
-int					ft_env_display(t_fd *fd, t_parsing *alk);
+int					ft_env_display(t_fd *fd);
 int					ft_export(t_fd *fd, t_parsing *alk);
 int					ft_unset(t_parsing *alk);
 int					find_fd(t_parsing *alk, char **env);
@@ -152,5 +152,5 @@ int					ft_dollar_env_loop(char *parsed);
 int					ft_quote_before_after(const char *str, int i,
 int builtin_detected);
 size_t				ft_strlen_quote(const char *str, int builtin_detected);
-
+void				error_message_builtin(t_parsing *alk);
 #endif
