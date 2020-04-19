@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/18 19:08:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/19 14:18:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,6 @@ char *parsed_cpy, int k);
 int					ft_dollar_env_loop(char *parsed);
 int					ft_quote_before_after(const char *str, int i,
 int builtin_detected);
+size_t				ft_strlen_quote(const char *str, int builtin_detected);
 
 #endif
