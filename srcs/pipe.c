@@ -48,7 +48,7 @@ void	list_builtin(t_parsing *alk, t_fd *fd)
 	if (alk->builtin_detected == 1)
 		g_last_return_value = ft_echo(alk, fd);
 	if (alk->builtin_detected == 2)
-		g_last_return_value = ft_env_display(fd);
+		g_last_return_value = ft_env_display(fd, alk);
 	if (alk->builtin_detected == 3)
 		ft_exit();
 	if (alk->builtin_detected == 4)

@@ -15,11 +15,18 @@
 extern int		g_last_return_value;
 extern t_env *g_env_list;
 
-int		ft_env_display(t_fd *fd)
+int		ft_env_display(t_fd *fd, t_parsing *alk)
 {
 	t_env	*save;
 	int		len;
 
+	if (alk->param[0] != '\0')
+	{
+		write(1, "env:[", 5);
+		ft_putstr(alk->param);
+		write(1, "]: no such file or directory\n", 30);
+		return (0);
+	}
 	save = g_env_list;
 	while (g_env_list)
 	{
