@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/19 14:16:52 by user42            #+#    #+#             */
-/*   Updated: 2020/04/19 14:17:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/19 17:37:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	error_message_builtin(t_parsing *alk)
 			ft_putstr("export");
 		if (alk->builtin_detected == 6)
 			ft_putstr("unset");
-		write(1, ":[", 2);
+		write(1, ": ", 2);
 		ft_putstr(alk->param);
-		write(1, "]: no such file or directory\n", 30);
-	}	
+		write(1, ": no such file or directory\n", 29);
+	}
 }
