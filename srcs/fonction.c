@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/18 15:43:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/21 15:22:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int		ft_pwd(t_fd *fd)
 	return (0);
 }
 
-void	ft_exit(void)
+void	ft_exit(t_parsing *alk)
 {
 	write(1, "exit\n", 5);
-	exit(0);
+	exit(ft_atoi(alk->param));
 }

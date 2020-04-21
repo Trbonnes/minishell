@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/19 14:18:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/21 15:21:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int					ft_up_directory(t_parsing *alk);
 int					ft_cd(t_parsing *alk);
 int					ft_echo(t_parsing *alk, t_fd *fd);
 int					ft_pwd(t_fd *fd);
-void				ft_exit(void);
+void				ft_exit(t_parsing *alk);
 int					ft_env_display(t_fd *fd);
 int					ft_export(t_fd *fd, t_parsing *alk);
 int					ft_unset(t_parsing *alk);
@@ -153,4 +153,5 @@ int					ft_quote_before_after(const char *str, int i,
 int builtin_detected);
 size_t				ft_strlen_quote(const char *str, int builtin_detected);
 void				error_message_builtin(t_parsing *alk);
+int					ft_atoi(const char *nptr);
 #endif
