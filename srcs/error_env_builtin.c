@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 15:46:44 by user42            #+#    #+#             */
-/*   Updated: 2020/04/22 20:32:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/22 20:35:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,11 @@ int		error_message_builtin(t_parsing *alk)
 		{
 			j = 0;
 			if (!is_error[i])
+			{
 				while (split[i][j])
 					alk->param[k++] = split[i][j++];
+				alk->param[k++] = ' ';
+			}
 			i++;
 		}
 		alk->param[k] = '\0';
