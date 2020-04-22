@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/19 14:16:52 by user42            #+#    #+#             */
-/*   Updated: 2020/04/19 17:37:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/21 15:47:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,4 @@ size_t	ft_strlen_quote(const char *str, int builtin_detected)
 
 	len = ft_strlen(str);
 	return (ft_strlen_quote_loop(str, len, builtin_detected));
-}
-
-void	error_message_builtin(t_parsing *alk)
-{
-	if (alk->param[0] != '\0')
-	{
-		if (alk->builtin_detected == 2)
-			ft_putstr("env");
-		if (alk->builtin_detected == 4)
-			ft_putstr("export");
-		if (alk->builtin_detected == 6)
-			ft_putstr("unset");
-		write(1, ": ", 2);
-		ft_putstr(alk->param);
-		write(1, ": no such file or directory\n", 29);
-	}
 }

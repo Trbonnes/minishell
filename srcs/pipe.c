@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/21 15:16:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/21 15:39:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,8 @@ void	ft_close_redirect_pipe(t_parsing *alk, t_fd *fd)
 
 void	list_builtin(t_parsing *alk, t_fd *fd)
 {
-	if (alk->builtin_detected == 2 || alk->builtin_detected == 4 ||
-	alk->builtin_detected == 6)
-	{
-		if (alk->param[0] != '\0')
-		{
-			error_message_builtin(alk);
-			return ;
-		}
-	}
+	if (error_message_builtin(alk) == -1)
+		return ;
 	if (alk->builtin_detected == 0)
 		g_last_return_value = ft_cd(alk);
 	if (alk->builtin_detected == 1)
