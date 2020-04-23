@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/22 19:53:11 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/23 16:20:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,6 @@ int					error_message_builtin(t_parsing *alk);
 int					ft_atoi(const char *nptr);
 bool				ft_into_quote(char *parsed, int i, bool into_q);
 char				**ft_split_libft(char const *str, char c);
+void				ft_quote_executable(char **str);
 
 #endif

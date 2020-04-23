@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/18 14:37:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/23 15:59:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,27 @@ char **params, char **env)
 	return (1);
 }
 
+void		ft_check_split(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i])
+	{
+		if (split[i][0] == 26)
+			split[i][0] = '\0';
+		i++;
+	}
+}
+
 int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 {
 	t_env		*search;
 	char		**params;
 
 	search = g_env_list;
-	params = ft_split(parser->param, ' ', parser->executable);
+	params = ft_split(parser->param, 39, parser->executable);
+	ft_check_split(params);
 	dup2(fd->out, 1);
 	dup2(fd->in, 0);
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')
