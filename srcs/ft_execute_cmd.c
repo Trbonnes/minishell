@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/23 15:59:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/23 16:48:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,6 @@ char **params, char **env)
 	g_last_return_value = 0;
 	free(path);
 	return (1);
-}
-
-void		ft_check_split(char **split)
-{
-	int i;
-
-	i = 0;
-	while (split[i])
-	{
-		if (split[i][0] == 26)
-			split[i][0] = '\0';
-		i++;
-	}
 }
 
 int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
