@@ -58,6 +58,7 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 	int		i;
 
 	i = 0;
+	printf("alk->param = %s\n", alk->param);
 	while (alk->param[i] != '=' && alk->param[i])
 		i++;
 	if (alk->param[i] == '\0' && i != 0)

@@ -15,15 +15,47 @@
 extern int		g_last_return_value;
 extern t_env	*g_env_list;
 
+void	sort_list(t_env **sorted)
+{
+	t_env	*count;
+	t_env	*current;
+	char	*key;
+	char	*ref;
+
+	count = *sorted;
+	while (count)
+	{
+		current = *sorted;
+		while (current->next)
+		{
+			if (ft_strcmp(current->key, current->next->key) > 0)
+			{
+				key = current->key;
+				ref = current->ref;
+				current->key = current->next->key;
+				current->ref = current->next->ref;
+				current->next->key = key;
+				current->next->ref = ref;
+			}
+			else
+				current = current->next;
+		}
+		count = count->next;
+	}
+}
+
 void	ft_export_loop(t_fd *fd, t_env *g_env_list)
 {
-	int len;
+	int		len;
+	t_env	*sorted;
 
+	sorted = g_env_list;
+	sort_list(&sorted);
 	len = ft_strlen(g_env_list->ref);
 	if (g_env_list->ref[0] != '\0')
 	{
 		write(fd->out, "declare -x ", 11);
-		write(fd->out, g_env_list->ref, len);
+		write(fd->out, sorted->ref, len);
 		write(fd->out, "\n", 1);
 	}
 }

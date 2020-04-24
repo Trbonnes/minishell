@@ -94,15 +94,6 @@ int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 {
 	if (alk->builtin_detected == 7)
 	{
-		if (!fd->index)
-			close(fd->pipe[0]);
-		if (fd->index && alk->next)
-		{
-			close(fd->last_pipe[1]);
-			close(fd->pipe[0]);
-		}
-		if (fd->index && !alk->next)
-			close(fd->last_pipe[1]);
 		if (ft_executable(alk, env, fd) == -1)
 		{
 			write(2, "minishell: command not found\n", 29);
