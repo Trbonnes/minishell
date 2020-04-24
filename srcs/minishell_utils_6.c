@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 16:47:53 by user42            #+#    #+#             */
-/*   Updated: 2020/04/24 18:36:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/24 19:42:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,25 @@ int		param_refull_k(t_parsing *alk, char **split, bool *is_error)
 	free(is_error);
 	if (k == 0)
 		return (-1);
+	return (0);
+}
+
+int		check_is_error_env(t_parsing *alk, char **split,
+bool *is_error, int i)
+{
+	int	j;
+
+	j = -1;
+	while (++j <= i)
+		if (is_error[j])
+		{
+			display_error_env(alk->builtin_detected, split[j]);
+			j = 0;
+			while (split[j])
+				free(split[j++]);
+			free(split);
+			free(is_error);
+			return (-1);
+		}
 	return (0);
 }

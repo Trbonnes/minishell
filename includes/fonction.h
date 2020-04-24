@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/24 19:28:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/24 19:42:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,7 @@ void				ft_list_copy_env(t_env *list);
 void				sort_list(t_env **sorted);
 t_env				*lst_cpy(t_env *lst);
 char				**ft_split_export(char *str);
+int					check_is_error_env(t_parsing *alk, char **split,
+bool *is_error, int i);
 
 #endif

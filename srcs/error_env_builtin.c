@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 15:46:44 by user42            #+#    #+#             */
-/*   Updated: 2020/04/24 19:12:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/24 19:43:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,9 @@ int		check_error_export(t_parsing *alk, char **split)
 	while (j <= i)
 		is_error[j++] = false;
 	check_error_export_loop(split, is_error);
-	j = -1;
 	if (alk->builtin_detected == 2)
-		while (++j <= i)
-			if (is_error[j])
-			{
-				display_error_env(alk->builtin_detected, split[j]);
-				j = 0;
-				while (split[j])
-					free(split[j++]);
-				free(split);
-				free(is_error);
-				return (-1);
-			}
+		if (check_is_error_env(alk, split, is_error, i) == -1)
+			return (-1);
 	return (param_refull(alk, split, is_error));
 }
 
@@ -124,7 +114,7 @@ int		error_message_builtin(t_parsing *alk)
 	if (alk->builtin_detected == 2 && alk->param[0] != '\0')
 	{
 		split = ft_split_export(alk->param);
-		return(check_error_export(alk, split));
+		return (check_error_export(alk, split));
 	}
 	if (alk->builtin_detected == 4 && alk->param[0] != '\0')
 	{
