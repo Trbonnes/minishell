@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 17:18:21 by user42            #+#    #+#             */
-/*   Updated: 2020/04/24 19:51:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/24 20:23:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ int		ft_split_export_nb(char *str)
 	nb = 0;
 	while (str[i])
 	{
-		while (str[i] && str[i] != '=' && str[i] != ' ')
-			i++;
 		while (str[i] && str[i] != ' ')
 		{
-			if (str[i] == '\'' && i++)
+			if (str[i] == '\'' && ++i)
 				while (str[i] && str[i] != '\'')
 					i++;
-			else if (str[i] == '\"' && i++)
-				while (str[i] && str[i] != '\"')
+			else if (str[i] == '"' && ++i)
+				while (str[i] && str[i] != '"')
 					i++;
 			if (str[i])
 				i++;
@@ -53,20 +51,15 @@ int		*ft_split_export_len(char *str, int i)
 	while (str[i])
 	{
 		len[j] = 0;
-		while (str[i] && str[i] != '=' && str[i] != ' ')
-		{
-			i++;
-			len[j]++;
-		}
 		while (str[i] && str[i] != ' ')
 		{
-			if (str[i] == '\'' && i++ && len[j]++)
+			if (str[i] == '\'' && ++i && ++len[j])
 				while (str[i] && str[i] != '\'')
 				{
 					i++;
 					len[j]++;
 				}
-			else if (str[i] == '\"' && i++ && len[j]++)
+			else if (str[i] == '\"' && ++i && ++len[j])
 				while (str[i] && str[i] != '\"')
 				{
 					i++;
@@ -100,8 +93,8 @@ char	**ft_split_export(char *str)
 	len = ft_split_export_len(str, i);
 	if (!(split = malloc(sizeof(char *) * (i + 1))))
 		return (NULL);
-	j = 0;
-	while (j < i)
+	j = -1;
+	while (++j < i)
 	{
 		k = 0;
 		if (!(split[j] = malloc(sizeof(char) * len[j] + 1)))
@@ -110,7 +103,6 @@ char	**ft_split_export(char *str)
 			split[j][k++] = *str++;
 		split[j][k] = '\0';
 		str++;
-		j++;
 	}
 	split[j] = 0;
 	free(len);
