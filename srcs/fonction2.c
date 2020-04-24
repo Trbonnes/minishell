@@ -54,28 +54,27 @@ void	ft_same_export(t_parsing *alk)
 
 int		ft_export(t_fd *fd, t_parsing *alk)
 {
-	t_env	*save;
 	int		i;
+	t_env	*cpy;
 
+	cpy = lst_cpy(cpy);
 	i = 0;
-	printf("alk->param = %s\n", alk->param);
 	while (alk->param[i] != '=' && alk->param[i])
 		i++;
 	if (alk->param[i] == '\0' && i != 0)
 		return (0);
-	save = g_env_list;
 	ft_same_export(alk);
 	if (alk->param[0] != '\0')
 		ft_lstadd_back(&g_env_list, ft_new_env(alk->param));
 	else
 	{
-		while (g_env_list)
+		sort_list(&cpy);
+		while (cpy)
 		{
-			ft_export_loop(fd, g_env_list);
-			g_env_list = g_env_list->next;
+			ft_export_loop(fd, cpy);
+			cpy = cpy->next;
 		}
 	}
-	g_env_list = save;
 	return (0);
 }
 

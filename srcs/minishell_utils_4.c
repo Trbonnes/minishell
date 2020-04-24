@@ -44,18 +44,15 @@ void	sort_list(t_env **sorted)
 	}
 }
 
-void	ft_export_loop(t_fd *fd, t_env *g_env_list)
+void	ft_export_loop(t_fd *fd, t_env *lst)
 {
 	int		len;
-	t_env	*sorted;
 
-	sorted = g_env_list;
-	sort_list(&sorted);
-	len = ft_strlen(g_env_list->ref);
-	if (g_env_list->ref[0] != '\0')
+	len = ft_strlen(lst->ref);
+	if (lst->ref[0] != '\0')
 	{
 		write(fd->out, "declare -x ", 11);
-		write(fd->out, sorted->ref, len);
+		write(fd->out, lst->ref, len);
 		write(fd->out, "\n", 1);
 	}
 }

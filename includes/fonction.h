@@ -139,7 +139,7 @@ void				ft_wait_children(t_pid *jul);
 void				ft_pid_back(t_pid **lst, t_pid *new);
 char				*ft_no_space(char *str);
 char				*ft_dollar_env(char *parsed);
-void				ft_export_loop(t_fd *fd, t_env *g_env_list);
+void				ft_export_loop(t_fd *fd, t_env *lst);
 char				*ft_itoa(int n);
 int					last_return_setup(int status);
 int					chevron_error(void);
@@ -162,5 +162,8 @@ void				display_error_env(int builtin, char *param_str);
 int					is_env_var(char c);
 int					param_refull_k(t_parsing *alk,
 char **split, bool *is_error);
+void				ft_list_copy_env(t_env *list);
+void				sort_list(t_env **sorted);
+t_env				*lst_cpy(t_env *lst);
 
 #endif
