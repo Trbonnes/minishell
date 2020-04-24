@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 15:46:44 by user42            #+#    #+#             */
-/*   Updated: 2020/04/23 16:53:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/24 19:12:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,23 @@ void	check_error_export_loop(char **split, bool *is_error)
 		else
 			is_error[i] = true;
 		while (split[i][j])
-			if (!is_env_var(split[i][j++]))
+		{
+			if (!is_env_var(split[i][j]) && split[i][j] != ' ')
 				is_error[i] = true;
+			j++;
+		}
 		i++;
 	}
 }
 
-int		check_error_export(t_parsing *alk)
+int		check_error_export(t_parsing *alk, char **split)
 {
 	int		i;
 	int		j;
-	char	**split;
 	bool	*is_error;
 
 	i = 0;
 	j = 0;
-	split = ft_split_libft(alk->param, ' ');
 	while (split[i++])
 		;
 	if (!(is_error = malloc(sizeof(bool) * i + 1)))
@@ -73,6 +74,19 @@ int		check_error_export(t_parsing *alk)
 	while (j <= i)
 		is_error[j++] = false;
 	check_error_export_loop(split, is_error);
+	j = -1;
+	if (alk->builtin_detected == 2)
+		while (++j <= i)
+			if (is_error[j])
+			{
+				display_error_env(alk->builtin_detected, split[j]);
+				j = 0;
+				while (split[j])
+					free(split[j++]);
+				free(split);
+				free(is_error);
+				return (-1);
+			}
 	return (param_refull(alk, split, is_error));
 }
 
@@ -105,13 +119,18 @@ int		check_error_unset(t_parsing *alk)
 
 int		error_message_builtin(t_parsing *alk)
 {
+	char	**split;
+
 	if (alk->builtin_detected == 2 && alk->param[0] != '\0')
 	{
-		display_error_env(alk->builtin_detected, alk->param);
-		return (-1);
+		split = ft_split_export(alk->param);
+		return(check_error_export(alk, split));
 	}
 	if (alk->builtin_detected == 4 && alk->param[0] != '\0')
-		return (check_error_export(alk));
+	{
+		split = ft_split_export(alk->param);
+		return (check_error_export(alk, split));
+	}
 	if (alk->builtin_detected == 6 && alk->param[0] != '\0')
 		return (check_error_unset(alk));
 	return (0);
