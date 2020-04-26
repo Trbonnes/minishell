@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 17:18:21 by user42            #+#    #+#             */
-/*   Updated: 2020/04/24 20:23:41 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/26 15:25:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,28 +54,16 @@ int		*ft_split_export_len(char *str, int i)
 		while (str[i] && str[i] != ' ')
 		{
 			if (str[i] == '\'' && ++i && ++len[j])
-				while (str[i] && str[i] != '\'')
-				{
-					i++;
+				while (str[i] && str[i] != '\'' && ++i)
 					len[j]++;
-				}
 			else if (str[i] == '\"' && ++i && ++len[j])
-				while (str[i] && str[i] != '\"')
-				{
-					i++;
+				while (str[i] && str[i] != '\"' && ++i)
 					len[j]++;
-				}
-			if (str[i])
-			{
+			if (str[i] && ++i)
 				len[j]++;
-				i++;
-			}
 		}
-		if (str[i])
-		{
-			i++;
+		if (str[i] && ++i)
 			j++;
-		}
 	}
 	return (len);
 }
