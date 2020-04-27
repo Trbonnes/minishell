@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/24 19:42:03 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/27 22:59:11 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,6 @@ t_env				*lst_cpy(t_env *lst);
 char				**ft_split_export(char *str);
 int					check_is_error_env(t_parsing *alk, char **split,
 bool *is_error, int i);
-
+void				ft_export_multi(t_parsing *alk);
+void				ft_same_export(char *exp);
 #endif

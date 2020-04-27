@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/03/10 21:59:09 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/04/27 23:04:18 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_export_norme(t_env *save, t_parsing *key)
 	}
 }
 
-void	ft_same_export(t_parsing *alk)
+void	ft_same_export(char *exp)
 {
 	t_env		*save;
 	t_parsing	key;
@@ -34,16 +34,16 @@ void	ft_same_export(t_parsing *alk)
 
 	i = 0;
 	key = (t_parsing){ 0 };
-	while (alk->param && alk->param[i] != '=' && alk->param[0])
+	while (exp && exp[i] != '=' && exp[0])
 		i++;
-	if (alk->param[i])
+	if (exp[i])
 	{
 		if (!(key.param = malloc(sizeof(char) * (i + 1))))
 			return ;
 		i = 0;
-		while (alk->param && alk->param[i] != '=')
+		while (exp && exp[i] != '=')
 		{
-			key.param[i] = alk->param[i];
+			key.param[i] = exp[i];
 			i++;
 		}
 		key.param[i] = '\0';
@@ -54,19 +54,11 @@ void	ft_same_export(t_parsing *alk)
 
 int		ft_export(t_fd *fd, t_parsing *alk)
 {
-	int		i;
 	t_env	*cpy;
 
 	cpy = lst_cpy(cpy);
-	i = 0;
-	while (alk->param[i] != '=' && alk->param[i])
-		i++;
-	if (alk->param[i] == '\0' && i != 0)
-		return (0);
-	ft_same_export(alk);
-	if (alk->param[0] != '\0')
-		ft_lstadd_back(&g_env_list, ft_new_env(alk->param));
-	else
+	ft_export_multi(alk);
+	if (alk->param[0] == '\0')
 	{
 		sort_list(&cpy);
 		while (cpy)
