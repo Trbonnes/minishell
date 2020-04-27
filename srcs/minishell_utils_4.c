@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_4.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/18 15:05:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 01:09:44 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,17 @@ void	ft_export_loop(t_fd *fd, t_env *lst)
 {
 	int		len;
 
-	len = ft_strlen(lst->ref);
+	len = 0;
 	if (lst->ref[0] != '\0')
 	{
+		while (lst->ref[len] != '=')
+			len++;
+		len++;
 		write(fd->out, "declare -x ", 11);
-		write(fd->out, lst->ref, len);
-		write(fd->out, "\n", 1);
+		write(fd->out, lst->key, len);
+		write(fd->out, "=\"", 2);
+		write(fd->out, lst->ref + len, ft_strlen(lst->ref) - len);
+		write(fd->out, "\"\n", 2);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 19:32:24 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 00:15:15 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 01:12:05 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	ft_clear_cpy(t_env *lst)
 	}
 }
 
-t_env	*lst_cpy()
+t_env	*lst_cpy(void)
 {
 	t_env	*save;
 	t_env	*tmp;
 	t_env	*lst;
-	
+
 	if (!(lst = malloc(sizeof(t_env))))
 		return (NULL);
 	tmp = lst;

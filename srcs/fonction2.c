@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 00:20:33 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 01:11:38 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 	t_env	*cpy;
 	t_env	*save;
 
+	printf("param = %s\n", alk->param);
 	cpy = lst_cpy();
 	save = cpy;
 	ft_export_multi(alk);
@@ -71,7 +72,6 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 	}
 	cpy = save;
 	ft_clear_cpy(cpy);
-
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 22:54:48 by trostan           #+#    #+#             */
-/*   Updated: 2020/04/27 23:59:40 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 00:52:58 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_export_multi(t_parsing *alk)
 		while (alk->param[i] != '\0' && alk->param[i] != ' ')
 			i++;
 		exp = ft_substr(alk->param, j, i - j);
+		ft_unquote(&exp, 2);
 		ft_same_export(exp);
 		if (alk->param[0] != '\0')
 			ft_lstadd_back(&g_env_list, ft_new_env(exp));
