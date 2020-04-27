@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/27 22:59:11 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 00:15:21 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,10 +164,11 @@ int					param_refull_k(t_parsing *alk,
 char **split, bool *is_error);
 void				ft_list_copy_env(t_env *list);
 void				sort_list(t_env **sorted);
-t_env				*lst_cpy(t_env *lst);
+t_env				*lst_cpy();
 char				**ft_split_export(char *str);
 int					check_is_error_env(t_parsing *alk, char **split,
 bool *is_error, int i);
 void				ft_export_multi(t_parsing *alk);
 void				ft_same_export(char *exp);
+void				ft_clear_cpy(t_env *lst);
 #endif

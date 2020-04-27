@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 22:54:48 by trostan           #+#    #+#             */
-/*   Updated: 2020/04/27 23:04:58 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/27 23:59:40 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void	ft_export_multi(t_parsing *alk)
 		while (alk->param[i] != '\0' && alk->param[i] == ' ')
 			i++;
 		j = i;
+		free(exp);
 	}
 }

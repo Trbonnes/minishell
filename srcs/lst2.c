@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 19:32:24 by user42            #+#    #+#             */
-/*   Updated: 2020/04/24 19:32:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 00:15:15 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,26 @@
 
 extern t_env *g_env_list;
 
-t_env	*lst_cpy(t_env *lst)
+void	ft_clear_cpy(t_env *lst)
+{
+	t_env *tmp;
+
+	while (lst)
+	{
+		tmp = lst;
+		free(lst->key);
+		free(lst->ref);
+		lst = lst->next;
+		free(tmp);
+	}
+}
+
+t_env	*lst_cpy()
 {
 	t_env	*save;
 	t_env	*tmp;
-
+	t_env	*lst;
+	
 	if (!(lst = malloc(sizeof(t_env))))
 		return (NULL);
 	tmp = lst;

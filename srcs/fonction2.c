@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/27 23:04:18 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 00:20:33 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	ft_same_export(char *exp)
 int		ft_export(t_fd *fd, t_parsing *alk)
 {
 	t_env	*cpy;
+	t_env	*save;
 
-	cpy = lst_cpy(cpy);
+	cpy = lst_cpy();
+	save = cpy;
 	ft_export_multi(alk);
 	if (alk->param[0] == '\0')
 	{
@@ -67,6 +69,9 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 			cpy = cpy->next;
 		}
 	}
+	cpy = save;
+	ft_clear_cpy(cpy);
+
 	return (0);
 }
 
