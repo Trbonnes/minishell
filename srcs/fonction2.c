@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 16:36:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 16:47:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int		ft_unset(t_parsing *alk)
 	i = 0;
 	j = 0;
 	save = g_env_list;
-	printf("%s\n", alk->param);
 	if (alk->param[0] == '\0')
 		return (0);
 	while (alk->param[i])
