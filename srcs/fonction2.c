@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 01:11:38 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 03:04:56 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,26 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 int		ft_unset(t_parsing *alk)
 {
 	t_env	*save;
-	t_env	*tmp_free;
-	int		res;
+	int		i;
+	int		j;
+	char	*uns;
 
+	i = 0;
+	j = 0;
 	save = g_env_list;
 	if (alk->param[0] == '\0')
 		return (0);
-	while ((res = ft_strcmp(g_env_list->key, alk->param)) != 0
-	&& g_env_list->next)
+	while (alk->param[i])
 	{
-		tmp_free = g_env_list;
-		g_env_list = g_env_list->next;
+		while (alk->param[i] != ' ' && alk->param[i])
+			i++;
+		uns = ft_substr(alk->param, j, i - j);
+		ft_unset_multiple(uns);
+		if (alk->param[i] != '\0')
+			i++;
+		j = i;
+		g_env_list = save;
+		free(uns);
 	}
-	if (res == 0)
-	{
-		tmp_free->next = g_env_list->next;
-		ft_envdelone(g_env_list);
-	}
-	g_env_list = save;
 	return (0);
 }
