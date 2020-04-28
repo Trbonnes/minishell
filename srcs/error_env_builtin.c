@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 15:46:44 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 16:28:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 16:43:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		param_refull(t_parsing *alk, char **split, bool *is_error)
 		{
 			k = -1;
 			while (k != -99 && split[i][++k])
-				if (split[i][k] == '=')
+				if (alk->builtin_detected == 6 || split[i][k] == '=')
 					k = -99;
 			if (k == -99)
 				j += ft_strlen(split[i]);
