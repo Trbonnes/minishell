@@ -6,11 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 16:47:53 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 14:28:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 16:04:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
+
+extern int		g_last_return_value;
 
 int		is_env_var(char c)
 {
@@ -31,6 +33,7 @@ void	display_error_env(int builtin, char *param_str)
 	write(1, ": ", 2);
 	ft_putstr(param_str);
 	write(1, ": no such file or directory\n", 29);
+	g_last_return_value = 1;
 }
 
 void	ft_check_split(char **split)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 07:03:52 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 15:59:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 	}
 	cpy = save;
 	ft_clear_cpy(cpy);
+	if (g_last_return_value == 1)
+		return (1);
 	return (0);
 }
 
