@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 15:46:44 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 16:03:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 16:28:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ int		param_refull(t_parsing *alk, char **split, bool *is_error)
 	int j;
 	int k;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	free(alk->param);
-	while (split[i])
-	{
+	while (split[++i])
 		if (!is_error[i])
 		{
 			k = -1;
@@ -38,8 +37,6 @@ int		param_refull(t_parsing *alk, char **split, bool *is_error)
 		}
 		else
 			display_error_env(alk->builtin_detected, split[i]);
-		i++;
-	}
 	if (!(alk->param = malloc(sizeof(char *) * j + 1)))
 		return (-1);
 	return (param_refull_k(alk, split, is_error));
