@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 22:54:48 by trostan           #+#    #+#             */
-/*   Updated: 2020/04/28 03:07:09 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 04:28:25 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,26 @@ void	ft_unset_multiple(char *uns)
 		tmp_free->next = g_env_list->next;
 		ft_envdelone(g_env_list);
 	}
+}
+
+char	**check_param_env(t_parsing *alk)
+{
+	char	**strings;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	strings = ft_split_export(alk->param);
+	while (strings[i])
+		i++;
+	while (j < i)
+	{
+		ft_unquote(&strings[j], 2);
+		j++;
+	}
+	j = 0;
+	while (j < i)
+		j++;
+	return (strings);
 }

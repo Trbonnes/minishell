@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 03:05:21 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 04:29:58 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int					ft_cd(t_parsing *alk);
 int					ft_echo(t_parsing *alk, t_fd *fd);
 int					ft_pwd(t_fd *fd);
 void				ft_exit(t_parsing *alk);
-int					ft_env_display(t_fd *fd);
+int					ft_env_display(t_fd *fd, t_parsing *alk);
 int					ft_export(t_fd *fd, t_parsing *alk);
 int					ft_unset(t_parsing *alk);
 int					find_fd(t_parsing *alk, char **env);
@@ -172,4 +172,5 @@ void				ft_export_multi(t_parsing *alk);
 void				ft_same_export(char *exp);
 void				ft_clear_cpy(t_env *lst);
 void				ft_unset_multiple(char *uns);
+char				**check_param_env(t_parsing *alk);
 #endif

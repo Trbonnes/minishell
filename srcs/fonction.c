@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/21 15:22:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 04:53:48 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 extern int		g_last_return_value;
 extern t_env *g_env_list;
 
-int		ft_env_display(t_fd *fd)
+int		ft_env_display(t_fd *fd, t_parsing *alk)
 {
 	t_env	*save;
 	int		len;
-
+	char	**string;
+	
 	save = g_env_list;
+	if (alk->param[0] != '\0')
+		string = check_param_env(alk);
 	while (g_env_list)
 	{
 		len = ft_strlen(g_env_list->ref);
@@ -30,6 +33,16 @@ int		ft_env_display(t_fd *fd)
 			write(fd->out, "\n", 1);
 		}
 		g_env_list = g_env_list->next;
+	}
+	if (alk->param[0] != '\0')
+	{
+		len = 0;
+		while (string[len])
+		{
+			write(fd->out, string[len], ft_strlen(string[len]));
+			write(fd->out, "\n", 1);
+			len++;
+		}
 	}
 	g_env_list = save;
 	return (0);

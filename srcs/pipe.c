@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/21 15:39:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 03:20:28 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	list_builtin(t_parsing *alk, t_fd *fd)
 	if (alk->builtin_detected == 1)
 		g_last_return_value = ft_echo(alk, fd);
 	if (alk->builtin_detected == 2)
-		g_last_return_value = ft_env_display(fd);
+		g_last_return_value = ft_env_display(fd, alk);
 	if (alk->builtin_detected == 3)
 		ft_exit(alk);
 	if (alk->builtin_detected == 4)
