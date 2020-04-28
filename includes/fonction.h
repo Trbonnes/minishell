@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 04:29:58 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 04:58:31 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,4 +173,5 @@ void				ft_same_export(char *exp);
 void				ft_clear_cpy(t_env *lst);
 void				ft_unset_multiple(char *uns);
 char				**check_param_env(t_parsing *alk);
+void				env_multiple(char **string, t_fd *fd);
 #endif

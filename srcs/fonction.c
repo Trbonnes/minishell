@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 04:53:48 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 04:58:06 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_env_display(t_fd *fd, t_parsing *alk)
 	t_env	*save;
 	int		len;
 	char	**string;
-	
+
 	save = g_env_list;
 	if (alk->param[0] != '\0')
 		string = check_param_env(alk);
@@ -35,15 +35,7 @@ int		ft_env_display(t_fd *fd, t_parsing *alk)
 		g_env_list = g_env_list->next;
 	}
 	if (alk->param[0] != '\0')
-	{
-		len = 0;
-		while (string[len])
-		{
-			write(fd->out, string[len], ft_strlen(string[len]));
-			write(fd->out, "\n", 1);
-			len++;
-		}
-	}
+		env_multiple(string, fd);
 	g_env_list = save;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 22:54:48 by trostan           #+#    #+#             */
-/*   Updated: 2020/04/28 04:28:25 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 04:59:12 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,17 @@ char	**check_param_env(t_parsing *alk)
 	while (j < i)
 		j++;
 	return (strings);
+}
+
+void	env_multiple(char **string, t_fd *fd)
+{
+	int i;
+
+	i = 0;
+	while (string[i])
+	{
+		write(fd->out, string[i], ft_strlen(string[i]));
+		write(fd->out, "\n", 1);
+		i++;
+	}
 }
