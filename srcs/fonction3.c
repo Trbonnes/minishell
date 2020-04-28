@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 22:54:48 by trostan           #+#    #+#             */
-/*   Updated: 2020/04/28 04:59:12 by trostan          ###   ########.fr       */
+/*   Updated: 2020/04/28 14:28:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,8 @@ void	env_multiple(char **string, t_fd *fd)
 		write(fd->out, "\n", 1);
 		i++;
 	}
+	i = 0;
+	while (string[i])
+		free(string[i++]);
+	free(string);
 }
