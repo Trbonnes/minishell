@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/29 14:31:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/29 14:34:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,13 @@ char		*ft_path_cpy(char *env_path, int i, char *cmd)
 
 char		*path_finding(int i, t_parsing *parser, t_env *search)
 {
+	int			k;
 	char		*path;
 	struct stat	buf;
 
-	if (parser->executable[0] == '/')
+	k = -1;
+	while (parser->executable[++k])
+		if (parser->executable[k] == '/')
 		return (path = ft_strdup(parser->executable));
 	else if (!search)
 		return (NULL);
