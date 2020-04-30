@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/15 17:27:19 by trombone         ###   ########.fr       */
+/*   Updated: 2020/04/30 14:25:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,10 @@ char	*ft_parser_param(char *str)
 			j += k;
 			i += k;
 		}
-		else
-		{
+		else if (++i)
 			j++;
-			i++;
-		}
-	if ((str[i] == ';' || str[i] == '|') && str[i - 1] == ' ' && j != 0)
+	if (i != 0 && (str[i] == ';' || str[i] == '|')
+	&& str[i - 1] == ' ' && j != 0)
 		parsed[j - 1] = '\0';
 	parsed[j] = '\0';
 	return (ft_dollar_env(parsed));
