@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trdella- <trdella-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 15:54:45 by trdella-          #+#    #+#             */
-/*   Updated: 2020/02/17 06:44:37 by trdella-         ###   ########.fr       */
+/*   Updated: 2020/05/01 04:05:03 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
 extern t_env	*g_env_list;
+
+int		ft_cd_2(char *save, t_parsing *alk)
+{
+	int i;
+
+	i = 1;
+	getcwd(save, 1024);
+	alk->param = ft_no_space(alk->param);
+	if (alk->param[0] == '\0' || alk->param[0] == '~')
+		i = 0;
+	if (alk->param[0] == '\0' || alk->param[0] == '~')
+		alk->param[0] = '\0';
+	return (i);
+}
 
 char	*ft_find_home(void)
 {

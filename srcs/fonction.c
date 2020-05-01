@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 04:58:06 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/01 04:04:50 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,31 @@ int		ft_echo(t_parsing *alk, t_fd *fd)
 
 int		ft_cd(t_parsing *alk)
 {
-	int		ret;
+	int			i;
+	t_parsing	test;
+	char		**cmd;
+	char		*save;
 
 	if (!alk->param)
 		return (1);
-	alk->param = ft_no_space(alk->param);
-	if (alk->param[0] == '.' && alk->param[1] == '.')
-		ft_up_directory(alk);
-	if (alk->param[0] == '\0' || alk->param[0] == '~')
-		ft_home(alk);
-	if ((ret = chdir(alk->param)) == -1)
+	save = malloc(sizeof(char) * 1024);
+	i = ft_cd_2(save, alk);
+	cmd = ft_split(alk->param, '/', "");
+	while (cmd[i])
 	{
-		write(1, "minishell: ", 11);
-		ft_putstr(alk->param);
-		write(1, ": is not a directory or does not exist\n", 39);
-		ret = 1;
+		test.param = ft_strdup(cmd[i]);
+		if (ft_cd_multi(&test) == -1)
+		{
+			free(test.param);
+			chdir(save);
+			free(save);
+			return (ft_free_params(cmd, 1));
+		}
+		free(test.param);
+		i++;
 	}
-	return (ret);
+	free(save);
+	return (ft_free_params(cmd, 0));
 }
 
 int		ft_pwd(t_fd *fd)
