@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:17:38 by trdella-          #+#    #+#             */
-/*   Updated: 2020/03/14 21:19:51 by trombone         ###   ########.fr       */
+/*   Updated: 2020/05/01 14:53:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,16 @@ int		strlen_word_file(char *str)
 	i = 0;
 	while (str[i] != ' ' && str[i] != ';' && str[i] != '<'
 	&& str[i] != '>' && str[i] != '!' && str[i] != '\0')
-		i++;
+	{
+		if (str[i] == '\'')
+			while (str[++i] && str[i] != '\'')
+				;
+		else if (str[i] == '"')
+			while (str[++i] && str[i] != '"')
+				;
+		else if (str[i])
+			i++;
+	}
 	return (i);
 }
 
