@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/30 14:25:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/02 12:32:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_parser_full_quote(char c, char *str, char *parsed)
 		i++;
 	}
 	parsed[i] = str[i];
-	if (str[i] == '\"')
+	if (str[i] == '\"' || str[i] == '\'')
 		i++;
 	return (i);
 }
