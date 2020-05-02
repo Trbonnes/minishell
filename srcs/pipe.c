@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 16:42:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/02 13:48:15 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_pipe(t_parsing *alk, t_fd *fd, char **env)
 			else
 				ft_pid_back(&jul, ft_newelem(g_pid));
 		}
-		else
+		else if (alk->builtin_detected != 0)
 			builtin_exec(alk, fd, env);
 		if (fd->index)
 			close(fd->last_pipe[0]);
