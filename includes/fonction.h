@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/01 03:58:10 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/03 11:42:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,4 +177,5 @@ void				env_multiple(char **string, t_fd *fd);
 int					ft_cd_multi(t_parsing *alk);
 int					ft_free_tab(char **tabl);
 int					ft_cd_2(char *save, t_parsing *alk);
+int					ft_syntax_error_comma(char *str);
 #endif

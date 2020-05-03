@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/03 11:29:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:42:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,7 @@ int			ft_detect_builtin(char **env)
 	if (ft_str_check(str) == -1)
 		return (0);
 	if (str[0] == ';')
-	{
-		g_last_return_value = 2;
-		write(2, "syntax error near unexpected token ;\n", 37);
-		free(str);
-		return (1);
-	}
+		return (ft_syntax_error_comma(str));
 	if (str[i] != '|')
 	{
 		if ((i = ft_str_loop(env, i, str)) == -1)

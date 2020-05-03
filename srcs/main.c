@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/18 14:14:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:43:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 int		g_last_return_value = 0;
 t_env	*g_env_list = (t_env *) { 0 };
 pid_t	g_pid = 1;
+
+int		ft_syntax_error_comma(char *str)
+{
+	g_last_return_value = 2;
+	write(2, "syntax error near unexpected token ;\n", 37);
+	free(str);
+	return (1);
+}
 
 void	sigint_handler(int sig)
 {

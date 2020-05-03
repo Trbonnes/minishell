@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 15:15:17 by user42            #+#    #+#             */
-/*   Updated: 2020/05/03 10:15:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:31:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			quote_executable_double(char **str, int i)
 void		ft_quote_executable(char **str)
 {
 	int i;
-	
+
 	i = 0;
 	while (str[0][i])
 	{

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/03 11:17:34 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:31:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char		*ft_parser_cmd(char *str)
 		if (str[i] == '\'')
 			while (++j && str[++i] && str[i] != '\'')
 				;
-		else if(str[i] == '"')
+		else if (str[i] == '"')
 			while (++j && str[++i] && str[i] != '"')
 				;
 		else if (str[i] && ++i)
