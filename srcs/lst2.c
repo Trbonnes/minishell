@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 19:32:24 by user42            #+#    #+#             */
-/*   Updated: 2020/05/01 03:39:59 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/03 11:59:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,31 @@ t_env	*lst_cpy(void)
 	g_env_list = save;
 	lst = tmp;
 	return (lst);
+}
+
+char	*ft_parser_cmd_full(char *str, char *parsed, int i, int j)
+{
+	i = i - j;
+	j = 0;
+	while (str[i] && str[i] != ' ' && str[i] != ';'
+	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
+	{
+		if (str[i] == '\'')
+		{
+			parsed[j++] = str[i++];
+			while (str[i] && str[i] != '\'')
+				parsed[j++] = str[i++];
+		}
+		if (str[i] == '"')
+		{
+			parsed[j++] = str[i++];
+			while (str[i] && str[i] != '"')
+				parsed[j++] = str[i++];
+		}
+		if (str[i])
+			parsed[j++] = str[i++];
+	}
+	parsed[j] = '\0';
+	ft_unquote(&parsed, 0);
+	return (parsed);
 }

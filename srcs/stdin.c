@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/03 11:31:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:58:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,7 @@ char		*ft_parser_cmd(char *str)
 	}
 	if (!(parsed = malloc(sizeof(char) * j + 1)))
 		return (NULL);
-	i = i - j;
-	j = 0;
-	while (str[i] && str[i] != ' ' && str[i] != ';'
-	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
-	{
-		if (str[i] == '\'')
-		{
-			parsed[j++] = str[i++];
-			while (str[i] && str[i] != '\'')
-				parsed[j++] = str[i++];
-		}
-		if (str[i] == '"')
-		{
-			parsed[j++] = str[i++];
-			while (str[i] && str[i] != '"')
-				parsed[j++] = str[i++];
-		}
-		if (str[i])
-			parsed[j++] = str[i++];
-	}
-	parsed[j] = '\0';
-	ft_unquote(&parsed, 0);
-	return (parsed);
+	return (ft_parser_cmd_full(str, parsed, i, j));
 }
 
 int			ft_option(char *str, t_parsing *parser, int i)
