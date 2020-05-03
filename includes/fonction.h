@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/03 11:58:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 18:20:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,4 +179,8 @@ int					ft_free_tab(char **tabl);
 int					ft_cd_2(char *save, t_parsing *alk);
 int					ft_syntax_error_comma(char *str);
 char				*ft_parser_cmd_full(char *str, char *parsed, int i, int j);
+char				*ft_dollar_call_ret(char *parsed, char *env_check);
+char				*ft_replace_env(t_env *search, char *parsed);
+char				*ft_delete_dollar(char *parsed);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 10:39:41 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/18 17:18:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 18:17:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,21 @@ char	*ft_delete_dollar(char *parsed)
 
 char	*ft_dollar_call(char *parsed, char *env_check)
 {
-	char	*parsed_cpy;
-	t_env	*search;
 	int		i;
 	int		j;
+	bool	into_q;
 
 	j = -1;
 	i = 0;
+	into_q = false;
 	while (parsed[++j])
-		if (parsed[j] == '$' && parsed[j + 1] != '\"' && parsed[j + 1] != '\''
-		&& (j == 0 || parsed[j - 1] != '\''))
+	{
+		if (parsed[j] == '\'' && into_q)
+			into_q = false;
+		else if (parsed[j] == '\'' && !into_q)
+			into_q = true;
+		if (parsed[j] == '$' && parsed[j + 1] != '\0'
+		&& !into_q)
 		{
 			j++;
 			while (parsed[j] != ' ' && parsed[j] != '\"'
@@ -107,13 +112,8 @@ char	*ft_dollar_call(char *parsed, char *env_check)
 			env_check[i] = '\0';
 			break ;
 		}
-	search = g_env_list;
-	while (search && ft_strcmp(env_check, search->key) != 0)
-		search = search->next;
-	if (search != NULL && env_check[0] != '\0')
-		return (parsed_cpy = ft_replace_env(search, parsed));
-	else
-		return (parsed_cpy = ft_delete_dollar(parsed));
+	}
+	return (ft_dollar_call_ret(parsed, env_check));
 }
 
 char	*ft_dollar_env(char *parsed)

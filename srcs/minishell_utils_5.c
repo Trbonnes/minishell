@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 13:55:57 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/22 18:22:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 18:17:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,18 @@ int		ft_dollar_env_loop(char *parsed)
 	into_q = false;
 	while (parsed[++j])
 	{
-		if (parsed[j] == '\'' && into_q)
-			into_q = false;
-		else if (parsed[j] == '\'' && !into_q)
-			into_q = true;
-		if (parsed[j] == '$' && parsed[j + 1] != '\0'
-		&& !into_q)
+		into_q = ft_into_quote(parsed, j, into_q);
+		if (parsed[j] == '$' && parsed[j + 1] != '\0' && !into_q)
 		{
 			j++;
-			while (parsed[j] != ' ' && parsed[j] != '$' && parsed[j++])
+			if ((parsed[j] == '"' && (j < 2 || parsed[j - 2] != '"'))
+			|| parsed[j] == '\'')
+				return (1);
+			while (parsed[j] != ' ' && parsed[j] != '$'
+			&& parsed[j] != '"' && parsed[j] != '\'' && parsed[j++])
 				i++;
-			break ;
+			if (i > 0)
+				break ;
 		}
 	}
 	return (i);

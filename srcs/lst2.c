@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 19:32:24 by user42            #+#    #+#             */
-/*   Updated: 2020/05/03 11:59:58 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 18:17:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,18 @@ char	*ft_parser_cmd_full(char *str, char *parsed, int i, int j)
 	parsed[j] = '\0';
 	ft_unquote(&parsed, 0);
 	return (parsed);
+}
+
+char	*ft_dollar_call_ret(char *parsed, char *env_check)
+{
+	t_env	*search;
+	char	*parsed_cpy;
+
+	search = g_env_list;
+	while (search && ft_strcmp(env_check, search->key) != 0)
+		search = search->next;
+	if (search != NULL && env_check[0] != '\0')
+		return (parsed_cpy = ft_replace_env(search, parsed));
+	else
+		return (parsed_cpy = ft_delete_dollar(parsed));
 }
