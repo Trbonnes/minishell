@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/03 11:23:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:29:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,12 @@ int			ft_str_loop(char **env, int i, char *str)
 		parser_init(str, i, &parser, &parser_save);
 		if (str[i] == '|')
 			i++;
-		printf("%d\n", i);
 		i = ft_increment_begin(str, i);
-		printf("%d\n", i);
 		parser->builtin_detected = ft_select_builtin(&parser->param);
 		if (parser->builtin_detected == 7)
 			parser->executable = strdup(parser->param);
 		free(parser->param);
-		printf("%d\n", i);
 		i = ft_increment_option(str, i, parser);
-		printf("%d\n", i);
 		if (ft_parser_get(parser, str, i) == -1)
 			return (-1);
 		i = ft_increment_end(str, i);
