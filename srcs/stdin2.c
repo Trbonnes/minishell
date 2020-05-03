@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/18 15:04:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:23:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,16 @@ int			ft_str_loop(char **env, int i, char *str)
 		parser_init(str, i, &parser, &parser_save);
 		if (str[i] == '|')
 			i++;
+		printf("%d\n", i);
 		i = ft_increment_begin(str, i);
+		printf("%d\n", i);
 		parser->builtin_detected = ft_select_builtin(&parser->param);
 		if (parser->builtin_detected == 7)
 			parser->executable = strdup(parser->param);
 		free(parser->param);
+		printf("%d\n", i);
 		i = ft_increment_option(str, i, parser);
+		printf("%d\n", i);
 		if (ft_parser_get(parser, str, i) == -1)
 			return (-1);
 		i = ft_increment_end(str, i);
@@ -93,6 +97,13 @@ int			ft_detect_builtin(char **env)
 	get_next_line(0, &str);
 	if (ft_str_check(str) == -1)
 		return (0);
+	if (str[0] == ';')
+	{
+		g_last_return_value = 2;
+		write(2, "syntax error near unexpected token ;\n", 37);
+		free(str);
+		return (1);
+	}
 	if (str[i] != '|')
 	{
 		if ((i = ft_str_loop(env, i, str)) == -1)

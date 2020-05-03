@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stdin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trombone <trombone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/04/16 18:43:35 by trombone         ###   ########.fr       */
+/*   Updated: 2020/05/03 11:17:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,41 @@ char		*ft_parser_cmd(char *str)
 	while (str[i] && str[i] == ' ')
 		i++;
 	while (str[i] && str[i] != ' ' && str[i] != ';'
-	&& str[i] != '|' && str[i] != '<' && str[i] != '>' && ++i)
-		j++;
+	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
+	{
+		if (str[i] == '\'')
+			while (++j && str[++i] && str[i] != '\'')
+				;
+		else if(str[i] == '"')
+			while (++j && str[++i] && str[i] != '"')
+				;
+		else if (str[i] && ++i)
+			j++;
+	}
 	if (!(parsed = malloc(sizeof(char) * j + 1)))
 		return (NULL);
 	i = i - j;
 	j = 0;
 	while (str[i] && str[i] != ' ' && str[i] != ';'
 	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
-		parsed[j++] = str[i++];
+	{
+		if (str[i] == '\'')
+		{
+			parsed[j++] = str[i++];
+			while (str[i] && str[i] != '\'')
+				parsed[j++] = str[i++];
+		}
+		if (str[i] == '"')
+		{
+			parsed[j++] = str[i++];
+			while (str[i] && str[i] != '"')
+				parsed[j++] = str[i++];
+		}
+		if (str[i])
+			parsed[j++] = str[i++];
+	}
 	parsed[j] = '\0';
+	ft_unquote(&parsed, 0);
 	return (parsed);
 }
 

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:34:56 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/02 12:35:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:26:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,16 @@ int		ft_increment_begin(char *str, int i)
 		i++;
 	while (str[i] && str[i] != ' ' && str[i] != ';'
 	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
-		i++;
+	{
+		if (str[i] == '\'')
+			while (str[++i] && str[i] != '\'')
+				;
+		else if(str[i] == '"')
+			while (str[++i] && str[i] != '"')
+				;
+		if (str[i])
+			i++;
+	}
 	return (i);
 }
 

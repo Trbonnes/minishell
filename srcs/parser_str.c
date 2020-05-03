@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/02 12:32:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/03 11:19:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*ft_parser_param(char *str)
 	int		j;
 	int		k;
 
+	printf("%s\n", str);
 	if (!(parsed = malloc(sizeof(char) * ft_parser_alloc_calculate(str) + 1)))
 		return (NULL);
 	i = 0;
