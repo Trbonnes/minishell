@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/03 18:20:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/04 14:21:55 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,5 +182,6 @@ char				*ft_parser_cmd_full(char *str, char *parsed, int i, int j);
 char				*ft_dollar_call_ret(char *parsed, char *env_check);
 char				*ft_replace_env(t_env *search, char *parsed);
 char				*ft_delete_dollar(char *parsed);
+int					error_multi_cd(char *save);
 
 #endif

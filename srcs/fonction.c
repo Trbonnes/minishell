@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/04 12:53:24 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/04 14:24:56 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int		ft_cd(t_parsing *alk)
 	if (!alk->param)
 		return (1);
 	save = malloc(sizeof(char) * 1024);
-	i = ft_cd_2(save, alk);
+	if ((i = ft_cd_2(save, alk)) == -2)
+		return (error_multi_cd(save));
 	cmd = ft_split(alk->param, '/', "");
-	while (cmd[i])
+	while (cmd[++i])
 	{
 		test.param = ft_strdup(cmd[i]);
 		if (ft_cd_multi(&test) == -1 || alk->index)
@@ -76,7 +77,6 @@ int		ft_cd(t_parsing *alk)
 			return (ft_free_params(cmd, 1));
 		}
 		free(test.param);
-		i++;
 	}
 	free(save);
 	return (ft_free_params(cmd, 0));
