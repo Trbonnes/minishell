@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 10:10:02 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/18 15:05:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/04 17:24:28 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int		superior(t_parsing *alk, int dbchevron, t_fd *fd)
 	if (fd->out != 1)
 		close(fd->out);
 	if (dbchevron == 0)
-		fd->out = open(fd_open, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU);
+		fd->out = open(fd_open, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	else
-		fd->out = open(fd_open, O_WRONLY | O_APPEND | O_CREAT, S_IRWXU);
+		fd->out = open(fd_open, O_WRONLY | O_APPEND | O_CREAT, 0666);
 	free(fd_open);
 	if (fd->out == -1)
 	{
