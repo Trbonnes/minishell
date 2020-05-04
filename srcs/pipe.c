@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/03 11:12:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/04 12:55:59 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int		g_status;
 
 void	ft_close_redirect_pipe(t_parsing *alk, t_fd *fd)
 {
+	alk->index = 1;
 	fd->last_pipe[0] = fd->pipe[0];
 	fd->last_pipe[1] = fd->pipe[1];
 	if (alk->next)
@@ -79,7 +80,7 @@ int		ft_pipe(t_parsing *alk, t_fd *fd, char **env)
 			else
 				ft_pid_back(&jul, ft_newelem(g_pid));
 		}
-		else if (alk->builtin_detected != 0)
+		else
 			builtin_exec(alk, fd, env);
 		if (fd->index)
 			close(fd->last_pipe[0]);

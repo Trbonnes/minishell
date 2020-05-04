@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/02 13:45:08 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/04 12:53:24 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		ft_cd(t_parsing *alk)
 	while (cmd[i])
 	{
 		test.param = ft_strdup(cmd[i]);
-		if (ft_cd_multi(&test) == -1)
+		if (ft_cd_multi(&test) == -1 || alk->index)
 		{
 			free(test.param);
 			chdir(save);
