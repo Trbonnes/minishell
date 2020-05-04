@@ -3,16 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   lst2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 19:32:24 by user42            #+#    #+#             */
-/*   Updated: 2020/05/03 18:17:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/04 16:24:38 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fonction.h"
 
 extern t_env *g_env_list;
+
+int		cd_cd(t_parsing *alk)
+{
+	char **param;
+
+	param = ft_split(alk->param, '\'', "");
+	if (param[1] == 0)
+		;
+	else if (param[1][0] == 26)
+		return (ft_free_params(param, -1));
+	else if (param[2] != 0)
+		return (ft_free_params(param, error_multi_cd()));
+	if (param[1] != 0)
+	{
+		free(alk->param);
+		alk->param = ft_strdup(param[1]);
+	}
+	ft_free_params(param, 0);
+	return (0);
+}
 
 void	ft_clear_cpy(t_env *lst)
 {
