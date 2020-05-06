@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/04 16:19:24 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/06 10:58:49 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,5 +184,6 @@ char				*ft_replace_env(t_env *search, char *parsed);
 char				*ft_delete_dollar(char *parsed);
 int					error_multi_cd(void);
 int					cd_cd(t_parsing *alk);
+void				ft_change_pwd();
 
 #endif
