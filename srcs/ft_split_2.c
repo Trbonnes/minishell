@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:04:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/06 11:18:48 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/06 11:24:19 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_env	*g_env_list;
 
-char	*ft_strdupcat(char *s1, char *s2)
+char		*ft_strdupcat(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -39,11 +39,10 @@ char	*ft_strdupcat(char *s1, char *s2)
 		j++;
 	}
 	str[i + j] = '\0';
-
 	return (str);
 }
 
-void	ft_change_pwd(void)
+void		ft_change_pwd(void)
 {
 	t_env	*save;
 	t_env	*old;
@@ -58,7 +57,7 @@ void	ft_change_pwd(void)
 	pwd = ft_substr(old->ref, 4, ft_strlen(old->ref) - 4);
 	while ((ft_strcmp(g_env_list->key, "OLDPWD") != 0))
 		g_env_list = g_env_list->next;
-	free (g_env_list->ref);
+	free(g_env_list->ref);
 	g_env_list->ref = ft_strdupcat("OLDPWD", pwd);
 	free(old->ref);
 	old->ref = ft_strdupcat("PWD", new);

@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/06 11:03:11 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/06 11:21:26 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	list_builtin(t_parsing *alk, t_fd *fd)
 	if (error_message_builtin(alk) == -1)
 		return ;
 	if (alk->builtin_detected == 0)
+	{
 		g_last_return_value = ft_cd(alk);
+		ft_change_pwd();
+	}
 	if (alk->builtin_detected == 1)
 		g_last_return_value = ft_echo(alk, fd);
 	if (alk->builtin_detected == 2)
@@ -60,7 +63,6 @@ void	list_builtin(t_parsing *alk, t_fd *fd)
 		g_last_return_value = ft_pwd(fd);
 	if (alk->builtin_detected == 6)
 		g_last_return_value = ft_unset(alk);
-	ft_change_pwd();
 }
 
 int		ft_pipe(t_parsing *alk, t_fd *fd, char **env)
