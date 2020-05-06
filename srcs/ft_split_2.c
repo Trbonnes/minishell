@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 13:04:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/06 11:17:43 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/06 11:18:48 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	ft_change_pwd(void)
 		g_env_list = g_env_list->next;
 	free (g_env_list->ref);
 	g_env_list->ref = ft_strdupcat("OLDPWD", pwd);
-	printf("new = %s\n", new);
 	free(old->ref);
 	old->ref = ft_strdupcat("PWD", new);
 	g_env_list = save;
