@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/09 14:49:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 15:13:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 int		g_last_return_value = 0;
 t_env	*g_env_list = (t_env *) { 0 };
 pid_t	g_pid = 1;
+
+int		ft_print_syntax_error(char *str, int i)
+{
+	g_last_return_value = 2;
+	write(2, "syntax error near unexpected token ", 35);
+	write(2, &str[i], 1);
+	write(2, "\n", 1);
+	free(str);
+	return (1);
+}
 
 int		ft_syntax_error_comma(char *str)
 {
@@ -32,14 +42,7 @@ int		ft_syntax_error_comma(char *str)
 			i++;
 		}
 		if (str[i] && detected == false)
-		{
-			g_last_return_value = 2;
-			write(2, "syntax error near unexpected token ", 35);
-			write(2, &str[i], 1);
-			write(2, "\n", 1);
-			free(str);
-			return (1);
-		}
+			return (ft_print_syntax_error(str, i));
 		else if (str[i])
 			i++;
 	}

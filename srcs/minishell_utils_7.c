@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 14:07:53 by user42            #+#    #+#             */
-/*   Updated: 2020/05/09 14:55:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 15:02:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	ft_isalpha(int c)
 
 int	ft_clear_spaces(char *str, int i)
 {
-	if (str[i] != ' ' && str[i] != '	' )
+	if (str[i] != ' ' && str[i] != '	')
 		return (1);
-	if  (str[i] == ' ' && str[i + 1] && str[i + 1] != ' '
+	if (str[i] == ' ' && str[i + 1] && str[i + 1] != ' '
 	&& str[i + 1] != '	' && str[i + 1] != ';' && str[i + 1] != '|')
 		return (1);
 	if (str[i] == '	' && str[i + 1] && str[i + 1] != '	'
