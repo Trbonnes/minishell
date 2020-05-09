@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 19:32:24 by user42            #+#    #+#             */
-/*   Updated: 2020/05/09 12:03:13 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/09 12:14:47 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_env	*lst_cpy(void)
 	while (g_env_list)
 	{
 		lst->key = ft_strdup(g_env_list->key);
-		printf("lst->key = {%s}\n", lst->key);
 		lst->ref = ft_strdup(g_env_list->ref);
 		if (g_env_list->next)
 		{
