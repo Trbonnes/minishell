@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/04/28 16:47:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 11:40:58 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		ft_export(t_fd *fd, t_parsing *alk)
 
 	cpy = lst_cpy();
 	save = cpy;
+	printf("par = {%s}\n", alk->param);
 	ft_export_multi(alk);
 	if (alk->param[0] == '\0')
 	{
