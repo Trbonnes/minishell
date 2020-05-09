@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/03 11:43:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 14:45:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,32 @@ pid_t	g_pid = 1;
 
 int		ft_syntax_error_comma(char *str)
 {
-	g_last_return_value = 2;
-	write(2, "syntax error near unexpected token ;\n", 37);
-	free(str);
-	return (1);
+	int		i;
+	bool	detected;
+
+	i = 0;
+	while (str[i])
+	{
+		detected = false;
+		while (str[i] && str[i] != ';' && str[i] != '|')
+		{
+			if (str[i] != ' ' && str[i] != '	')
+			detected = true;
+			i++;
+		}
+		if (str[i] && detected == false)
+		{
+			g_last_return_value = 2;
+			write(2, "syntax error near unexpected token ", 35);
+			write(2, &str[i], 1);
+			write(2, "\n", 1);
+			free(str);
+			return (1);
+		}
+		else if (str[i])
+			i++;
+	}
+	return (0);
 }
 
 void	sigint_handler(int sig)

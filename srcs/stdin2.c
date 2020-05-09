@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/03 15:11:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 14:45:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int			ft_detect_builtin(char **env)
 	get_next_line(0, &str);
 	if (ft_str_check(str) == -1)
 		return (0);
-	if (str[0] == ';')
-		return (ft_syntax_error_comma(str));
+	if (ft_syntax_error_comma(str) == 1)
+		return (1);
 	if (str[i] != '|')
 	{
 		if ((i = ft_str_loop(env, i, str)) == -1)
