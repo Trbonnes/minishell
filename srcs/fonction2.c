@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/09 12:15:39 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/09 13:35:30 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,17 @@ void	ft_same_export(char *exp)
 
 	i = 0;
 	key = (t_parsing){ 0 };
-	while (exp && exp[i] != '=' && exp[0])
+	while (exp && exp[i] && exp[i] != '=' && exp[0])
 		i++;
-	if (exp[i])
+	if (!(key.param = malloc(sizeof(char) * (i + 1))))
+		return ;
+	i = 0;
+	while (exp && exp[i] && exp[i] != '=')
 	{
-		if (!(key.param = malloc(sizeof(char) * (i + 1))))
-			return ;
-		i = 0;
-		while (exp && exp[i] != '=')
-		{
-			key.param[i] = exp[i];
-			i++;
-		}
-		key.param[i] = '\0';
+		key.param[i] = exp[i];
+		i++;
 	}
+	key.param[i] = '\0';
 	save = g_env_list;
 	ft_export_norme(save, &key);
 }

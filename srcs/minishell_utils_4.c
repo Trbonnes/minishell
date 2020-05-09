@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:28:13 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/09 12:15:20 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/09 13:37:17 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,18 @@ void	ft_export_loop(t_fd *fd, t_env *lst)
 	len = 0;
 	if (lst->ref[0] != '\0')
 	{
-		while (lst->ref[len] != '=')
+		while (lst->ref[len] != '=' && lst->ref[len])
 			len++;
 		len++;
 		write(fd->out, "declare -x ", 11);
 		write(fd->out, lst->key, len - 1);
-		write(fd->out, "=\"", 2);
-		write(fd->out, lst->ref + len, ft_strlen(lst->ref) - len);
-		write(fd->out, "\"\n", 2);
+		if (ft_strcmp(lst->ref, lst->key) != 0)
+		{
+			write(fd->out, "=\"", 2);
+			write(fd->out, lst->ref + len, ft_strlen(lst->ref) - len);
+			write(fd->out, "\"", 1);
+		}
+		write(fd->out, "\n", 1);
 	}
 }
 

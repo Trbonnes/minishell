@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/09 12:41:34 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/09 13:15:34 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		ft_env_display(t_fd *fd, t_parsing *alk)
 	while (g_env_list)
 	{
 		len = ft_strlen(g_env_list->ref);
-		if (g_env_list->ref[0] != '\0')
+		if (g_env_list->ref[0] != '\0' &&
+		ft_strcmp(g_env_list->key, g_env_list->ref) != 0)
 		{
 			write(fd->out, g_env_list->ref, len);
 			write(fd->out, "\n", 1);
