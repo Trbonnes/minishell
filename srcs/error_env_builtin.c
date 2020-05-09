@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 15:46:44 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 16:43:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 12:13:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		param_refull(t_parsing *alk, char **split, bool *is_error)
 {
 	int i;
 	int j;
-	int k;
+	// int k;
 
 	i = -1;
 	j = 0;
@@ -26,14 +26,14 @@ int		param_refull(t_parsing *alk, char **split, bool *is_error)
 	while (split[++i])
 		if (!is_error[i])
 		{
-			k = -1;
-			while (k != -99 && split[i][++k])
-				if (alk->builtin_detected == 6 || split[i][k] == '=')
-					k = -99;
-			if (k == -99)
+			// k = -1;
+			// while (k != -99 && split[i][++k])
+			// 	if (alk->builtin_detected == 6 || split[i][k] == '=')
+			// 		k = -99;
+			// if (k == -99)
 				j += ft_strlen(split[i]);
-			else
-				is_error[i] = true;
+			// else
+			// 	is_error[i] = true;
 		}
 		else
 			display_error_env(alk->builtin_detected, split[i]);
@@ -53,7 +53,10 @@ void	check_error_export_loop(char **split, bool *is_error, t_parsing *alk)
 		j = 0;
 		while (split[i][j] && split[i][j] != '=')
 			if (!is_env_var(split[i][j++]))
+			{
+				printf("lolilol\n");
 				is_error[i] = true;
+			}
 		if (split[i][j] && j != 0)
 			j++;
 		else if (alk->builtin_detected == 4 && split[i][j] == '=')
@@ -120,6 +123,7 @@ int		check_error_unset(t_parsing *alk)
 int		error_message_builtin(t_parsing *alk)
 {
 	char	**split;
+	int		i = 0;
 
 	g_last_return_value = 0;
 	if (alk->builtin_detected == 2 && alk->param[0] != '\0')
@@ -130,6 +134,8 @@ int		error_message_builtin(t_parsing *alk)
 	if (alk->builtin_detected == 4 && alk->param[0] != '\0')
 	{
 		split = ft_split_export(alk->param);
+		while (split[i])
+			printf("%s\n", split[i++]);
 		return (check_error_export(alk, split));
 	}
 	if (alk->builtin_detected == 6 && alk->param[0] != '\0')
