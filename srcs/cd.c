@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 15:54:45 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/04 16:22:39 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/09 12:35:59 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		ft_cd_2(char *save, t_parsing *alk)
 		i = 0;
 	if (alk->param[0] == '\0' || alk->param[0] == '~')
 		alk->param[0] = '\0';
+	if (alk->param[0] == '/')
+		i = 0;
 	return (i - 1);
 }
 
