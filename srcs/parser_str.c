@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/09 13:47:13 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 14:30:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_parser_alloc_calculate(char *str)
 			i += k;
 			j += k;
 		}
-		else if ((str[i] != ' ' && str[i] != '	' ) || ((str[i] == ' ' && str[i + 1] && str[i + 1] != ' ')))
+		else if (ft_clear_spaces(str, i))
 		{
 			i++;
 			j++;
@@ -110,7 +110,7 @@ char	*ft_parser_param(char *str)
 			j += k;
 			i += k;
 		}
-		else if ((str[i] != ' ' && str[i] != '	' ) || ((str[i] == ' ' && str[i + 1] && str[i + 1] != ' ')))
+		else if (ft_clear_spaces(str, i))
 			parsed[j++] = str[i++];
 		else
 			i++;

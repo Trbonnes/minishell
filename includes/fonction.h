@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/09 14:08:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 14:29:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,6 @@ int					error_multi_cd(void);
 int					cd_cd(t_parsing *alk);
 void				ft_change_pwd();
 int					ft_isalpha(int c);
+int					ft_clear_spaces(char *str, int i);
 
 #endif
