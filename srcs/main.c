@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/09 14:45:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 14:49:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_syntax_error_comma(char *str)
 		while (str[i] && str[i] != ';' && str[i] != '|')
 		{
 			if (str[i] != ' ' && str[i] != '	')
-			detected = true;
+				detected = true;
 			i++;
 		}
 		if (str[i] && detected == false)
