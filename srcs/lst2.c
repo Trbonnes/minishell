@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 19:32:24 by user42            #+#    #+#             */
-/*   Updated: 2020/05/09 12:14:47 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/09 13:56:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_parser_cmd_full(char *str, char *parsed, int i, int j)
 {
 	i = i - j;
 	j = 0;
-	while (str[i] && str[i] != ' ' && str[i] != ';'
+	while (str[i] && str[i] != ' ' && str[i] != '	' && str[i] != ';'
 	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
 	{
 		if (str[i] == '\'')

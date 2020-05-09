@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/03 11:58:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/09 14:10:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ char		*ft_parser_cmd(char *str)
 
 	j = 0;
 	i = 0;
-	while (str[i] && str[i] == ' ')
+	while (str[i] && (str[i] == ' ' || str[i] == '	'))
 		i++;
-	while (str[i] && str[i] != ' ' && str[i] != ';'
+	while (str[i] && str[i] != ' ' && str[i] != '	' && str[i] != ';'
 	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
 	{
 		if (str[i] == '\'')
@@ -81,11 +81,12 @@ char		*ft_parser_cmd(char *str)
 
 int			ft_option(char *str, t_parsing *parser, int i)
 {
-	if (parser->builtin_detected != 1 && parser->builtin_detected != 7)
+	if (parser->builtin_detected != 1 && parser->builtin_detected != 7 && ft_isalpha(str[i + 1]))
 	{
 		write(2, "minishell: ", 11);
 		write(2, &str[i], 1);
-		write(2, &str[++i], 1);
+		while (str[++i] && ft_isalpha(str[i]))
+			write(2, &str[i], 1);
 		write(2, ": invalid option\n", 17);
 		g_last_return_value = 1;
 		parser->builtin_detected = 8;

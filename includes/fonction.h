@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/06 10:58:49 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/09 14:08:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,6 @@ char				*ft_delete_dollar(char *parsed);
 int					error_multi_cd(void);
 int					cd_cd(t_parsing *alk);
 void				ft_change_pwd();
+int					ft_isalpha(int c);
 
 #endif
