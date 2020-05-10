@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:36:14 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/10 12:42:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/10 14:29:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,16 @@ char	*ft_parser_redirection(char **builtin_str, int builtin_detected)
 {
 	int		i;
 	int		j;
-	int		quote;
+	int		q;
 	char	*redirection_str;
 
 	i = -1;
 	redirection_str = NULL;
-	quote = 0;
+	q = 0;
 	while (builtin_str[0][++i])
 	{
-		quote = ft_quote_check(builtin_str[0][i], quote);
-		if ((builtin_str[0][i] == '<' || builtin_str[0][i] == '>')
-		&& quote == 0)
+		q = ft_quote_check(builtin_str[0][i], q);
+		if ((builtin_str[0][i] == '<' || builtin_str[0][i] == '>') && q == 0)
 		{
 			j = ft_redirection_setup(builtin_str[0] + i, &redirection_str);
 			builtin_str[0] = ft_realloc_param_str(i, j, builtin_str[0]);

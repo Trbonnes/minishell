@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/10 13:09:16 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/10 14:25:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			ft_str_loop(char **env, int i, char *str)
 		if (ft_parser_get(parser, str, i) == -1)
 			return (-1);
 		i = ft_increment_end(str, i);
-		if (str[i] != '|' || str[i - 1] == '\\') 
+		if (str[i] != '|' || str[i - 1] == '\\')
 			if (ft_execute_and_clear(parser, parser_save, env) == -1)
 			{
 				free(str);

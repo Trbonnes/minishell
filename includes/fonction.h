@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/10 13:10:51 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/10 15:20:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,4 +189,9 @@ int					ft_isalpha(int c);
 int					ft_clear_spaces(char *str, int i);
 void				ft_handle_escape_character(char **str);
 void				ft_exit2(char **split);
+int					ft_skip_escape(char *str, int *i, int *j);
+int					ft_parser_param_quote(char *str, char c);
+void				ft_escape_zero(char **str, char *tmp, int *i, int *j);
+void				ft_escape_quote(char **str, char *tmp, int *i, int *j);
+
 #endif

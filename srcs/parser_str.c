@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/10 13:05:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/10 15:05:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ char	*ft_realloc_param_str(int i, int j, char *param_str)
 	return (cpy);
 }
 
-int		ft_parser_param_quote(char *str, char c)
-{
-	int k;
-
-	k = 1;
-	while (str[k] && str[k] != c)
-		k++;
-	return (k);
-}
-
 int		ft_parser_full_quote(char c, char *str, char *parsed)
 {
 	int i;
@@ -73,12 +63,8 @@ int		ft_parser_alloc_calculate(char *str)
 	j = 0;
 	while (str[i] && str[i] != ';' && str[i] != '|')
 	{
-		if (str[i] == '\\' && (str[i + 1] == ';' || str[i + 1] == '|'))
-		{
-			i += 2;
-			j += 2;
-		}
-		else if (str[i] == '\"' || str[i] == '\'')
+		if (ft_skip_escape(str, &i, &j) == 0
+		&& (str[i] == '\"' || str[i] == '\''))
 		{
 			k = ft_parser_param_quote(str + i, str[i]);
 			i += k;
@@ -95,17 +81,11 @@ int		ft_parser_alloc_calculate(char *str)
 	return (j);
 }
 
-char	*ft_parser_param(char *str)
+void	ft_parser_param_loop(char *str, char *parsed, int i, int j)
 {
-	char	*parsed;
-	int		i;
-	int		j;
-	int		k;
+	int k;
 
-	if (!(parsed = malloc(sizeof(char) * ft_parser_alloc_calculate(str) + 1)))
-		return (NULL);
-	i = 0;
-	j = 0;
+	k = 0;
 	while (str[i] && str[i] != ';' && str[i] != '|')
 	{
 		if (str[i] == '\\' && (str[i + 1] == ';' || str[i + 1] == '|'))
@@ -126,5 +106,18 @@ char	*ft_parser_param(char *str)
 			i++;
 	}
 	parsed[j] = '\0';
+}
+
+char	*ft_parser_param(char *str)
+{
+	char	*parsed;
+	int		i;
+	int		j;
+
+	if (!(parsed = malloc(sizeof(char) * ft_parser_alloc_calculate(str) + 1)))
+		return (NULL);
+	i = 0;
+	j = 0;
+	ft_parser_param_loop(str, parsed, i, j);
 	return (ft_dollar_env(parsed));
 }

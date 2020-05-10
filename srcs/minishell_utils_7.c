@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_7.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 14:07:53 by user42            #+#    #+#             */
-/*   Updated: 2020/05/10 11:50:13 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/10 15:05:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,25 @@ int		ft_clear_spaces(char *str, int i)
 	&& str[i + 1] != ' ' && str[i + 1] != ';' && str[i + 1] != '|')
 		return (1);
 	return (0);
+}
+
+int		ft_skip_escape(char *str, int *i, int *j)
+{
+	if (str[i[0]] == '\\' && (str[i[0] + 1] == ';' || str[i[0] + 1] == '|'))
+	{
+		i[0] += 2;
+		j[0] += 2;
+		return (1);
+	}
+	return (0);
+}
+
+int		ft_parser_param_quote(char *str, char c)
+{
+	int k;
+
+	k = 1;
+	while (str[k] && str[k] != c)
+		k++;
+	return (k);
 }

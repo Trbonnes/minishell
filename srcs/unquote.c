@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/12 15:40:16 by trombone          #+#    #+#             */
-/*   Updated: 2020/05/10 12:01:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/10 14:25:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int builtin_detected)
 			copy[j++] = str[i++];
 			copy[j++] = str[i++];
 		}
-		if (builtin_detected == 6 
+		if (builtin_detected == 6
 		&& str[i] && str[i] == 39 && str[i + 1] == 39)
 		{
 			copy[j++] = str[i++];
