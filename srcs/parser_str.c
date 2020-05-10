@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/09 14:55:50 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/10 13:05:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,23 @@ int		ft_parser_alloc_calculate(char *str)
 	j = 0;
 	while (str[i] && str[i] != ';' && str[i] != '|')
 	{
-		if (str[i] == '\"' || str[i] == '\'')
+		if (str[i] == '\\' && (str[i + 1] == ';' || str[i + 1] == '|'))
+		{
+			i += 2;
+			j += 2;
+		}
+		else if (str[i] == '\"' || str[i] == '\'')
 		{
 			k = ft_parser_param_quote(str + i, str[i]);
 			i += k;
 			j += k;
 		}
-		else if (ft_clear_spaces(str, i))
+		else if (str[i] && ft_clear_spaces(str, i))
 		{
 			i++;
 			j++;
 		}
-		else
+		else if (str[i])
 			i++;
 	}
 	return (j);
@@ -103,6 +108,11 @@ char	*ft_parser_param(char *str)
 	j = 0;
 	while (str[i] && str[i] != ';' && str[i] != '|')
 	{
+		if (str[i] == '\\' && (str[i + 1] == ';' || str[i + 1] == '|'))
+		{
+			parsed[j++] = str[i++];
+			parsed[j++] = str[i++];
+		}
 		if (str[i] == '\"' || str[i] == '\'')
 		{
 			parsed[j] = str[i];
@@ -110,9 +120,9 @@ char	*ft_parser_param(char *str)
 			j += k;
 			i += k;
 		}
-		else if (ft_clear_spaces(str, i))
+		else if (str[i] && ft_clear_spaces(str, i))
 			parsed[j++] = str[i++];
-		else
+		else if (str[i])
 			i++;
 	}
 	parsed[j] = '\0';

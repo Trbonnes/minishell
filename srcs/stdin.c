@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/09 15:02:46 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/10 14:07:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int			ft_option(char *str, t_parsing *parser, int i)
 int			parser_init(char *str, int i, t_parsing **parser,
 t_parsing **parser_save)
 {
-	if (str[i] != '|')
+	if (str[i] != '|' || str[i - 1] == '\\')
 	{
 		if (!(parser[0] = malloc(sizeof(t_parsing))))
 			return (-1);

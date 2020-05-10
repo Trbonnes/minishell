@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/10 11:42:23 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/10 13:10:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,6 @@ int					cd_cd(t_parsing *alk);
 void				ft_change_pwd();
 int					ft_isalpha(int c);
 int					ft_clear_spaces(char *str, int i);
+void				ft_handle_escape_character(char **str);
 void				ft_exit2(char **split);
 #endif

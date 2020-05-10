@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:36:14 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/04 14:52:28 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/10 12:42:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	*ft_parser_redirection(char **builtin_str, int builtin_detected)
 		}
 	}
 	ft_redirection_check(&redirection_str);
+	ft_handle_escape_character(builtin_str);
 	if (builtin_detected == 7 || builtin_detected == 0)
 		ft_quote_executable(builtin_str);
 	else if (builtin_detected != 4 && builtin_detected != 2)
