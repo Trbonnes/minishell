@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/09 13:15:34 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/10 11:46:30 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,24 @@ int		ft_pwd(t_fd *fd)
 
 void	ft_exit(t_parsing *alk)
 {
+	int		i;
+	char	**split;
+
+	split = ft_split_libft(alk->param, ' ');
+	i = 0;
 	write(1, "exit\n", 5);
+	ft_exit2(split);
+	i = 0;
+	while (alk->param[i] != 0 && alk->param[i] != ' ')
+		i++;
+	if (alk->param[i] != 0)
+	{
+		ft_putstr("exit : too many arguments\n");
+		g_last_return_value = 1;
+		ft_free_params(split, 0);
+		return ;
+	}
+	i = 0;
+	ft_free_params(split, 0);
 	exit(ft_atoi(alk->param));
 }
