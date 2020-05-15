@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/09 11:48:31 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/15 13:42:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 	{
 		if (ft_executable(alk, env, fd) == -1)
 		{
-			write(2, "minishell: command not found\n", 29);
+			write(2, "minishell: ", 11);
+			write(2, alk->executable, ft_strlen(alk->executable));
+			write(2, ": command not found\n", 20);
 			exit(127);
 			return (-1);
 		}
@@ -122,7 +124,9 @@ int		builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env)
 		if (g_pid == 0)
 			if (ft_executable(alk, env, fd) == -1)
 			{
-				write(2, "minishell: command not found\n", 29);
+				write(2, "minishell: ", 11);
+				write(2, alk->executable, ft_strlen(alk->executable));
+				write(2, ": command not found\n", 20);
 				exit(127);
 				return (-1);
 			}
