@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/15 16:11:00 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/15 17:01:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,15 @@ t_parsing **parser_save)
 		if (!(parser[0]->next = malloc(sizeof(t_parsing))))
 			return (str);
 		parser[0] = parser[0]->next;
-		if (!(str = ft_increment_pipe(str, i)))
+		if (!(str = ft_increment_pipe(str, i)) || ft_syntax_error_comma(str) == 1)
+		{
+			parser[0]->next = NULL;
+			parser[0]->param = NULL;
+			parser[0]->redirection = NULL;
+			parser[0]->executable = NULL;
+			ft_parserclear(parser_save);
 			return (NULL);
-		if (ft_syntax_error_comma(str) == 1)
-			return (NULL);
+		}
 		i++;
 	}
 	parser[0]->echo_option = 0;
