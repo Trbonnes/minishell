@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils_7.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 14:07:53 by user42            #+#    #+#             */
-/*   Updated: 2020/05/15 16:28:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/15 16:34:11 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_exit2(char **split)
 	int i;
 
 	i = 0;
-	if (split[0][0] == 0)
+	if (!split[0])
 		exit(0);
 	while (split[0][i])
 	{
