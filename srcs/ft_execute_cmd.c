@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/03 10:17:58 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/15 14:05:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			ft_executable(t_parsing *parser, char **env, t_fd *fd)
 	if (parser->executable[0] == '.' && parser->executable[1] == '/')
 	{
 		if (ft_selfmade_binary(parser, env, params) == -1)
-			return (ft_free_params(params, -1));
+			return (ft_free_params(params, -2));
 	}
 	else if (ft_path_binary(parser, search, params, env) == -1)
 		return (ft_free_params(params, -1));

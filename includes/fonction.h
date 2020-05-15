@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/10 15:20:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/15 15:45:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int					ft_free_params(char **params, int ret);
 int					ft_selfmade_binary(t_parsing *parser, char **env,
 char **params);
 int					ft_str_check(char *str);
-int					parser_init(char *str, int i, t_parsing **parser,
+char				*parser_init(char *str, int i, t_parsing **parser,
 t_parsing **parser_save);
 int					ft_execute_and_clear(t_parsing *parser,
 t_parsing *parser_save, char **env);
@@ -193,5 +193,6 @@ int					ft_skip_escape(char *str, int *i, int *j);
 int					ft_parser_param_quote(char *str, char c);
 void				ft_escape_zero(char **str, char *tmp, int *i, int *j);
 void				ft_escape_quote(char **str, char *tmp, int *i, int *j);
+char				*ft_increment_pipe(char *str, int i);
 
 #endif

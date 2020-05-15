@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/15 13:34:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/15 16:11:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,24 @@ int			ft_option(char *str, t_parsing *parser, int i)
 	return (i);
 }
 
-int			parser_init(char *str, int i, t_parsing **parser,
+char			*parser_init(char *str, int i, t_parsing **parser,
 t_parsing **parser_save)
 {
 	if (str[i] != '|' || str[i - 1] == '\\')
 	{
 		if (!(parser[0] = malloc(sizeof(t_parsing))))
-			return (-1);
+			return (str);
 		parser_save[0] = parser[0];
 	}
 	else
 	{
 		if (!(parser[0]->next = malloc(sizeof(t_parsing))))
-			return (-1);
+			return (str);
 		parser[0] = parser[0]->next;
+		if (!(str = ft_increment_pipe(str, i)))
+			return (NULL);
+		if (ft_syntax_error_comma(str) == 1)
+			return (NULL);
 		i++;
 	}
 	parser[0]->echo_option = 0;
@@ -124,8 +128,8 @@ t_parsing **parser_save)
 	parser[0]->index = 0;
 	parser[0]->builtin_detected = -1;
 	if ((parser[0]->param = ft_parser_cmd(str + i)) == NULL)
-		return (-1);
-	return (1);
+		return (str);
+	return (str);
 }
 
 int			ft_execute_and_clear(t_parsing *parser,

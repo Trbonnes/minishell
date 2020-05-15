@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/10 14:25:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/15 16:08:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int			ft_str_loop(char **env, int i, char *str)
 
 	while (str[i])
 	{
-		parser_init(str, i, &parser, &parser_save);
+		if (!(str = parser_init(str, i, &parser, &parser_save)))
+			return (1);
 		if (str[i] == '|')
 			i++;
 		i = ft_increment_begin(str, i);
@@ -80,6 +81,7 @@ int			ft_str_loop(char **env, int i, char *str)
 				return (-1);
 			}
 	}
+	free(str);
 	return (i);
 }
 
@@ -97,7 +99,7 @@ int			ft_detect_builtin(char **env)
 		return (1);
 	if (str[i] != '|')
 	{
-		if ((i = ft_str_loop(env, i, str)) == -1)
+		if (ft_str_loop(env, i, str) == -1)
 			return (-1);
 	}
 	else
@@ -105,6 +107,5 @@ int			ft_detect_builtin(char **env)
 		g_last_return_value = 2;
 		write(2, "syntax error near unexpected token |\n", 37);
 	}
-	free(str);
 	return (1);
 }

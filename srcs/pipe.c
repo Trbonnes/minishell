@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/15 13:42:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/15 14:26:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 {
 	if (alk->builtin_detected == 7)
 	{
-		if (ft_executable(alk, env, fd) == -1)
+		if (ft_executable(alk, env, fd) == -1 && g_pid == 0)
 		{
 			write(2, "minishell: ", 11);
 			write(2, alk->executable, ft_strlen(alk->executable));
@@ -116,13 +116,16 @@ int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 
 int		builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env)
 {
+	int r;
+
 	if (alk->builtin_detected == 7)
 	{
 		g_pid = fork();
 		wait(&g_status);
 		g_last_return_value = last_return_setup(g_status);
 		if (g_pid == 0)
-			if (ft_executable(alk, env, fd) == -1)
+		{
+			if ((r = ft_executable(alk, env, fd)) == -1)
 			{
 				write(2, "minishell: ", 11);
 				write(2, alk->executable, ft_strlen(alk->executable));
@@ -130,6 +133,15 @@ int		builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env)
 				exit(127);
 				return (-1);
 			}
+			else if (r == -2)
+			{
+				write(2, "minishell: ", 11);
+				write(2, alk->executable, ft_strlen(alk->executable));
+				write(2, ": No such file or directory\n", 28);
+				exit(127);
+				return (-1);
+			}
+		}
 	}
 	else
 		list_builtin(alk, fd);
