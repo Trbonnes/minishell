@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/15 17:01:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 10:53:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,17 @@ int			ft_option(char *str, t_parsing *parser, int i)
 	return (i);
 }
 
-char			*parser_init(char *str, int i, t_parsing **parser,
+char		*init_pipe_error(t_parsing **parser, t_parsing **parser_save)
+{
+	parser[0]->next = NULL;
+	parser[0]->param = NULL;
+	parser[0]->redirection = NULL;
+	parser[0]->executable = NULL;
+	ft_parserclear(parser_save);
+	return (NULL);
+}
+
+char		*parser_init(char *str, int i, t_parsing **parser,
 t_parsing **parser_save)
 {
 	if (str[i] != '|' || str[i - 1] == '\\')
@@ -116,15 +126,9 @@ t_parsing **parser_save)
 		if (!(parser[0]->next = malloc(sizeof(t_parsing))))
 			return (str);
 		parser[0] = parser[0]->next;
-		if (!(str = ft_increment_pipe(str, i)) || ft_syntax_error_comma(str) == 1)
-		{
-			parser[0]->next = NULL;
-			parser[0]->param = NULL;
-			parser[0]->redirection = NULL;
-			parser[0]->executable = NULL;
-			ft_parserclear(parser_save);
-			return (NULL);
-		}
+		if (!(str = ft_increment_pipe(str, i))
+		|| ft_syntax_error_comma(str) == 1)
+			return (init_pipe_error(parser, parser_save));
 		i++;
 	}
 	parser[0]->echo_option = 0;

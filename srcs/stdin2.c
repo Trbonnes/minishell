@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/15 17:01:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 10:47:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,17 @@ int			ft_str_check(char *str)
 	return (i);
 }
 
+int			execute_and_clear_r(char *str, t_parsing *parser,
+t_parsing *parser_save, char **env)
+{
+	if (ft_execute_and_clear(parser, parser_save, env) == -1)
+	{
+		free(str);
+		return (-1);
+	}
+	return (0);
+}
+
 int			ft_str_loop(char **env, int i, char *str)
 {
 	t_parsing	*parser;
@@ -75,11 +86,8 @@ int			ft_str_loop(char **env, int i, char *str)
 			return (-1);
 		i = ft_increment_end(str, i);
 		if (str[i] != '|' || str[i - 1] == '\\')
-			if (ft_execute_and_clear(parser, parser_save, env) == -1)
-			{
-				free(str);
+			if (execute_and_clear_r(str, parser, parser_save, env) == -1)
 				return (-1);
-			}
 	}
 	free(str);
 	return (i);

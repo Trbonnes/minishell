@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 15:00:30 by user42            #+#    #+#             */
-/*   Updated: 2020/05/15 15:59:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 11:05:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int		g_last_return_value;
 
-char *ft_strcat(char *dest, char *src)
+char		*ft_strcat(char *dest, char *src)
 {
 	int i;
 	int j;
@@ -32,7 +32,7 @@ char *ft_strcat(char *dest, char *src)
 	return (dest);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+char		*ft_strcpy(char *dest, char *src)
 {
 	unsigned int i;
 
@@ -93,7 +93,8 @@ char		*ft_increment_pipe(char *str, int i)
 			free(str);
 			return (NULL);
 		}
-		if (!(tmp = malloc(sizeof(char) * (ft_strlen(str) + ft_strlen(buffer) + 1))))
+		if (!(tmp = malloc(sizeof(char) * (ft_strlen(str)
+		+ ft_strlen(buffer) + 1))))
 			return (str);
 		tmp = ft_strcpy(tmp, str);
 		tmp = ft_strcat(tmp, buffer);
