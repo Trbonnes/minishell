@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/10 15:05:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 16:34:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		ft_parser_alloc_calculate(char *str)
 	while (str[i] && str[i] != ';' && str[i] != '|')
 	{
 		if (ft_skip_escape(str, &i, &j) == 0
-		&& (str[i] == '\"' || str[i] == '\''))
+		&& (str[i] == '\"' || str[i] == '\'') && (i == 0 || str[i - 1] != '\\'))
 		{
 			k = ft_parser_param_quote(str + i, str[i]);
 			i += k;
@@ -93,7 +93,8 @@ void	ft_parser_param_loop(char *str, char *parsed, int i, int j)
 			parsed[j++] = str[i++];
 			parsed[j++] = str[i++];
 		}
-		if (str[i] == '\"' || str[i] == '\'')
+		if ((str[i] == '\"' || str[i] == '\'')
+		&& (i == 0 || str[i - 1] != '\\'))
 		{
 			parsed[j] = str[i];
 			k = ft_parser_full_quote(str[i], str + i, parsed + j);

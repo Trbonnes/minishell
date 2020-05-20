@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:34:56 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/10 14:10:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 16:34:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		ft_increment_end(char *str, int i)
 	{
 		if (str[i] == '\\' && (str[i + 1] == ';' || str[i + 1] == '|'))
 			i += 2;
-		if ((str[i] == '\"' || str[i] == '\'') && str[i + 1])
+		if ((str[i] == '\"' || str[i] == '\'')
+		&& (i == 0 || str[i - 1] != '\\') && str[i + 1])
 			i += ft_parser_param_quote(str + i, str[i]);
 		if (str[i])
 			i++;
