@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/20 10:59:39 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 15:55:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,24 +112,6 @@ int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 	else
 		list_builtin(alk, fd);
 	return (0);
-}
-
-int		ft_command_not_found(t_parsing *alk)
-{
-	write(2, "minishell: ", 11);
-	write(2, alk->executable, ft_strlen(alk->executable));
-	write(2, ": command not found\n", 20);
-	exit(127);
-	return (-1);
-}
-
-int		ft_no_such_file(t_parsing *alk)
-{
-	write(2, "minishell: ", 11);
-	write(2, alk->executable, ft_strlen(alk->executable));
-	write(2, ": No such file or directory\n", 28);
-	exit(127);
-	return (-1);
 }
 
 int		builtin_exec_simple(t_parsing *alk, t_fd *fd, char **env)

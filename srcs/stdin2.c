@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 06:46:23 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/20 10:47:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 15:54:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,6 @@ int			ft_str_check(char *str)
 	while (str[i] && str[i] == ' ')
 		i++;
 	return (i);
-}
-
-int			execute_and_clear_r(char *str, t_parsing *parser,
-t_parsing *parser_save, char **env)
-{
-	if (ft_execute_and_clear(parser, parser_save, env) == -1)
-	{
-		free(str);
-		return (-1);
-	}
-	return (0);
 }
 
 int			ft_str_loop(char **env, int i, char *str)

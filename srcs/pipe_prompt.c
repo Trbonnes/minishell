@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 15:00:30 by user42            #+#    #+#             */
-/*   Updated: 2020/05/20 11:05:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 15:56:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,23 @@ int			ft_pipe_prompt_check(char *buffer)
 	return (1);
 }
 
+char		*ft_pipe_prompt(char *buffer)
+{
+	int j;
+
+	j = 0;
+	if (buffer)
+		while (buffer[j])
+			buffer[j++] = '\0';
+	write(1, "pipe>", 5);
+	get_next_line(0, &buffer);
+	return (buffer);
+}
+
 char		*ft_increment_pipe(char *str, int i)
 {
 	char	*buffer;
 	char	*tmp;
-	int		j;
 
 	buffer = NULL;
 	i++;
@@ -79,20 +91,9 @@ char		*ft_increment_pipe(char *str, int i)
 	if (str[i] == '\0')
 	{
 		while (ft_pipe_prompt_check(buffer) != 1)
-		{
-			j = 0;
-			if (buffer)
-				while (buffer[j])
-					buffer[j++] = '\0';
-			write(1, "pipe>", 5);
-			get_next_line(0, &buffer);
-		}
+			buffer = ft_pipe_prompt(buffer);
 		if (buffer[0] == 3)
-		{
-			free(buffer);
-			free(str);
-			return (NULL);
-		}
+			return (ft_pipe_null_return(buffer, str));
 		if (!(tmp = malloc(sizeof(char) * (ft_strlen(str)
 		+ ft_strlen(buffer) + 1))))
 			return (str);

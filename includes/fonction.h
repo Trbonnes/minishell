@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/15 16:58:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 15:59:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,12 @@ int					ft_parser_param_quote(char *str, char c);
 void				ft_escape_zero(char **str, char *tmp, int *i, int *j);
 void				ft_escape_quote(char **str, char *tmp, int *i, int *j);
 char				*ft_increment_pipe(char *str, int i);
+int					execute_and_clear_r(char *str, t_parsing *parser,
+t_parsing *parser_save, char **env);
+char				*init_pipe_error(t_parsing **parser,
+t_parsing **parser_save);
+int					ft_command_not_found(t_parsing *alk);
+int					ft_no_such_file(t_parsing *alk);
+char				*ft_pipe_null_return(char *buffer, char *str);
 
 #endif

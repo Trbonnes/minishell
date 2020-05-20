@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/20 10:53:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/20 15:54:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,6 @@ int			ft_option(char *str, t_parsing *parser, int i)
 		i += 3;
 	}
 	return (i);
-}
-
-char		*init_pipe_error(t_parsing **parser, t_parsing **parser_save)
-{
-	parser[0]->next = NULL;
-	parser[0]->param = NULL;
-	parser[0]->redirection = NULL;
-	parser[0]->executable = NULL;
-	ft_parserclear(parser_save);
-	return (NULL);
 }
 
 char		*parser_init(char *str, int i, t_parsing **parser,
