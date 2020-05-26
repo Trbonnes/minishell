@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/20 15:54:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/21 13:46:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ char		*ft_parser_cmd(char *str)
 	i = 0;
 	while (str[i] && (str[i] == ' ' || str[i] == '	'))
 		i++;
-	while (str[i] && str[i] != ' ' && str[i] != '	' && str[i] != ';'
-	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
+	while ((str[i] && str[i] != ' ' && str[i] != '	' && str[i] != ';'
+	&& str[i] != '|' && str[i] != '<' && str[i] != '>') || (i != 0 && str[i - 1] == '\\'))
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' && (i == 0 || str[i - 1] != '\\'))
 			while (++j && str[++i] && str[i] != '\'')
 				;
-		else if (str[i] == '"')
+		else if (str[i] == '"' && (i == 0 || str[i - 1] != '\\'))
 			while (++j && str[++i] && str[i] != '"')
 				;
 		else if (str[i] && ++i)

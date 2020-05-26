@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/20 15:59:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/26 11:51:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char				*ft_parser_redirection(char **builtin_str,
 int builtin_detected);
 int					ft_option(char *str, t_parsing *parser, int i);
 void				ft_quote_cpy(int i, int j, char **redirection, char **q);
-int					ft_quote_check(char c, int quote);
+int					ft_quote_check(char* str, int i, int quote);
 char				*ft_realloc_param_str(int i, int j, char *param_str);
 void				ft_parserclear(t_parsing **lst);
 char				**ft_split(char const *str, char c, char const *cmd);
@@ -201,5 +201,7 @@ t_parsing **parser_save);
 int					ft_command_not_found(t_parsing *alk);
 int					ft_no_such_file(t_parsing *alk);
 char				*ft_pipe_null_return(char *buffer, char *str);
+char				**ft_replace_quote_split(char **split);
+void				ft_replace_quote_string(char *str);
 
 #endif

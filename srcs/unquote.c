@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/12 15:40:16 by trombone          #+#    #+#             */
-/*   Updated: 2020/05/10 14:25:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/26 13:55:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		ft_str_dup_dup(const char *str, char *copy, int *i, int *j)
 {
-	if (str[(*i)] == 34 && str[(*i)] && str[(*i) + 1])
+	if (str[(*i)] == 34 && str[(*i)] && str[(*i) + 1] && ((*i) == 0 || str[(*i) - 1] != '\\'))
 	{
 		while (str[(*i)] && str[++(*i)] != 34)
 			if (str[(*i)])
@@ -22,7 +22,7 @@ void		ft_str_dup_dup(const char *str, char *copy, int *i, int *j)
 		if (str[(*i)])
 			(*i)++;
 	}
-	else if (str[(*i)] == 39 && str[(*i)] && str[(*i) + 1])
+	else if (str[(*i)] == 39 && str[(*i)] && str[(*i) + 1] && ((*i) == 0 || str[(*i) - 1] != '\\'))
 	{
 		while (str[(*i)] && str[++(*i)] != 39)
 			if (str[(*i)])
@@ -45,13 +45,13 @@ int builtin_detected)
 	while (str[i])
 	{
 		if (builtin_detected == 6
-		&& str[i] && str[i] == 34 && str[i + 1] == 34)
+		&& str[i] && str[i] == 34 && str[i + 1] == 34 /* && (i == 0 || str[i - 1] != '\\') */)
 		{
 			copy[j++] = str[i++];
 			copy[j++] = str[i++];
 		}
 		if (builtin_detected == 6
-		&& str[i] && str[i] == 39 && str[i + 1] == 39)
+		&& str[i] && str[i] == 39 && str[i + 1] == 39 /* && (i == 0 || str[i - 1] != '\\') */)
 		{
 			copy[j++] = str[i++];
 			copy[j++] = str[i++];

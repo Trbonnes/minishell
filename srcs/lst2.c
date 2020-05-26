@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 19:32:24 by user42            #+#    #+#             */
-/*   Updated: 2020/05/09 13:56:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/21 13:47:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ char	*ft_parser_cmd_full(char *str, char *parsed, int i, int j)
 {
 	i = i - j;
 	j = 0;
-	while (str[i] && str[i] != ' ' && str[i] != '	' && str[i] != ';'
-	&& str[i] != '|' && str[i] != '<' && str[i] != '>')
+	while ((str[i] && str[i] != ' ' && str[i] != '	' && str[i] != ';'
+	&& str[i] != '|' && str[i] != '<' && str[i] != '>') || (i != 0 && str[i - 1] == '\\'))
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' && (i == 0 || str[i - 1] != '\\'))
 		{
 			parsed[j++] = str[i++];
 			while (str[i] && str[i] != '\'')
 				parsed[j++] = str[i++];
 		}
-		if (str[i] == '"')
+		if (str[i] == '"' && (i == 0 || str[i - 1] != '\\'))
 		{
 			parsed[j++] = str[i++];
 			while (str[i] && str[i] != '"')
@@ -100,6 +100,7 @@ char	*ft_parser_cmd_full(char *str, char *parsed, int i, int j)
 			parsed[j++] = str[i++];
 	}
 	parsed[j] = '\0';
+	ft_handle_escape_character(&parsed);
 	ft_unquote(&parsed, 0);
 	return (parsed);
 }

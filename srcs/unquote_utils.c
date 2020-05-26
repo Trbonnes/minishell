@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/19 14:16:52 by user42            #+#    #+#             */
-/*   Updated: 2020/04/21 15:47:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/26 13:54:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int builtin_detected)
 	while (str[i])
 	{
 		i = ft_quote_before_after(str, i, builtin_detected);
-		if (str[i] == 34 && str[i] && str[i + 1])
+		if (str[i] == 34 && str[i] && str[i + 1] /* && (i == 0 || str[i - 1] != '\\') */)
 			i = ft_strlen_quote_loop_increment(str, i, 34, &len);
-		else if (str[i] == 39 && str[i] && str[i + 1])
+		else if (str[i] == 39 && str[i] && str[i + 1] /* && (i == 0 || str[i - 1] != '\\') */)
 			i = ft_strlen_quote_loop_increment(str, i, 39, &len);
 		else if (str[i])
 			i++;

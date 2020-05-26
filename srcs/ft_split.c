@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:24:44 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/02/17 09:04:18 by trbonnes         ###   ########.fr       */
+/*   Updated: 2020/05/26 11:25:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ char		**ft_split(char const *str, char c, char const *cmd)
 		i++;
 	}
 	split[i] = 0;
-	return (split);
+	return (ft_replace_quote_split(split));
 }

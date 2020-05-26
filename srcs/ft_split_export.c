@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 17:18:21 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 04:43:38 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/26 11:25:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ char	**ft_split_export(char *str)
 	}
 	split[j] = 0;
 	free(len);
-	return (split);
+	return (ft_replace_quote_split(split));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:04 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/10 11:46:30 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/26 11:54:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		ft_echo(t_parsing *alk, t_fd *fd)
 
 	if (fd->out == -1)
 		return (1);
+	ft_replace_quote_string(alk->param);
 	len = ft_strlen(alk->param);
 	write(fd->out, alk->param, len);
 	if (alk->echo_option == FALSE)

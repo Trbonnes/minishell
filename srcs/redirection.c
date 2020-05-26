@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:36:14 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/10 14:29:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/26 10:53:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*ft_parser_redirection(char **builtin_str, int builtin_detected)
 	q = 0;
 	while (builtin_str[0][++i])
 	{
-		q = ft_quote_check(builtin_str[0][i], q);
+		q = ft_quote_check(builtin_str[0], i, q);
 		if ((builtin_str[0][i] == '<' || builtin_str[0][i] == '>') && q == 0)
 		{
 			j = ft_redirection_setup(builtin_str[0] + i, &redirection_str);

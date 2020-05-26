@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/09 13:35:30 by trostan          ###   ########.fr       */
+/*   Updated: 2020/05/26 11:52:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,12 @@ int		ft_unset(t_parsing *alk)
 	int		j;
 	char	*uns;
 
-	i = 0;
 	j = 0;
+	i = 0;
 	save = g_env_list;
 	if (alk->param[0] == '\0')
 		return (0);
+	ft_replace_quote_string(alk->param);
 	while (alk->param[i])
 	{
 		while (alk->param[i] != ' ' && alk->param[i])
