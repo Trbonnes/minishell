@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 12:08:01 by user42            #+#    #+#             */
-/*   Updated: 2020/05/27 13:22:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/27 13:31:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,10 @@ void	ft_escape_spaces(char *tmp)
 	int		j;
 
 
-	// printf("begining: %s\n", tmp);
 	i = -1;
 	while (tmp[++i])
 		if (tmp[i] == 26 && tmp[i + 1] == ' ')
 			tmp[i + 1] = 27;
-	// i = -1;
-	// while (tmp[++i])
-		// printf("before loop %d: %c\n", i, tmp[i]);
 	i = 0;
 	while (tmp[i])
 	{
@@ -118,24 +114,18 @@ void	ft_escape_spaces(char *tmp)
 				}
 				j++;
 			}
-			// printf("inside loop: %s\n", tmp);
-			// printf("j: %c %d\n", tmp[j], j);
 			if (tmp[j] == 26)
 				tmp[j] = '\'';
-			// printf("inside loop1: %s\n", tmp);
 			if (tmp[j] != '\'' && tmp[j - 1] != '\'')
 				tmp[j - 1] = '\'';
-			// printf("inside loop2: %s\n", tmp);
 		}
 		else if (tmp[i])
 			i++;
 	}
-	// printf("after loop: %s\n", tmp);
 	i = -1;
 	while (tmp[++i])
 		if (tmp[i] == 27)
 			tmp[i] = ' ';
-	// printf("end: %s\n", tmp);
 }
 
 size_t	ft_strdup_escape_len(char *str)
@@ -176,7 +166,6 @@ void	ft_handle_escape_character(char **str)
 	int		len;
 	char	*tmp;
 
-	// printf("str_escape: %s\n", str[0]);
 	len = ft_escapelen(str);
 	if (!(tmp = malloc(sizeof(char) * len + 1)))
 		return ;
