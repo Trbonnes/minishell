@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:39:30 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/20 16:34:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/27 10:08:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_parser_param_loop(char *str, char *parsed, int i, int j)
 			parsed[j++] = str[i++];
 			parsed[j++] = str[i++];
 		}
-		if ((str[i] == '\"' || str[i] == '\'')
+		else if ((str[i] == '\"' || str[i] == '\'')
 		&& (i == 0 || str[i - 1] != '\\'))
 		{
 			parsed[j] = str[i];
