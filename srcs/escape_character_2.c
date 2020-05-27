@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 15:10:48 by user42            #+#    #+#             */
-/*   Updated: 2020/05/27 13:27:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/27 13:36:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**ft_replace_quote_split(char **split)
 		{
 			if (split[i][j] == 31)
 				split[i][j] = '\'';
-			j++; 
+			j++;
 		}
 		i++;
 	}
@@ -53,7 +53,7 @@ char	**ft_replace_quote_split(char **split)
 void	ft_replace_quote_string(char *str)
 {
 	int i;
-	
+
 	i = -1;
 	while (str[++i])
 		if (str[i] == 31)

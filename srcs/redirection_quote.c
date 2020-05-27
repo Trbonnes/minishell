@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:41:06 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/21 15:37:03 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/27 13:37:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_quote_cpy(int i, int j, char **redirection, char **quote_str)
 	redirection[0][j] = '\0';
 }
 
-int		ft_quote_check(char* str, int i, int quote)
+int		ft_quote_check(char *str, int i, int quote)
 {
 	if (str[i] == 34 && (i == 0 || str[i - 1] != '\\'))
 	{
@@ -46,10 +46,12 @@ int		ft_quote_before_after(const char *str, int i,
 int builtin_detected)
 {
 	if (builtin_detected == 6
-	&& str[i] && str[i] == 34 && str[i + 1] == 34 && (i == 0 || str[i - 1] != '\\'))
+	&& str[i] && str[i] == 34 && str[i + 1] == 34
+	&& (i == 0 || str[i - 1] != '\\'))
 		i += 2;
 	if (builtin_detected == 6
-	&& str[i] && str[i] == 39 && str[i + 1] == 39 && (i == 0 || str[i - 1] != '\\'))
+	&& str[i] && str[i] == 39 && str[i + 1] == 39
+	&& (i == 0 || str[i - 1] != '\\'))
 		i += 2;
 	return (i);
 }
