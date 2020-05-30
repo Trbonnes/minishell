@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/27 13:35:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/30 12:46:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,6 @@ int					ft_no_such_file(t_parsing *alk);
 char				*ft_pipe_null_return(char *buffer, char *str);
 char				**ft_replace_quote_split(char **split);
 void				ft_replace_quote_string(char *str);
+void				ft_escape_spaces(char *tmp);
 
 #endif

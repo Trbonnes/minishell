@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:36:14 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/27 13:44:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/30 12:13:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*ft_redirection_check(char **redirection_str)
 char	*ft_parser_redirection(char **builtin_str, int builtin_detected)
 {
 	int		i;
-	int		j;
 	int		q;
 	char	*redirection_str;
 
@@ -83,8 +82,8 @@ char	*ft_parser_redirection(char **builtin_str, int builtin_detected)
 		if ((builtin_str[0][i] == '<' || builtin_str[0][i] == '>')
 		&& q == 0 && (i == 0 || builtin_str[0][i - 1] != '\\'))
 		{
-			j = ft_redirection_setup(builtin_str[0] + i, &redirection_str);
-			builtin_str[0] = ft_realloc_param_str(i, j, builtin_str[0]);
+			builtin_str[0] = ft_realloc_param_str(i, ft_redirection_setup(
+			builtin_str[0] + i, &redirection_str), builtin_str[0]);
 			i = -1;
 		}
 	}

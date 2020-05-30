@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 12:08:01 by user42            #+#    #+#             */
-/*   Updated: 2020/05/27 13:31:03 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/30 12:46:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_escapelen(char **str)
 		quote = ft_quote_check(str[0], i, quote);
 		if (str[0][i] == '\\' && quote != '\'')
 		{
-			if (quote == 0 &&str[0][i + 1] != '\0')
+			if (quote == 0 && str[0][i + 1] != '\0')
 				len++;
 			else if (quote == '"' && str[0][i + 1] == '\\' && ++i)
 				len -= 1;
@@ -65,67 +65,6 @@ void	ft_escape_character_dup(char **str, char *tmp)
 			tmp[j++] = str[0][i++];
 	}
 	tmp[j] = '\0';
-}
-
-void	ft_escape_spaces(char *tmp)
-{
-	int		i;
-	int		j;
-
-
-	i = -1;
-	while (tmp[++i])
-		if (tmp[i] == 26 && tmp[i + 1] == ' ')
-			tmp[i + 1] = 27;
-	i = 0;
-	while (tmp[i])
-	{
-		while (tmp[i] && (tmp[i] == ' ' || tmp[i] == '	'))
-			i++;
-		if (tmp[i] == 26 && tmp[i + 1] != ' ' && tmp[i + 1] != '	')
-		{
-			if (tmp[i + 1] == '\'')
-				tmp[i + 1] = 31;
-			j = i;
-			while (j > 0 && tmp[j] != ' ')
-			{
-				tmp[j] = tmp[j - 1];
-				tmp[j - 1] = 127;
-				j--;
-			}
-			if (j == 0 && tmp[j] != '\'' && tmp[j + 1] != '\'')
-				tmp[j] = '\'';
-			else if (tmp[j] != '\'' && tmp[j + 1] != '\'')
-				tmp[j + 1] = '\'';
-			i += 2;
-			j = i;
-			while (tmp[j] && tmp[j] != ' ')
-			{
-				if (tmp[j + 1] != '\0')
-				{
-					tmp[j] = tmp[j + 1];
-					tmp[j + 1] = 127;
-				}
-				else
-				{
-					if (tmp[j] != ' ')
-						j++;
-					break ;
-				}
-				j++;
-			}
-			if (tmp[j] == 26)
-				tmp[j] = '\'';
-			if (tmp[j] != '\'' && tmp[j - 1] != '\'')
-				tmp[j - 1] = '\'';
-		}
-		else if (tmp[i])
-			i++;
-	}
-	i = -1;
-	while (tmp[++i])
-		if (tmp[i] == 27)
-			tmp[i] = ' ';
 }
 
 size_t	ft_strdup_escape_len(char *str)
