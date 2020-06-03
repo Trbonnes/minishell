@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:22:33 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/15 14:05:41 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/03 15:12:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char		*path_finding(int i, t_parsing *parser, t_env *search)
 	while (parser->executable[++k])
 		if (parser->executable[k] == '/')
 			return (path = ft_strdup(parser->executable));
-	if (!search)
-		return (NULL);
+	if (!search || !search->ref[i])
+		return (ft_execute_empty_path(parser));
 	path = ft_path_cpy(search->ref, i, parser->executable);
 	while (stat(path, &buf) != 0 && search->ref[i])
 	{
@@ -71,8 +71,6 @@ char **params, char **env)
 	i = 0;
 	while (search && ft_strcmp("PATH", search->key) != 0)
 		search = search->next;
-	if (!search)
-		g_last_return_value = 1;
 	while (search && search->ref[i] != '=')
 		i++;
 	i++;
