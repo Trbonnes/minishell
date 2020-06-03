@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/05/15 16:20:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/03 14:13:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	sigquit_handler(int sig)
 		exit(131);
 	}
 	else if (g_pid != 1)
-		write(1, "Quit: 3\n", 8);
+		write(1, "Quit (core dumped)\n", 19);
 }
 
 int		main(int ac, char **av, char **env)
@@ -90,5 +90,5 @@ int		main(int ac, char **av, char **env)
 	while (ft_detect_builtin(env) > 0)
 		g_pid = 1;
 	ft_envclear(&g_env_list);
-	return (0);
+	return (g_last_return_value);
 }
