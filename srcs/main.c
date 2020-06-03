@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:26:25 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/06/03 14:13:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/03 16:08:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	sigquit_handler(int sig)
 	}
 	else if (g_pid != 1)
 		write(1, "Quit (core dumped)\n", 19);
+	else
+		ft_putstr("\b\b  \b\b");
 }
 
 int		main(int ac, char **av, char **env)
