@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 12:44:44 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/26 11:52:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/04 05:08:11 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,26 @@
 extern int		g_last_return_value;
 extern t_env *g_env_list;
 
-void	ft_export_norme(t_env *save, t_parsing *key)
+int		ft_export_norme(t_env *save, t_parsing *key, int i)
 {
+	int val;
+
+	val = 1;
 	if (key->param)
 	{
 		while (save && ft_strcmp(key->param, save->key) != 0)
 			save = save->next;
-		ft_unset(key);
+		if (save && key->redirection[i] == '=')
+			ft_unset(key);
+		if (save && key->redirection[i] != '=')
+			val = 0;
 		free(key->param);
+		free(key->redirection);
 	}
+	return (val);
 }
 
-void	ft_same_export(char *exp)
+int		ft_same_export(char *exp)
 {
 	t_env		*save;
 	t_parsing	key;
@@ -36,17 +44,11 @@ void	ft_same_export(char *exp)
 	key = (t_parsing){ 0 };
 	while (exp && exp[i] && exp[i] != '=' && exp[0])
 		i++;
-	if (!(key.param = malloc(sizeof(char) * (i + 1))))
-		return ;
-	i = 0;
-	while (exp && exp[i] && exp[i] != '=')
-	{
-		key.param[i] = exp[i];
-		i++;
-	}
-	key.param[i] = '\0';
+	key.param = ft_substr(exp, 0, i);
+	key.redirection = ft_strdup(exp);
 	save = g_env_list;
-	ft_export_norme(save, &key);
+	i = ft_export_norme(save, &key, i);
+	return (i);
 }
 
 int		ft_export(t_fd *fd, t_parsing *alk)

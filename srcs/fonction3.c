@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 22:54:48 by trostan           #+#    #+#             */
-/*   Updated: 2020/05/09 13:35:50 by trostan          ###   ########.fr       */
+/*   Updated: 2020/06/04 05:08:32 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	ft_export_multi(t_parsing *alk)
 	split = check_param_env(alk);
 	while (split[i])
 	{
-		ft_same_export(split[i]);
-		if (split[i][0] != '\0')
-			ft_lstadd_back(&g_env_list, ft_new_env(split[i]));
+		if (ft_same_export(split[i]) == 1)
+		{
+			if (split[i][0] != '\0')
+				ft_lstadd_back(&g_env_list, ft_new_env(split[i]));
+		}
 		i++;
 	}
 	i = 0;
