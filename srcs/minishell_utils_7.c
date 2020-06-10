@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 14:07:53 by user42            #+#    #+#             */
-/*   Updated: 2020/06/03 14:31:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/10 13:46:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void	ft_exit2(char **split)
 		exit(0);
 	while (split[0][i])
 	{
-		if (!(split[0][i] == '-' && i == 0))
+		if (!(split[0][i] == '-' && i == 0)
+		|| (split[0][i] == '-' && split[0][i + 1] == '\0'))
 		{
-			if (!(split[0][i] >= '0' && split[0][i] <= '9'))
+			if (!(split[0][i] >= '0' && split[0][i] <= '9')
+			|| (split[0][i + 1] == '-' && split[0][i] == '\0'))
 			{
 				ft_putstr("bash: exit: ");
 				ft_putstr(split[0]);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 10:37:02 by trbonnes          #+#    #+#             */
-/*   Updated: 2020/06/03 15:56:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/10 13:37:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char		*ft_parser_cmd(char *str)
 int			ft_option(char *str, t_parsing *parser, int i)
 {
 	if (parser->builtin_detected != 1 && parser->builtin_detected != 7
-	&& ft_isalpha(str[i + 1]))
+	 && parser->builtin_detected != 3 && ft_isalpha(str[i + 1]))
 	{
 		write(2, "minishell: ", 11);
 		write(2, &str[i], 1);
@@ -95,10 +95,13 @@ int			ft_option(char *str, t_parsing *parser, int i)
 	}
 	if (parser->builtin_detected == 8)
 		return (i);
-	else if (str[i + 1] == 'n' && str[i + 2] == ' ')
+	else if (str[i + 1] == 'n' && (str[i + 2] == ' ' || str[i + 2] == '	' || !str[i + 2]))
 	{
 		parser->echo_option = 1;
-		i += 3;
+		if (!str[i + 2])
+			i += 2;
+		else
+		 i+= 3;
 	}
 	return (i);
 }
