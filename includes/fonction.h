@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 13:55:19 by trdella-          #+#    #+#             */
-/*   Updated: 2020/06/04 05:09:02 by trostan          ###   ########.fr       */
+/*   Updated: 2020/06/10 16:28:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,5 +205,8 @@ char				**ft_replace_quote_split(char **split);
 void				ft_replace_quote_string(char *str);
 void				ft_escape_spaces(char *tmp);
 char				*ft_execute_empty_path(t_parsing *parser);
+bool				check_error_export_quote(char *str, char c);
+int					param_refull(t_parsing *alk, char **split, bool *is_error);
+int					check_error_unset(t_parsing *alk);
 
 #endif
