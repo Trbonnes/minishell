@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/05/20 15:55:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/16 15:12:56 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,16 @@ int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 {
 	if (alk->builtin_detected == 7)
 	{
+		if (!fd->index)
+			close(fd->pipe[0]);
+		if (fd->index && alk->next)
+		{
+			close(fd->last_pipe[1]);
+			close(fd->pipe[0]);
+		}
+		if (fd->index && !alk->next)
+			close(fd->last_pipe[1]);
+
 		if (ft_executable(alk, env, fd) == -1 && g_pid == 0)
 		{
 			write(2, "minishell: ", 11);
