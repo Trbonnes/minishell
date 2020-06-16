@@ -6,7 +6,7 @@
 /*   By: trostan <trostan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 22:38:43 by trdella-          #+#    #+#             */
-/*   Updated: 2020/06/16 15:12:56 by trostan          ###   ########.fr       */
+/*   Updated: 2020/06/16 16:03:55 by trostan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	list_builtin(t_parsing *alk, t_fd *fd)
 		g_last_return_value = ft_echo(alk, fd);
 	if (alk->builtin_detected == 2)
 		g_last_return_value = ft_env_display(fd, alk);
-	if (alk->builtin_detected == 3)
+	if (alk->builtin_detected == 3 && !alk->index)
 		ft_exit(alk);
 	if (alk->builtin_detected == 4)
 		g_last_return_value = ft_export(fd, alk);
@@ -107,7 +107,6 @@ int		builtin_exec(t_parsing *alk, t_fd *fd, char **env)
 		}
 		if (fd->index && !alk->next)
 			close(fd->last_pipe[1]);
-
 		if (ft_executable(alk, env, fd) == -1 && g_pid == 0)
 		{
 			write(2, "minishell: ", 11);
