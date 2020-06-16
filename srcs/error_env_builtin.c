@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 15:46:44 by user42            #+#    #+#             */
-/*   Updated: 2020/06/10 16:26:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/16 14:06:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	check_error_export_loop(char **split, bool *is_error, t_parsing *alk)
 			j++;
 		else if (alk->builtin_detected == 4 && split[i][j] == '=')
 			is_error[i] = true;
-		else if (alk->builtin_detected == 4)
-			is_error[i] = false;
 		else if (alk->builtin_detected == 2 && split[i][j] != '=')
 			is_error[i] = true;
 		j = 0;
