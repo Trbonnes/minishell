@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 12:08:01 by user42            #+#    #+#             */
-/*   Updated: 2020/05/30 12:46:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/29 14:35:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_escape_character_dup(char **str, char *tmp)
 	while (str[0][i])
 	{
 		quote = ft_quote_check(str[0], i, quote);
-		if (str[0][i] == '\\' && quote != '\'')
+		if (str[0][i] == '\\' && quote != '\'' && str[0][i + 1])
 		{
 			if (quote == 0)
 				ft_escape_zero(str, tmp, &i, &j);
