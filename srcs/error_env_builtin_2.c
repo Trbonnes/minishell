@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 16:25:41 by user42            #+#    #+#             */
-/*   Updated: 2020/06/11 15:19:03 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/29 14:06:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,12 @@ int		ft_syntax_error_comma(char *str)
 		detected = false;
 		while (str[i] && str[i] != ';' && str[i] != '|')
 		{
-			if (str[i] == '\\' && (str[i + 1] == ';' || str[i + 1] == '|'))
+			if (str[i] == '\'' || str[i] == '"')
+				i += ft_parser_param_quote(str + i, str[i]);
+			if (str[i] && str[i] == '\\'
+			&& (str[i + 1] == ';' || str[i + 1] == '|'))
 				i += 2;
-			if (str[i] != ' ' && str[i] != '	')
+			if (str[i] && str[i] != ' ' && str[i] != '	')
 				detected = true;
 			if (str[i])
 				i++;
