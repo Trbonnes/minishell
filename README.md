@@ -19,7 +19,7 @@ It's a minimal version of a shell taking bash as a reference (https://www.gnu.or
 - environment variables
 - < > << >> redirections
 - pipes
-- signals (ctrl-C ctrl-D ctrl-'\')
+- signals (ctrl-C ctrl-D ctrl-\)
 
 To be honest this project is a bit messy and you can find way better Minishells on github.
 
