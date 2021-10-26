@@ -7,7 +7,7 @@ little bash or zsh. You will learn a lot about processes and file descriptors. "
 
 ---
 
-Our Webserver
+My Minishell
 ===============
 
 ### Overview
